@@ -1,0 +1,20 @@
+{
+  "name": "pathway-presenter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@wikipathways/pvjs": "^3.1.7-beta",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "spectacle": "^2.1.0"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
