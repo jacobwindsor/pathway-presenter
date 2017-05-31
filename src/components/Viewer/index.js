@@ -38,7 +38,7 @@ export default class extends Component {
         }
 
         if (error)  {
-            return <p>Error occurred: {error}</p>
+            return <p>Error occurred: {error.message}</p>
         }
 
 
