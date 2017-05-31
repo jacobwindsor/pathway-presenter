@@ -30,6 +30,19 @@ export default class extends Component {
             });
     }
 
+    onPvjsReady = (pvjsRef) => {
+        const { presentation } = this.state;
+        const manipulator = pvjsRef.manipulator;
+        console.log("redy");
+        presentation.slides[0].targets.forEach(singleTarget => {
+            if (singleTarget.hidden) manipulator.hide(singleTarget.entityId);
+            else manipulator.show(singleTarget.entityId);
+
+            if (singleTarget.highlighted) manipulator.highlightOn(singleTarget.entityId, singleTarget.highlightedColor);
+            else manipulator.highlightOff(singleTarget.entityId);
+        })
+    }
+
     render() {
         const { loading, presentation, error } = this.state;
 
@@ -41,7 +54,6 @@ export default class extends Component {
             return <p>Error occurred: {error.message}</p>
         }
 
-
         const slideStyle = {
             height: '100%'
         };
@@ -51,7 +63,9 @@ export default class extends Component {
                 <Slide style={slideStyle}>
                     <Pvjs about={`http://identifiers.org/wikipathways/WP${presentation.wpId}`}
                           version={presentation.version}
-                          showPanZoomControls={false} />
+                          showPanZoomControls={false}
+                          onReady={this.onPvjsReady}
+                    />
                 </Slide>
             </Deck>
         )

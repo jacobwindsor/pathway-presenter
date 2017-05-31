@@ -9,8 +9,9 @@ export default [
             {
                 id: 'fd68b61c-136c-4e63-b5f6-f020c894c738',
                 notes: '<p>This can be a normal string.</p><p>Alternatively we can do <strong>HTML</strong></p>',
-                targets: {
-                    'd9ef6': {
+                targets: [
+                    {
+                        entityId: 'd9ef6',
                         hidden: false,
                         zoomed: true,
                         panned: true,
@@ -21,7 +22,7 @@ export default [
                         animateInDuration: 200,
                         animateOutDuration: 200,
                     }
-                }
+                ]
             }
         ]
     }
