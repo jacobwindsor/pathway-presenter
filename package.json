@@ -4,11 +4,13 @@
   "private": true,
   "dependencies": {
     "@wikipathways/pvjs": "^3.1.9-beta",
+    "lodash": "^4.17.4",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "spectacle": "^2.1.0"
   },
   "devDependencies": {
+    "flow-bin": "^0.47.0",
     "react-scripts": "1.0.7"
   },
   "scripts": {
