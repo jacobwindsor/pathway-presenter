@@ -5,6 +5,7 @@
   "dependencies": {
     "@wikipathways/pvjs": "^3.2.1-beta",
     "lodash": "^4.17.4",
+    "moize": "^2.3.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "spectacle": "^2.1.0"
