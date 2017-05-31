@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@wikipathways/pvjs": "^3.1.7-beta",
+    "@wikipathways/pvjs": "^3.1.9-beta",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "spectacle": "^2.1.0"
