@@ -49,7 +49,9 @@ export default class extends Component {
         return (
             <Deck>
                 <Slide style={slideStyle}>
-                    <Pvjs about={`http://identifiers.org/wikipathways/WP${presentation.wpId}`}version="0" showPanZoomControls/>
+                    <Pvjs about={`http://identifiers.org/wikipathways/WP${presentation.wpId}`}
+                          version={presentation.version}
+                          showPanZoomControls={false} />
                 </Slide>
             </Deck>
         )
