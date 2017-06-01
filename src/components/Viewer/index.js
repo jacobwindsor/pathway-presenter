@@ -54,15 +54,17 @@ class Viewer extends Component {
 
     nextSlide() {
         const { activeSlideIndex, presentation } = this.state;
+        if (activeSlideIndex === presentation.slides.length - 1) return;
         this.setState({
-            activeSlideIndex: Math.min(activeSlideIndex + 1, presentation.slides.length -1)
+            activeSlideIndex: activeSlideIndex + 1,
         })
     }
 
     prevSlide() {
         const { activeSlideIndex } = this.state;
+        if (activeSlideIndex === 0) return;
         this.setState({
-            activeSlideIndex: Math.max(activeSlideIndex - 1, 0)
+            activeSlideIndex: activeSlideIndex - 1,
         })
     }
 
