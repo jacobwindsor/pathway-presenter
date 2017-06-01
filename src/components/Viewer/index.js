@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import Slide from './Slide';
-import { Pvjs } from '@wikipathways/pvjs';
 import presentations from '../../data/presentations';
 import './index.css';
 import { memoize } from 'lodash/fp';
+import Diagram from './components/Diagram';
+import Loading from '../Loading';
+import ErrorMessage from '../ErrorMessage';
+import PropTypes from 'prop-types';
 
-export default class extends Component {
+class Viewer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,7 +16,8 @@ export default class extends Component {
     }
 
     componentDidMount() {
-        presentations.get('906e47f9-8a16-491c-80ac-0df2dd609260')
+        const { presId } = this.props;
+        presentations.get(presId)
             .then(presentation => {
                 this.addEventListeners();
 
@@ -90,38 +93,29 @@ export default class extends Component {
         const { loading, presentation, error } = this.state;
 
         if (error)  {
-            return <p>Error occurred: {error.message}</p>
+            return <ErrorMessage message={error.message} />
         }
-
-        if (! presentation ) {
-            return <p>Fetching presentation data...</p>
-        }
-
-        // Render Pvjs on top of the slides. This is a bit of a hack
-        // TODO: Consider pre-rendering the Pvjs component and passing the HTML to the Slide
-        // Each slide then has full control over the diagram
-        // Memoize may be helpful in doing this
-        const diagram = <Pvjs about={`http://identifiers.org/wikipathways/WP${presentation.wpId}`}
-                              version={presentation.version}
-                              showPanZoomControls={false}
-                              onReady={this.onPvjsReady} />;
-
-        const diagramWrapperStyles = {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: '60%',
-            height: '60%',
-            zIndex: '9999'
-        };
 
         return (
-            <div>
-                <div style={diagramWrapperStyles}>
-                    {diagram}
-                </div>
+            <div className="presentation-viewer">
+                { loading? <Loading /> : null }
+                {
+                    presentation ?
+                        <Diagram
+                            className={loading? 'hidden': null}
+                            wpId={presentation.wpId}
+                            version={presentation.version}
+                            showPanZoomControls={false}
+                            onReady={this.onPvjsReady}  /> :
+                        null
+                }
             </div>
         );
     }
 }
+
+Viewer.propTypes = {
+    presId: PropTypes.string.isRequired
+};
+
+export default Viewer;

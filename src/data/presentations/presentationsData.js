@@ -2,7 +2,7 @@ export default [
     {
         id: '906e47f9-8a16-491c-80ac-0df2dd609260',
         title: 'TCA Cycle',
-        wpId: '78',
+        wpId: 78,
         version: 0,
         description: 'Presentation for the TCA cycle',
         slides: [
