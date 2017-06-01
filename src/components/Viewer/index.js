@@ -66,31 +66,12 @@ class Viewer extends Component {
         })
     }
 
-    onPvjsReady = (pvjsRef) => {
-        this.setState({
-            loading: false,
-            manipulator: pvjsRef.manipulator
-        })
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        const { manipulator, presentation, activeSlideIndex } = this.state;
-        const prevSlideIndex = prevState;
-
-        if (! manipulator || !presentation) return;
-
-        if (prevSlideIndex === activeSlideIndex) return;
-
-        presentation.slides[activeSlideIndex].targets.forEach(singleTarget => {
-            if (singleTarget.highlighted)
-                manipulator.highlightOn(singleTarget.entityId, singleTarget.highlightedColor);
-            else
-                manipulator.highlightOff(singleTarget.entityId);
-        })
+    onReady = () => {
+        this.setState({loading: false})
     }
 
     render() {
-        const { loading, presentation, error } = this.state;
+        const { loading, presentation, error, activeSlideIndex } = this.state;
 
         if (error)  {
             return <ErrorMessage message={error.message} />
@@ -105,8 +86,9 @@ class Viewer extends Component {
                             className={loading? 'hidden': null}
                             wpId={presentation.wpId}
                             version={presentation.version}
+                            slide={presentation.slides[activeSlideIndex]}
                             showPanZoomControls={false}
-                            onReady={this.onPvjsReady}  /> :
+                            onReady={this.onReady}  /> :
                         null
                 }
             </div>

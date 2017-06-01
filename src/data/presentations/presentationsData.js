@@ -13,7 +13,7 @@ export default [
                     {
                         entityId: 'd9ef6',
                         hidden: false,
-                        zoomed: true,
+                        zoomed: false,
                         panned: true,
                         highlighted: true,
                         highlightedColor: 'red',
