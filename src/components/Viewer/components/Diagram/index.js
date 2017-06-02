@@ -69,7 +69,7 @@ class Diagram extends Component {
                 <Pvjs about={`http://identifiers.org/wikipathways/WP${wpId}`}
                       version={version}
                       showPanZoomControls={showPanZoomControls}
-                      onReady={this.onPvjsReady} />;
+                      onReady={this.onPvjsReady} />
             </div>
         )
     }
