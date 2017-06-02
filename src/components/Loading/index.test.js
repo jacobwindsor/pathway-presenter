@@ -8,5 +8,5 @@ it('renders without failing', () => {
 
 it('Shows a loading indicator', () => {
     const comp = shallow(<Loading/>);
-    expect(comp.contains(<p>Loading...</p>)).toBeTruthy();
+    expect(comp.contains('.loading-spinner')).toBeTruthy();
 });

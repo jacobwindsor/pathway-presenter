@@ -10,6 +10,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-spinkit": "^3.0.0",
     "react-tap-event-plugin": "^2.0.1",
     "roboto-fontface": "^0.7.0",
     "spectacle": "^2.1.0"
