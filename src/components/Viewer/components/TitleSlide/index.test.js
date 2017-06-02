@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import TitleSlide from './index';
-import Title from '../Title';
 
 it('Should render without failing', () => {
     shallow(<TitleSlide title="My title" authorName="Me, myself & I" />);
@@ -14,7 +13,7 @@ it('should have a wrapper', () => {
 
 it('should have a title', () => {
     const comp = shallow(<TitleSlide title="My title" authorName="Me, myself & I" />);
-    expect(comp.contains(<Title title="My title"/>)).toBeTruthy();
+    expect(comp.contains(<h1>My title</h1>)).toBeTruthy();
 });
 
 it('should show the author', () => {

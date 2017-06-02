@@ -5,3 +5,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.title-slide h1 {
+    font-size: 3rem;
+}
+
+.title-slide h2 {
+    color: #3b3b3b;
+}
