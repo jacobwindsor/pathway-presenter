@@ -10,6 +10,7 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import Title from './components/Title';
+import TitleSlide from './components/TitleSlide';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -28,11 +29,9 @@ class Viewer extends Component {
         presentations.get(presId)
             .then(presentation => {
                 this.addEventListeners();
-
-                // Loading is not done here
-                // Must wait until the Pvjs diagram has loaded
                 this.setState({
                     presentation,
+                    loading: false,
                     activeSlideIndex: 0
                 });
             })
@@ -81,30 +80,36 @@ class Viewer extends Component {
     }
 
     render() {
-        const { loading, presentation, error, activeSlideIndex } = this.state;
+        const { loading, presentation, activeSlideIndex, error } = this.state;
 
         if (error)  {
             return <ErrorMessage message={error.message} />
         }
 
-        const slideTitle = presentation ? presentation.slides[activeSlideIndex].title : null;
+        if ( loading ) return  <Loading />;
+        if (! presentation) return null;
+
+        const activeSlide = presentation.slides[activeSlideIndex];
+        const diagramSlide = activeSlide.isTitleSlide ? presentation.slides[activeSlideIndex + 1] : activeSlide;
+
+        const isHidden = activeSlide.isTitleSlide;
 
         return (
             <MuiThemeProvider>
                 <div className="presentation-viewer">
-                    { loading ? <Loading /> : null }
-                    { slideTitle ? <Title title={slideTitle} /> : null }
-                    {
-                        presentation ?
-                            <Diagram
-                                wpId={presentation.wpId}
-                                version={presentation.version}
-                                slide={presentation.slides[activeSlideIndex]}
-                                showPanZoomControls={true}
-                                isHidden={loading}
-                                onReady={this.onReady}  />:
-                            null
-                    }
+                    { activeSlide.isTitleSlide ? <TitleSlide title={presentation.title} authorName={presentation.authorName} />
+                        : null }
+
+                    { !activeSlide.isTitleSlide && activeSlide.title ? <Title title={activeSlide.title} /> : null }
+
+                    <Diagram
+                        wpId={presentation.wpId}
+                        version={presentation.version}
+                        slide={diagramSlide}
+                        showPanZoomControls={false}
+                        isHidden={isHidden}
+                        onReady={this.onReady}  />
+
                     <Controls onBackward={this.prevSlide} onForward={this.nextSlide} />
                 </div>
             </MuiThemeProvider>

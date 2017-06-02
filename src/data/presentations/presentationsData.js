@@ -2,10 +2,14 @@ export default [
     {
         id: '906e47f9-8a16-491c-80ac-0df2dd609260',
         title: 'TCA Cycle',
+        authorName: "Jacob Windsor",
         wpId: 78,
         version: 0,
         description: 'Presentation for the TCA cycle',
         slides: [
+            {
+                isTitleSlide: true
+            },
             {
                 id: 'fd68b61c-136c-4e63-b5f6-f020c894c738',
                 title: 'This is a title',
