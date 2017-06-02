@@ -2,9 +2,17 @@ import React, { Component } from 'react';
 import presentations from '../../data/presentations';
 import './index.css';
 import Diagram from './components/Diagram';
+import Controls from './components/Controls';
 import Loading from '../Loading';
 import ErrorMessage from '../ErrorMessage';
 import PropTypes from 'prop-types';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 class Viewer extends Component {
     constructor(props) {
@@ -51,7 +59,7 @@ class Viewer extends Component {
         })
     }
 
-    nextSlide() {
+    nextSlide = () =>  {
         const { activeSlideIndex, presentation } = this.state;
         if (activeSlideIndex === presentation.slides.length - 1) return;
         this.setState({
@@ -59,7 +67,7 @@ class Viewer extends Component {
         })
     }
 
-    prevSlide() {
+    prevSlide = () => {
         const { activeSlideIndex } = this.state;
         if (activeSlideIndex === 0) return;
         this.setState({
@@ -79,20 +87,23 @@ class Viewer extends Component {
         }
 
         return (
-            <div className="presentation-viewer">
-                { loading? <Loading /> : null }
-                {
-                    presentation ?
-                        <Diagram
-                            className={loading? 'hidden': null}
-                            wpId={presentation.wpId}
-                            version={presentation.version}
-                            slide={presentation.slides[activeSlideIndex]}
-                            showPanZoomControls={true}
-                            onReady={this.onReady}  /> :
-                        null
-                }
-            </div>
+            <MuiThemeProvider>
+                <div className="presentation-viewer">
+                    { loading? <Loading /> : null }
+                    {
+                        presentation ?
+                            (<Diagram
+                                className={loading? 'hidden': null}
+                                wpId={presentation.wpId}
+                                version={presentation.version}
+                                slide={presentation.slides[activeSlideIndex]}
+                                showPanZoomControls={true}
+                                onReady={this.onReady}  />) :
+                            null
+                    }
+                    <Controls onBackward={this.prevSlide} onForward={this.nextSlide} />
+                </div>
+            </MuiThemeProvider>
         );
     }
 }

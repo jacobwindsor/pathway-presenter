@@ -5,10 +5,13 @@
   "dependencies": {
     "@wikipathways/pvjs": "^3.2.3-beta",
     "lodash": "^4.17.4",
+    "material-ui": "^0.18.1",
     "moize": "^2.3.3",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-tap-event-plugin": "^2.0.1",
+    "roboto-fontface": "^0.7.0",
     "spectacle": "^2.1.0"
   },
   "devDependencies": {

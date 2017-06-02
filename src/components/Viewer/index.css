@@ -1,3 +1,9 @@
 .presentation-viewer {
     display: flex;
 }
+
+.presentation-viewer .controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
