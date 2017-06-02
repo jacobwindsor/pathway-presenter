@@ -3,6 +3,6 @@ import { shallow } from 'enzyme';
 import Diagram from './index';
 
 it('renders without crashing', () => {
-    shallow(<Diagram wpId="34" version="0" showPanZoomControls="true" slide="0"/>)
+    shallow(<Diagram wpId={123} version={0} showPanZoomControls={true} slide={{}} />)
 });
 

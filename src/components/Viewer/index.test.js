@@ -7,7 +7,6 @@ it('renders without crashing', () => {
 });
 
 it('has the correct wrapper class name', () => {
-    const comp = shallow(<Viewer presId="1234"/>);
+    const comp = shallow(<Viewer presId="1234" />);
     expect(comp.find('.presentation-viewer')).toHaveLength(1);
 });
-
