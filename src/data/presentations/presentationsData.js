@@ -8,6 +8,7 @@ export default [
         slides: [
             {
                 id: 'fd68b61c-136c-4e63-b5f6-f020c894c738',
+                title: 'This is a title',
                 notes: '<p>This can be a normal string.</p><p>Alternatively we can do <strong>HTML</strong></p>',
                 targets: [
                     {

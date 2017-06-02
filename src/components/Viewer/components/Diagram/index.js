@@ -62,10 +62,10 @@ class Diagram extends Component {
     }
 
     render() {
-        const { wpId, version, showPanZoomControls } = this.props;
+        const { wpId, version, showPanZoomControls, isHidden } = this.props;
 
         return (
-            <div className="diagram-wrapper">
+            <div className={`diagram-wrapper ${isHidden? 'isHidden' : ''}`}>
                 <Pvjs about={`http://identifiers.org/wikipathways/WP${wpId}`}
                       version={version}
                       showPanZoomControls={showPanZoomControls}
@@ -80,7 +80,12 @@ Diagram.propTypes = {
     version: PropTypes.number.isRequired,
     showPanZoomControls: PropTypes.bool.isRequired,
     onReady: PropTypes.func,
-    slide: PropTypes.object.isRequired
+    slide: PropTypes.object.isRequired,
+    isHidden: PropTypes.bool
+};
+
+Diagram.defaultProps = {
+    hidden: false
 };
 
 export default Diagram;

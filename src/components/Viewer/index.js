@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import Title from './components/Title';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -86,19 +87,22 @@ class Viewer extends Component {
             return <ErrorMessage message={error.message} />
         }
 
+        const slideTitle = presentation ? presentation.slides[activeSlideIndex].title : null;
+
         return (
             <MuiThemeProvider>
                 <div className="presentation-viewer">
-                    { loading? <Loading /> : null }
+                    { loading ? <Loading /> : null }
+                    { slideTitle ? <Title title={slideTitle} /> : null }
                     {
                         presentation ?
-                            (<Diagram
-                                className={loading? 'hidden': null}
+                            <Diagram
                                 wpId={presentation.wpId}
                                 version={presentation.version}
                                 slide={presentation.slides[activeSlideIndex]}
                                 showPanZoomControls={true}
-                                onReady={this.onReady}  />) :
+                                isHidden={loading}
+                                onReady={this.onReady}  />:
                             null
                     }
                     <Controls onBackward={this.prevSlide} onForward={this.nextSlide} />
