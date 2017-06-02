@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import presentations from '../../data/presentations';
 import './index.css';
-import { memoize } from 'lodash/fp';
 import Diagram from './components/Diagram';
 import Loading from '../Loading';
 import ErrorMessage from '../ErrorMessage';
