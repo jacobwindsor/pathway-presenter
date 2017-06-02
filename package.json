@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@wikipathways/pvjs": "^3.2.1-beta",
+    "@wikipathways/pvjs": "^3.2.3-beta",
     "lodash": "^4.17.4",
     "moize": "^2.3.3",
     "prop-types": "^15.5.10",
@@ -12,8 +12,10 @@
     "spectacle": "^2.1.0"
   },
   "devDependencies": {
+    "enzyme": "^2.8.2",
     "flow-bin": "^0.47.0",
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "react-test-renderer": "^15.5.4"
   },
   "scripts": {
     "start": "react-scripts start",

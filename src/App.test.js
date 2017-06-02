@@ -1,8 +1,13 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from'enzyme';
 import App from './App';
+import Viewer from './components/Viewer';
 
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+  shallow(<App/>);
+});
+
+it('Contains a viewer', () => {
+  const wrapper = shallow(<App/>);
+  expect(wrapper.find(Viewer)).toHaveLength(1);
 });

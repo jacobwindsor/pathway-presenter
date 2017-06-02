@@ -89,7 +89,7 @@ class Viewer extends Component {
                             wpId={presentation.wpId}
                             version={presentation.version}
                             slide={presentation.slides[activeSlideIndex]}
-                            showPanZoomControls={false}
+                            showPanZoomControls={true}
                             onReady={this.onReady}  /> :
                         null
                 }
