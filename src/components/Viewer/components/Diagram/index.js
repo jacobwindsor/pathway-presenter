@@ -47,7 +47,9 @@ Diagram.propTypes = {
     version: PropTypes.number.isRequired,
     showPanZoomControls: PropTypes.bool.isRequired,
     onReady: PropTypes.func,
-    slide: PropTypes.object.isRequired,
+    slide: PropTypes.shape({
+        targets: PropTypes.array.isRequired
+    }),
     isHidden: PropTypes.bool
 };
 
