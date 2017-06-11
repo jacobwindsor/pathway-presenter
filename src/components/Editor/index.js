@@ -7,7 +7,9 @@ class Editor extends Component {
     render() {
         const { presId } = this.props;
         return (
-            <Viewer presId={presId}/>
+            <div className="editor-wrapper">
+                <Viewer presId={presId}/>
+            </div>
         )
     }
 }
