@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@wikipathways/pvjs": "^3.2.3-beta",
+    "@wikipathways/pvjs": "^3.3.0-beta",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.1",
     "moize": "^2.3.3",

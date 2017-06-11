@@ -10,51 +10,6 @@ class Diagram extends Component {
         this.state = {};
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        const { prevManipulator } = prevState;
-        const { curManipulator } = this.state;
-        const { prevSlide } = prevProps;
-        const { curSlide } = this.props;
-        if (isMatch(prevSlide, curSlide)
-            && (!prevManipulator && curManipulator)) return;
-        this.performManipulations();
-    }
-
-    performManipulations() {
-        const { slide } = this.props;
-        const { manipulator } = this.state;
-        if (! manipulator || ! slide ) return;
-        const getEntityIds = (targets) => targets.map(singleTarget => singleTarget.entityId);
-
-        // Find the entities that are not included in the slide and reset them
-        const diagramEntityIds = manipulator.getEntities().map(singleEntity => singleEntity.id);
-        difference(diagramEntityIds, getEntityIds(slide.targets)).forEach(singleId => {
-            manipulator.highlightOff(singleId);
-            manipulator.show(singleId);
-        });
-
-        // Now perform the manipulations on the targets
-        slide.targets.forEach(singleTarget => {
-            if (singleTarget.highlighted)
-                manipulator.highlightOn(singleTarget.entityId, singleTarget.highlightedColor);
-            else
-                manipulator.highlightOff(singleTarget.entityId);
-            if (singleTarget.hidden)
-                manipulator.hide(singleTarget.entityId);
-            else
-                manipulator.show(singleTarget.entityId);
-        });
-
-        const toZoomTo = slide.targets.filter(singleTarget => singleTarget.zoomed);
-        const toPanTo = slide.targets.filter(singleTarget => singleTarget.panned && ! singleTarget.zoomed);
-        if (toZoomTo.length > 0)
-            manipulator.zoomOn(getEntityIds(toZoomTo));
-        if (toPanTo.length > 0) {
-            manipulator.resetZoom();
-            manipulator.panTo(getEntityIds(toPanTo));
-        }
-    }
-
     onPvjsReady = (pvjsRef) => {
         const { onReady } = this.props;
         this.setState({manipulator: pvjsRef.manipulator});
@@ -62,13 +17,32 @@ class Diagram extends Component {
     }
 
     render() {
-        const { wpId, version, showPanZoomControls, isHidden } = this.props;
+        const { wpId, version, showPanZoomControls, isHidden, slide } = this.props;
+        const targets = slide.targets;
+
+        const getEntityIds = entities => entities.map(singleEntity => singleEntity.entityId);
+
+        const highlightedEntities = targets
+            .filter(singleTarget => singleTarget.highlighted)
+            .map(singleTarget => Object.assign({},
+                {entityId: singleTarget.entityId, color: singleTarget.highlightedColor})
+            );
+        const pannedEntities = getEntityIds(targets
+            .filter(singleTarget => singleTarget.panned));
+        const zoomedEntities = getEntityIds(targets
+            .filter(singleTarget => singleTarget.zoomed));
+        const hiddenEntities = getEntityIds(targets
+            .filter(singleTarget => singleTarget.hidden));
 
         return (
             <div className={`diagram-wrapper ${isHidden? 'isHidden' : ''}`}>
                 <Pvjs about={`http://identifiers.org/wikipathways/WP${wpId}`}
                       version={version}
                       showPanZoomControls={showPanZoomControls}
+                      highlightedEntities={highlightedEntities}
+                      pannedEntities={pannedEntities}
+                      zoomedEntities={zoomedEntities}
+                      hiddenEntities={hiddenEntities}
                       onReady={this.onPvjsReady} />
             </div>
         )
