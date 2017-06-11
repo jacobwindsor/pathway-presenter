@@ -1,10 +1,14 @@
 import './index.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Viewer from '../Viewer';
 
 class Editor extends Component {
     render() {
-        return null
+        const { presId } = this.props;
+        return (
+            <Viewer presId={presId}/>
+        )
     }
 }
 

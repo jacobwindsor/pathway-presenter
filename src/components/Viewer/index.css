@@ -1,5 +1,7 @@
 .presentation-viewer {
     display: flex;
+    position: relative;
+    min-height: 1200px;
 }
 
 .presentation-viewer .controls {
