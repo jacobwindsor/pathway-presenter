@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import presentations from '../../data/presentations';
 import './index.css';
-import Diagram from './components/Diagram';
+import Diagram from '../Diagram';
 import Controls from './components/Controls';
 import Loading from '../Loading';
 import ErrorMessage from '../ErrorMessage';

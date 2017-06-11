@@ -1,7 +1,7 @@
 import './index.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Viewer from '../Viewer';
+import Diagram from '../Diagram';
 import presentations from '../../data/presentations';
 import PreviewPanel from './components/PreviewPanel';
 
@@ -35,12 +35,21 @@ class Editor extends Component {
     }
 
     render() {
-        const { presId } = this.props;
-        const { loading, error, presentation } = this.state;
+        const { loading, error, presentation, activeSlideIndex } = this.state;
+
+        if(! presentation) return null;
+
+        // Don't show the title slide
+        const slide = presentation.slides[activeSlideIndex].isTitleSlide ?
+            presentation.slides[activeSlideIndex + 1] : presentation.slides[activeSlideIndex];
 
         return (
             <div className="editor-wrapper">
-                <Viewer presId={presId}/>
+                <Diagram
+                    wpId={presentation.wpId}
+                    version={presentation.version}
+                    slide={slide}
+                    showPanZoomControls={true}/>
             </div>
         )
     }

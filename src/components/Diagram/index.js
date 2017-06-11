@@ -8,7 +8,8 @@ const Diagram = (props) => {
 
     const onPvjsReady = (pvjsRef) => {
         const { onReady } = props;
-        onReady();
+        if (onReady)
+            onReady();
     }
 
     const { wpId, version, showPanZoomControls, isHidden, slide } = props;
