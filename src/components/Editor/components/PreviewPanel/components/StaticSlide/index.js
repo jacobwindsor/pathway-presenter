@@ -2,10 +2,13 @@ import React from 'react';
 import './index.css';
 import PropTypes from 'prop-types';
 import { Pvjs } from '@wikipathways/pvjs';
-import { GridTile } from 'material-ui/GridList';
 
 const StaticSlide = (props) => {
-    const { slide, wpId, version, slideNumber } = props;
+    const { slide, wpId, version, slideNumber, onClick } = props;
+
+    const handleClick = () => {
+        onClick(slideNumber)
+    };
 
     const targets = slide.targets;
 
@@ -24,7 +27,7 @@ const StaticSlide = (props) => {
         .filter(singleTarget => singleTarget.hidden));
 
     return (
-        <div className="static-slide">
+        <div className="static-slide" onClick={handleClick}>
             <Pvjs about={`http://identifiers.org/wikipathways/WP${wpId}`}
                   version={version}
                   showPanZoomControls={false}
@@ -45,6 +48,7 @@ StaticSlide.propTypes = {
     wpId: PropTypes.number.isRequired,
     version: PropTypes.number.isRequired,
     slideNumber: PropTypes.number.isRequired,
+    onClick: PropTypes.func.isRequired,
 };
 
 export default StaticSlide;

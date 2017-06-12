@@ -36,6 +36,13 @@ class Editor extends Component {
             })
     }
 
+    handlePreviewClick = (slideNumber) => {
+          this.setState({
+              // slideNumber is not a 0th index
+              activeSlideIndex: slideNumber - 1,
+          });
+    };
+
     render() {
         const { loading, error, presentation, activeSlideIndex } = this.state;
 
@@ -53,9 +60,12 @@ class Editor extends Component {
                         slide={slide}
                         showPanZoomControls={true} />
                     <Divider/>
-                    <PreviewPanel slides={slides}
-                                  wpId={presentation.wpId}
-                                  version={presentation.version} />
+                    <PreviewPanel
+                        slides={slides}
+                        wpId={presentation.wpId}
+                        version={presentation.version}
+                        onClick={this.handlePreviewClick}
+                    />
                 </div>
             </MuiThemeProvider>
         )

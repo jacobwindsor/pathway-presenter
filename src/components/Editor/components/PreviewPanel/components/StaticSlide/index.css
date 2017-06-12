@@ -4,6 +4,7 @@
     position: relative;
     display: inline-block;
     margin-right: .8rem;
+    cursor: pointer;
 }
 
 .static-slide .title {
