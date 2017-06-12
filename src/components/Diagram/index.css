@@ -1,10 +1,6 @@
 .diagram-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 70%;
-    height: 70%;
+    height: 900px;
+    margin-bottom: 4rem;
 }
 
 .diagram-wrapper.isHidden {

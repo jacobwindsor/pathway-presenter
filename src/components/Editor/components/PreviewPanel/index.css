@@ -1,0 +1,6 @@
+.preview-panel {
+    text-wrap: none;
+    overflow-x: auto;
+    height: 150px;
+    overflow-y: hidden;
+}

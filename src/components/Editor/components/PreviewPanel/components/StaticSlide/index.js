@@ -2,9 +2,10 @@ import React from 'react';
 import './index.css';
 import PropTypes from 'prop-types';
 import { Pvjs } from '@wikipathways/pvjs';
+import { GridTile } from 'material-ui/GridList';
 
 const StaticSlide = (props) => {
-    const { slide, wpId, version } = props;
+    const { slide, wpId, version, slideNumber } = props;
 
     const targets = slide.targets;
 
@@ -32,14 +33,18 @@ const StaticSlide = (props) => {
                   zoomedEntities={zoomedEntities}
                   hiddenEntities={hiddenEntities}
             />
+            <div className="title">
+                {slideNumber}
+            </div>
         </div>
     )
 };
 
 StaticSlide.propTypes = {
     slide: PropTypes.object.isRequired,
-    wpId: PropTypes.string.isRequired,
-    version: PropTypes.number.isRequired
+    wpId: PropTypes.number.isRequired,
+    version: PropTypes.number.isRequired,
+    slideNumber: PropTypes.number.isRequired,
 };
 
 export default StaticSlide;

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Diagram from '../Diagram';
 import presentations from '../../data/presentations';
 import PreviewPanel from './components/PreviewPanel';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Divider from 'material-ui/Divider';
 
 class Editor extends Component {
     constructor(props) {
@@ -38,19 +40,24 @@ class Editor extends Component {
         const { loading, error, presentation, activeSlideIndex } = this.state;
 
         if(! presentation) return null;
-
         // Don't show the title slide
-        const slide = presentation.slides[activeSlideIndex].isTitleSlide ?
-            presentation.slides[activeSlideIndex + 1] : presentation.slides[activeSlideIndex];
+        const slides = presentation.slides.filter(singleSlide => !singleSlide.isTitleSlide);
+        const slide = slides[activeSlideIndex];
 
         return (
-            <div className="editor-wrapper">
-                <Diagram
-                    wpId={presentation.wpId}
-                    version={presentation.version}
-                    slide={slide}
-                    showPanZoomControls={true}/>
-            </div>
+            <MuiThemeProvider>
+                <div className="editor-wrapper">
+                    <Diagram
+                        wpId={presentation.wpId}
+                        version={presentation.version}
+                        slide={slide}
+                        showPanZoomControls={true} />
+                    <Divider/>
+                    <PreviewPanel slides={slides}
+                                  wpId={presentation.wpId}
+                                  version={presentation.version} />
+                </div>
+            </MuiThemeProvider>
         )
     }
 }

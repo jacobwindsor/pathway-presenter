@@ -1,5 +1,17 @@
 .static-slide {
-    width: 200px;
-    height: 150px;
+    width: 300px;
+    height: 100%;
     position: relative;
+    display: inline-block;
+    margin-right: .8rem;
+}
+
+.static-slide .title {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    bottom:0;
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    font-size: 1.3rem;
+    color: white;
 }
