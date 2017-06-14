@@ -1,0 +1,11 @@
+.editor-panel-container {
+    width: 30rem !important;
+    position: absolute!important;
+    z-index: 99999 !important;
+    bottom:0 !important;
+    top:0 !important;
+}
+
+.editor-panel-container .empty-state {
+    text-align: center;
+}

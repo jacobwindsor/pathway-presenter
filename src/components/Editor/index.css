@@ -2,3 +2,7 @@
     position: relative;
     min-height: 1200px;
 }
+
+.editor-wrapper .right-section {
+    margin-left: 32rem;
+}

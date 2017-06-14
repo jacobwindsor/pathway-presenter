@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Diagram from '../Diagram';
 import presentations from '../../data/presentations';
 import PreviewPanel from './components/PreviewPanel';
+import EditorPanel from './components/EditorPanel';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 
@@ -54,18 +55,21 @@ class Editor extends Component {
         return (
             <MuiThemeProvider>
                 <div className="editor-wrapper">
-                    <Diagram
-                        wpId={presentation.wpId}
-                        version={presentation.version}
-                        slide={slide}
-                        showPanZoomControls={true} />
-                    <Divider/>
-                    <PreviewPanel
-                        slides={slides}
-                        wpId={presentation.wpId}
-                        version={presentation.version}
-                        onClick={this.handlePreviewClick}
-                    />
+                    <EditorPanel/>
+                    <div className="right-section">
+                        <Diagram
+                            wpId={presentation.wpId}
+                            version={presentation.version}
+                            slide={slide}
+                            showPanZoomControls={true} />
+                        <Divider/>
+                        <PreviewPanel
+                            slides={slides}
+                            wpId={presentation.wpId}
+                            version={presentation.version}
+                            onClick={this.handlePreviewClick}
+                        />
+                    </div>
                 </div>
             </MuiThemeProvider>
         )

@@ -6,10 +6,10 @@ import { isMatch, difference } from 'lodash';
 
 const Diagram = (props) => {
 
-    const onPvjsReady = (pvjsRef) => {
+    const onPvjsReady = ({entities, manipulator}) => {
         const { onReady } = props;
         if (onReady)
-            onReady();
+            onReady({entities, manipulator});
     }
 
     const { wpId, version, showPanZoomControls, isHidden, slide } = props;
@@ -31,7 +31,7 @@ const Diagram = (props) => {
 
     return (
         <div className={`diagram-wrapper ${isHidden? 'isHidden' : ''}`}>
-            <Pvjs about={`http://identifiers.org/wikipathways/WP${wpId}`}
+            <Pvjs wpId={`WP${wpId}`}
                   version={version}
                   showPanZoomControls={showPanZoomControls}
                   highlightedEntities={highlightedEntities}
