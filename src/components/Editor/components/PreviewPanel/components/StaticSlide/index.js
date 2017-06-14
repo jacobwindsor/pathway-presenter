@@ -28,7 +28,7 @@ const StaticSlide = (props) => {
 
     return (
         <div className="static-slide" onClick={handleClick}>
-            <Pvjs about={`http://identifiers.org/wikipathways/WP${wpId}`}
+            <Pvjs wpId={wpId}
                   version={version}
                   showPanZoomControls={false}
                   highlightedEntities={highlightedEntities}
@@ -45,7 +45,7 @@ const StaticSlide = (props) => {
 
 StaticSlide.propTypes = {
     slide: PropTypes.object.isRequired,
-    wpId: PropTypes.number.isRequired,
+    wpId: PropTypes.string.isRequired,
     version: PropTypes.number.isRequired,
     slideNumber: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,

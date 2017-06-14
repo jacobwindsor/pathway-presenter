@@ -23,7 +23,7 @@ const PreviewPanel = (props) => {
 
 PreviewPanel.propTypes = {
     slides: PropTypes.array.isRequired,
-    wpId: PropTypes.number.isRequired,
+    wpId: PropTypes.string.isRequired,
     version: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
 };
