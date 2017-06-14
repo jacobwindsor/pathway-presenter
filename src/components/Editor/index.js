@@ -46,8 +46,10 @@ class Editor extends Component {
     };
 
     handleEntityClick = (entity) => {
+        // For now we only allow entities with text (nodes)
+        if (! entity.textContent ) return;
         this.setState({selectedEntity: entity})
-    }
+    };
 
     render() {
         const { loading, error, presentation, activeSlideIndex, selectedEntity } = this.state;

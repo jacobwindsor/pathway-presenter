@@ -9,3 +9,26 @@
 .editor-panel-container .empty-state {
     text-align: center;
 }
+
+.editor-panel-container .color-options {
+    margin-top: 16px;
+    margin-left: 72px;
+}
+
+.editor-panel-container .color-options .color-choice {
+    margin-bottom: 16px;
+}
+
+.editor-panel-container .add-button {
+    float: right;
+    margin-top: 16px;
+}
+
+.editor-panel-container .chip-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.editor-panel-container .target-chip {
+    margin: 16px 0 0 8px !important;
+}
