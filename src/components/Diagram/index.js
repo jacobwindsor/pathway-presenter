@@ -31,7 +31,7 @@ const Diagram = (props) => {
 
     return (
         <div className={`diagram-wrapper ${isHidden? 'isHidden' : ''}`}>
-            <Pvjs wpId={`WP${wpId}`}
+            <Pvjs wpId={wpId}
                   version={version}
                   showPanZoomControls={showPanZoomControls}
                   highlightedEntities={highlightedEntities}
@@ -44,7 +44,7 @@ const Diagram = (props) => {
 }
 
 Diagram.propTypes = {
-    wpId: PropTypes.number.isRequired,
+    wpId: PropTypes.string.isRequired,
     version: PropTypes.number.isRequired,
     showPanZoomControls: PropTypes.bool.isRequired,
     onReady: PropTypes.func,
