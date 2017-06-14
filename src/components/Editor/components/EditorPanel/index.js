@@ -6,15 +6,12 @@ import Drawer from 'material-ui/Drawer';
 class EditorPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            selectedEntity: null,
-        }
     }
 
     render() {
-        const { selectedEntity } = this.state;
+        const { activeEntity } = this.props;
         const EmptyState = () => {
-            if (selectedEntity) return null;
+            if (activeEntity) return null;
             return (
                 <div className="empty-state">
                     <h1>Select an entity!</h1>
@@ -23,16 +20,25 @@ class EditorPanel extends Component {
             )
         };
 
+        const Controls = () => {
+            if (! activeEntity) return null;
+            return (
+                <div className="controls">
+                    <p>Active entiyId is {activeEntity.id}</p>
+                </div>
+            )
+        }
         return (
             <Drawer open={true} containerClassName="editor-panel-container" >
                 <EmptyState/>
+                <Controls/>
             </Drawer>
         )
     }
 }
 
 EditorPanel.propTypes = {
-
+    activeEntity: PropTypes.object,
 };
 
 export default EditorPanel;

@@ -16,6 +16,7 @@ class Editor extends Component {
             loading: true,
             activeSlideIndex: 0,
             error: null,
+            selectedEntity: null,
         };
     }
 
@@ -44,8 +45,12 @@ class Editor extends Component {
           });
     };
 
+    handleEntityClick = (entity) => {
+        this.setState({selectedEntity: entity})
+    }
+
     render() {
-        const { loading, error, presentation, activeSlideIndex } = this.state;
+        const { loading, error, presentation, activeSlideIndex, selectedEntity } = this.state;
 
         if(! presentation) return null;
         // Don't show the title slide
@@ -55,11 +60,15 @@ class Editor extends Component {
         return (
             <MuiThemeProvider>
                 <div className="editor-wrapper">
-                    <EditorPanel/>
+                    <EditorPanel
+                        activeEntity={selectedEntity}
+                    />
                     <div className="right-section">
                         <Diagram
                             wpId={presentation.wpId}
                             version={presentation.version}
+                            detailPanelEnabled={false}
+                            onEntityClick={this.handleEntityClick}
                             slide={slide}
                             showPanZoomControls={true} />
                         <Divider/>

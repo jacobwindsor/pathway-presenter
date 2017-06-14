@@ -12,7 +12,7 @@ const Diagram = (props) => {
             onReady({entities, manipulator});
     }
 
-    const { wpId, version, showPanZoomControls, isHidden, slide } = props;
+    const { wpId, version, showPanZoomControls, isHidden, slide, detailPanelEnabled, onEntityClick } = props;
     const targets = slide.targets;
 
     const getEntityIds = entities => entities.map(singleEntity => singleEntity.entityId);
@@ -34,6 +34,8 @@ const Diagram = (props) => {
             <Pvjs wpId={wpId}
                   version={version}
                   showPanZoomControls={showPanZoomControls}
+                  detailPanelEnabled={detailPanelEnabled}
+                  onEntityClick={onEntityClick}
                   highlightedEntities={highlightedEntities}
                   pannedEntities={pannedEntities}
                   zoomedEntities={zoomedEntities}
@@ -51,11 +53,14 @@ Diagram.propTypes = {
     slide: PropTypes.shape({
         targets: PropTypes.array.isRequired
     }),
-    isHidden: PropTypes.bool
+    isHidden: PropTypes.bool,
+    detailPanelEnabled: PropTypes.bool.isRequired,
+    onEntityClick: PropTypes.func
 };
 
 Diagram.defaultProps = {
-    hidden: false
+    hidden: false,
+    detailPanelEnabled: true
 };
 
 export default Diagram;
