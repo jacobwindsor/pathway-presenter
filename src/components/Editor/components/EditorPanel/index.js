@@ -9,6 +9,8 @@ import IconButton from 'material-ui/IconButton';
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 import Chip from 'material-ui/Chip';
+import Snackbar from 'material-ui/Snackbar';
+import { find } from 'lodash';
 
 class EditorPanel extends Component {
     constructor(props) {
@@ -20,6 +22,7 @@ class EditorPanel extends Component {
             isHidden: false,
             highlightedColor: null,
             targets: [],
+            isDuplicate: false,
         }
     }
 
@@ -63,6 +66,11 @@ class EditorPanel extends Component {
 
     handleAdd = () => {
         this.setState((state, props) => {
+            if(find(state.targets, singleTarget => singleTarget.entityId === props.activeEntity.id)) {
+                return {
+                    isDuplicate: true,
+                }
+            }
             return {
                 targets: state.targets.concat([{
                     entityId: props.activeEntity.id,
@@ -82,6 +90,12 @@ class EditorPanel extends Component {
             return {
                 targets: state.targets.filter(singleTarget => singleTarget.entityId !== entityId),
             }
+        })
+    };
+
+    handleSnackbarRequestClose = () => {
+        this.setState({
+            isDuplicate: false,
         })
     };
 
@@ -151,6 +165,12 @@ class EditorPanel extends Component {
                     <div className="chip-wrapper">
                         {chips()}
                     </div>
+                    <Snackbar
+                        open={this.state.isDuplicate}
+                        message="No duplicate entities!"
+                        autoHideDuration={3000}
+                        onRequestClose={this.handleSnackbarRequestClose}
+                    />
                 </div>
             )
         }
