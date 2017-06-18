@@ -62,9 +62,8 @@ class Editor extends Component {
     handleSlideUpdate = (slide) => {
         this.setState(state => {
             let newSlides = state.presentation.slides.slice();
-            newSlides[
-                    findIndex(newSlides, singleSlide => singleSlide.id === slide.id)
-                ] = slide;
+            const indexToChange = findIndex(newSlides, singleSlide => singleSlide.id === slide.id);
+            newSlides[indexToChange] = slide;
             return {
                 presentation: Object.assign({}, state.presentation, {
                     slides: newSlides

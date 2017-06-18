@@ -18,16 +18,24 @@ import Subheader from 'material-ui/Subheader';
 class EditorPanel extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        this.state = this.getInitialState(props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(isEqual(this.props.slide, nextProps.slide)) return;
+        this.setState(this.getInitialState(nextProps));
+    }
+
+    getInitialState(props) {
+        return {
             isHighlighted: false,
             isPanned: false,
-            isZoomed: false,
             isHidden: false,
             highlightedColor: null,
             targets: props.slide.targets || [],
-            title: props.slide.title || [],
+            title: props.slide.title,
             id: props.slide.id,
-            isDuplicate: false,
+            isDuplicate: false
         }
     }
 
