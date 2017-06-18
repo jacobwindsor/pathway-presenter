@@ -7,6 +7,10 @@ import PreviewPanel from './components/PreviewPanel';
 import EditorPanel from './components/EditorPanel';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import { findIndex } from 'lodash';
+const uuidV4 = require('uuid/v4');
 
 class Editor extends Component {
     constructor(props) {
@@ -24,8 +28,12 @@ class Editor extends Component {
         const { presId } = this.props;
         presentations.get(presId)
             .then(presentation => {
+                // Don't show title slide
+                const slidesToShow = presentation.slides.filter(singleSlide => !singleSlide.isTitleSlide);
+                const presToShow = Object.assign({}, presentation, {slides: slidesToShow});
+
                 this.setState({
-                    presentation,
+                    presentation: presToShow,
                     loading: false,
                     activeSlideIndex: 0,
                 })
@@ -51,19 +59,49 @@ class Editor extends Component {
         this.setState({selectedEntity: entity})
     };
 
+    handleSlideUpdate = (slide) => {
+        this.setState(state => {
+            let newSlides = state.presentation.slides.slice();
+            newSlides[
+                    findIndex(newSlides, singleSlide => singleSlide.id === slide.id)
+                ] = slide;
+            return {
+                presentation: Object.assign({}, state.presentation, {
+                    slides: newSlides
+                })
+            }
+        })
+    };
+
+    onSlideAdd = () => {
+        this.setState(state => {
+            return {
+                presentation: Object.assign({}, state.presentation, {
+                    slides: state.presentation.slides.concat({
+                        id: uuidV4(),
+                        targets: [],
+                        title: null
+                    })
+                }),
+                // Since added one slide, new index is the length
+                activeSlideIndex: state.presentation.slides.length,
+            }
+        })
+    };
+
     render() {
         const { loading, error, presentation, activeSlideIndex, selectedEntity } = this.state;
 
         if(! presentation) return null;
-        // Don't show the title slide
-        const slides = presentation.slides.filter(singleSlide => !singleSlide.isTitleSlide);
-        const slide = slides[activeSlideIndex];
+        const slide = presentation.slides[activeSlideIndex];
 
         return (
             <MuiThemeProvider>
                 <div className="editor-wrapper">
                     <EditorPanel
+                        slide={slide}
                         activeEntity={selectedEntity}
+                        onUpdate={this.handleSlideUpdate}
                     />
                     <div className="right-section">
                         <Diagram
@@ -75,11 +113,14 @@ class Editor extends Component {
                             showPanZoomControls={true} />
                         <Divider/>
                         <PreviewPanel
-                            slides={slides}
+                            slides={presentation.slides}
                             wpId={presentation.wpId}
                             version={presentation.version}
                             onClick={this.handlePreviewClick}
                         />
+                        <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
+                            <ContentAdd />
+                        </FloatingActionButton>
                     </div>
                 </div>
             </MuiThemeProvider>

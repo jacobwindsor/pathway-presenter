@@ -4,24 +4,29 @@ import './index.css';
 import Drawer from 'material-ui/Drawer';
 import {List, ListItem} from 'material-ui/List';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import TextField from 'material-ui/TextField';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton'
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 import Chip from 'material-ui/Chip';
 import Snackbar from 'material-ui/Snackbar';
-import { find } from 'lodash';
+import { find, differenceWith, isEqual } from 'lodash';
+import Subheader from 'material-ui/Subheader';
 
 class EditorPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            colorPickerOpen: false,
+            isHighlighted: false,
             isPanned: false,
             isZoomed: false,
             isHidden: false,
             highlightedColor: null,
-            targets: [],
+            targets: props.slide.targets || [],
+            title: props.slide.title || [],
+            id: props.slide.id,
             isDuplicate: false,
         }
     }
@@ -29,7 +34,7 @@ class EditorPanel extends Component {
     handleHighlightToggle = () => {
         this.setState((state) => {
             return {
-                colorPickerOpen: !state.colorPickerOpen
+                isHighlighted: !state.isHighlighted
             }
         });
     };
@@ -78,7 +83,7 @@ class EditorPanel extends Component {
                     hidden: state.isHidden,
                     zoomed: state.isZoomed,
                     panned: state.isPanned,
-                    highlighted: !!state.highlightedColor,
+                    highlighted: state.isHighlighted,
                     highlightedColor: state.highlightedColor,
                 }])
             }
@@ -99,11 +104,27 @@ class EditorPanel extends Component {
         })
     };
 
+    componentDidUpdate(prevProps, prevState) {
+        const prevTargets = prevState.targets;
+        const curTargets = this.state.targets;
+        const prevTitle = prevState.title;
+        const curTitle = this.state.title;
+        const { onUpdate } = this.props;
+        if (! onUpdate) return;
+        if (differenceWith(curTargets, prevTargets, isEqual).length > 0 || prevTitle !== curTitle) {
+            onUpdate({
+                id: this.state.id,
+                title: curTitle,
+                targets: curTargets,
+            });
+        }
+    }
+
     render() {
         const { activeEntity } = this.props;
         const { targets } = this.state;
 
-        const EmptyState = () => {
+        const TargetEmptyState = () => {
             if (activeEntity) return null;
             return (
                 <div className="empty-state">
@@ -113,19 +134,13 @@ class EditorPanel extends Component {
             )
         };
 
-        const chips = () => targets.map((singleTarget,i) => <Chip
-            key={i}
-            className="target-chip"
-            onRequestDelete={() => this.handleRequestChipDelete(singleTarget.entityId)}>
-                {singleTarget.textContent}
-            </Chip>);
-
-        const Controls = () => {
+        const TargetControls = () => {
             if (! activeEntity) return null;
+
             return (
                 <div className="controls">
                     <List>
-                        <h1>{activeEntity.textContent}</h1>
+                        <Subheader>{activeEntity.textContent}</Subheader>
                         <ListItem primaryText="Zoom" rightToggle={<Toggle
                             onToggle={this.handleZoomToggle}
                             toggled={this.state.isZoomed} />} />
@@ -141,8 +156,8 @@ class EditorPanel extends Component {
                         <ListItem primaryText="Highlight"
                                   rightToggle={<Toggle
                                       onToggle={this.handleHighlightToggle}
-                                      toggled={this.state.colorPickerOpen} />}
-                                  open={this.state.colorPickerOpen}
+                                      toggled={this.state.isHighlighted} />}
+                                  open={this.state.isHighlighted}
                                   nestedItems={[
                                       <RadioButtonGroup
                                           name="highlightColor"
@@ -159,12 +174,9 @@ class EditorPanel extends Component {
                                   ]} />
                         <Divider/>
                     </List>
-                    <IconButton className="add-button" onClick={this.handleAdd}>
+                    <IconButton className="add-target-button" onClick={this.handleAdd}>
                         <ContentAdd/>
                     </IconButton>
-                    <div className="chip-wrapper">
-                        {chips()}
-                    </div>
                     <Snackbar
                         open={this.state.isDuplicate}
                         message="No duplicate entities!"
@@ -173,11 +185,30 @@ class EditorPanel extends Component {
                     />
                 </div>
             )
+        };
+
+        const TargetChips = () => {
+            const chips = targets.map((singleTarget,i) => <Chip
+                key={i}
+                className="target-chip"
+                onRequestDelete={() => this.handleRequestChipDelete(singleTarget.entityId)}>
+                {singleTarget.textContent}
+            </Chip>);
+
+            if (chips.length < 1) return null;
+            return (
+                <div className="chip-wrapper">
+                    {chips}
+                </div>
+            )
         }
+
         return (
             <Drawer open={true} containerClassName="editor-panel-container" >
-                <EmptyState/>
-                <Controls/>
+                <TextField hintText="Slide title" fullWidth={true} className="title-input"/>
+                <TargetEmptyState/>
+                <TargetControls/>
+                <TargetChips/>
             </Drawer>
         )
     }
@@ -185,6 +216,8 @@ class EditorPanel extends Component {
 
 EditorPanel.propTypes = {
     activeEntity: PropTypes.object,
+    onUpdate: PropTypes.func,
+    slide: PropTypes.object.isRequired,
 };
 
 export default EditorPanel;

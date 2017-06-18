@@ -6,3 +6,9 @@
 .editor-wrapper .right-section {
     margin-left: 32rem;
 }
+
+.editor-wrapper .add-slide-button {
+    position: absolute;
+    bottom: calc((100% - 1000px)/3);
+    right: 2rem;
+}
