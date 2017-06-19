@@ -12,7 +12,7 @@ import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 import Chip from 'material-ui/Chip';
 import Snackbar from 'material-ui/Snackbar';
-import { find, differenceWith, isEqual } from 'lodash';
+import { find, sortBy, isEqual } from 'lodash';
 import Subheader from 'material-ui/Subheader';
 
 class EditorPanel extends Component {
@@ -28,13 +28,25 @@ class EditorPanel extends Component {
 
         const { activeEntity, slide } = nextProps;
         if(! isEqual(this.props.activeEntity, activeEntity)) {
-            const activeTarget = slide.targets.filter(singleTarget => singleTarget.entityId === activeEntity.id)[0];
-            this.setState({
-                isHighlighted: activeTarget.highlighted,
-                isPanned: activeTarget.panned,
-                isHidden: activeTarget.hidden,
-                highlightedColor: activeTarget.highlightedColor,
-            })
+            const activeTarget = slide.targets.find(singleTarget => singleTarget.entityId === activeEntity.id);
+            if (! activeTarget) {
+                this.setState({
+                    isHighlighted: false,
+                    isPanned: false,
+                    isHidden: false,
+                    isZoomed: false,
+                    highlightedColor: null,
+                })
+            }
+            else {
+                this.setState({
+                    isHighlighted: activeTarget.highlighted,
+                    isPanned: activeTarget.panned,
+                    isHidden: activeTarget.hidden,
+                    isZoomed: activeTarget.zoomed,
+                    highlightedColor: activeTarget.highlightedColor,
+                })
+            }
         }
     }
 
@@ -43,6 +55,7 @@ class EditorPanel extends Component {
             isHighlighted: false,
             isPanned: false,
             isHidden: false,
+            isZoomed: false,
             highlightedColor: null,
             targets: props.slide.targets || [],
             title: props.slide.title,
@@ -125,13 +138,14 @@ class EditorPanel extends Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
+        const sort = (arr) => sortBy(arr, 'entityId');
         const prevTargets = prevState.targets;
         const curTargets = this.state.targets;
         const prevTitle = prevState.title;
         const curTitle = this.state.title;
         const { onUpdate } = this.props;
         if (! onUpdate) return;
-        if (differenceWith(curTargets, prevTargets, isEqual).length > 0 || prevTitle !== curTitle) {
+        if (!isEqual(sort(prevTargets), sort(curTargets)) || prevTitle !== curTitle) {
             onUpdate({
                 id: this.state.id,
                 title: curTitle,
