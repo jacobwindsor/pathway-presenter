@@ -105,13 +105,15 @@ class Editor extends Component {
                         onUpdate={this.handleSlideUpdate}
                     />
                     <div className="right-section">
-                        <Diagram
-                            wpId={presentation.wpId}
-                            version={presentation.version}
-                            detailPanelEnabled={false}
-                            onEntityClick={this.handleEntityClick}
-                            slide={slide}
-                            showPanZoomControls={true} />
+                        <div className="diagram-comp-wrapper">
+                            <Diagram
+                                wpId={presentation.wpId}
+                                version={presentation.version}
+                                detailPanelEnabled={false}
+                                onEntityClick={this.handleEntityClick}
+                                slide={slide}
+                                showPanZoomControls={true} />
+                        </div>
                         <Divider/>
                         <PreviewPanel
                             slides={presentation.slides}

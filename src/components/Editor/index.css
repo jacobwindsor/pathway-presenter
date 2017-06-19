@@ -1,14 +1,23 @@
 .editor-wrapper {
     position: relative;
-    min-height: 1200px;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .editor-wrapper .right-section {
-    margin-left: 32rem;
+    width: 70%;
+    margin-left: calc(30% + 2rem);
+    height: 100%;
+}
+
+.editor-wrapper .right-section .diagram-comp-wrapper {
+    height: 80%;
+    width: 100%;
 }
 
 .editor-wrapper .add-slide-button {
     position: absolute;
-    bottom: calc((100% - 1000px)/3);
+    bottom: 1.6rem;
     right: 2rem;
 }

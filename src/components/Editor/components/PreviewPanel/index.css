@@ -1,7 +1,7 @@
 .preview-panel {
     text-wrap: none;
     overflow-x: auto;
-    height: calc(100% - 1000px);
+    height: 20%;
     overflow-y: hidden;
     position: absolute;
     bottom: 0;

@@ -1,5 +1,5 @@
 .editor-panel-container {
-    width: 30rem !important;
+    width: 30% !important;
     position: absolute!important;
     z-index: 99999 !important;
     bottom:0 !important;
