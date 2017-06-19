@@ -6,6 +6,7 @@ import {List, ListItem} from 'material-ui/List';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import ActionDone from 'material-ui/svg-icons/action/done';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton'
 import Toggle from 'material-ui/Toggle';
@@ -22,8 +23,10 @@ class EditorPanel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(! isEqual(this.props.slide, nextProps.slide)) {
+        if(this.props.slide.id !== nextProps.slide.id) {
+            // Slide id not the same. Probably a new slide has been given
             this.setState(this.getInitialState(nextProps));
+            return;
         }
 
         const { activeEntity, slide } = nextProps;
@@ -104,13 +107,11 @@ class EditorPanel extends Component {
 
     handleAdd = () => {
         this.setState((state, props) => {
-            if(find(state.targets, singleTarget => singleTarget.entityId === props.activeEntity.id)) {
-                return {
-                    isDuplicate: true,
-                }
-            }
+            // Filter out the new target and add it again
+            // Allows for editing of already added targets
+            const newTargets = state.targets.filter(singleTarget => singleTarget.entityId !== props.activeEntity.id);
             return {
-                targets: state.targets.concat([{
+                targets: newTargets.concat([{
                     entityId: props.activeEntity.id,
                     textContent: props.activeEntity.textContent,
                     hidden: state.isHidden,
@@ -118,7 +119,7 @@ class EditorPanel extends Component {
                     panned: state.isPanned,
                     highlighted: state.isHighlighted,
                     highlightedColor: state.highlightedColor,
-                }])
+                }]),
             }
         });
     };
@@ -209,7 +210,7 @@ class EditorPanel extends Component {
                         <Divider/>
                     </List>
                     <IconButton className="add-target-button" onClick={this.handleAdd}>
-                        <ContentAdd/>
+                        <ActionDone/>
                     </IconButton>
                     <Snackbar
                         open={this.state.isDuplicate}

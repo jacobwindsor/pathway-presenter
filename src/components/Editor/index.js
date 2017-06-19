@@ -50,6 +50,7 @@ class Editor extends Component {
           this.setState({
               // slideNumber is not a 0th index
               activeSlideIndex: slideNumber - 1,
+              selectedEntity: null,
           });
     };
 
@@ -80,10 +81,11 @@ class Editor extends Component {
                         id: uuidV4(),
                         targets: [],
                         title: null
-                    })
+                    }),
                 }),
                 // Since added one slide, new index is the length
                 activeSlideIndex: state.presentation.slides.length,
+                selectedEntity: null,
             }
         })
     };
