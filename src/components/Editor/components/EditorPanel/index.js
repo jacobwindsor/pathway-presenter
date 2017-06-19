@@ -22,8 +22,20 @@ class EditorPanel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(isEqual(this.props.slide, nextProps.slide)) return;
-        this.setState(this.getInitialState(nextProps));
+        if(! isEqual(this.props.slide, nextProps.slide)) {
+            this.setState(this.getInitialState(nextProps));
+        }
+
+        const { activeEntity, slide } = nextProps;
+        if(! isEqual(this.props.activeEntity, activeEntity)) {
+            const activeTarget = slide.targets.filter(singleTarget => singleTarget.entityId === activeEntity.id)[0];
+            this.setState({
+                isHighlighted: activeTarget.highlighted,
+                isPanned: activeTarget.panned,
+                isHidden: activeTarget.hidden,
+                highlightedColor: activeTarget.highlightedColor,
+            })
+        }
     }
 
     getInitialState(props) {
