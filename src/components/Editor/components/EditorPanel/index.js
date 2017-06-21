@@ -138,6 +138,13 @@ class EditorPanel extends Component {
         })
     };
 
+    handleTitleChange = (e) => {
+        const val = e.target.value;
+        this.setState({
+            title: val,
+        })
+    };
+
     componentDidUpdate(prevProps, prevState) {
         const sort = (arr) => sortBy(arr, 'entityId');
         const prevTargets = prevState.targets;
@@ -240,7 +247,8 @@ class EditorPanel extends Component {
 
         return (
             <Drawer open={true} containerClassName="editor-panel-container" >
-                <TextField hintText="Slide title" fullWidth={true} className="title-input"/>
+                <TextField hintText="Slide title" fullWidth={true} className="title-input"
+                           onChange={this.handleTitleChange} />
                 <TargetEmptyState/>
                 <TargetControls/>
                 <TargetChips/>

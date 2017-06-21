@@ -8,7 +8,7 @@ import ErrorMessage from '../ErrorMessage';
 import PropTypes from 'prop-types';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Title from './components/Title';
+import Title from '../Title';
 import TitleSlide from './components/TitleSlide';
 
 class Viewer extends Component {

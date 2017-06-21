@@ -9,6 +9,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Divider from 'material-ui/Divider';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import Title from '../Title';
 import { findIndex } from 'lodash';
 const uuidV4 = require('uuid/v4');
 
@@ -107,6 +108,7 @@ class Editor extends Component {
                     />
                     <div className="right-section">
                         <div className="diagram-comp-wrapper">
+                            { slide.title ? <Title title={slide.title} /> : null }
                             <Diagram
                                 wpId={presentation.wpId}
                                 version={presentation.version}
