@@ -18,6 +18,7 @@
 
 .editor-wrapper .add-slide-button {
     position: absolute;
-    bottom: 1.6rem;
-    right: 2rem;
+    bottom: 10%;
+    transform: translateY(50%);
+    right: 3rem;
 }

@@ -30,7 +30,7 @@ class EditorPanel extends Component {
         }
 
         const { activeEntity, slide } = nextProps;
-        if(! isEqual(this.props.activeEntity, activeEntity)) {
+        if(! isEqual(this.props.activeEntity, activeEntity) && activeEntity) {
             const activeTarget = slide.targets.find(singleTarget => singleTarget.entityId === activeEntity.id);
             if (! activeTarget) {
                 this.setState({

@@ -1,10 +1,10 @@
 .static-slide {
-    width: 300px;
+    width: 250px;
     height: 100%;
     position: relative;
-    display: inline-block;
     margin-right: .8rem;
     cursor: pointer;
+    display: inline-block;
 }
 
 .static-slide .title {

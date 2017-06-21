@@ -68,7 +68,8 @@ class Editor extends Component {
             return {
                 presentation: Object.assign({}, state.presentation, {
                     slides: newSlides
-                })
+                }),
+                selectedEntity: null,
             }
         })
     };
