@@ -35,10 +35,10 @@ class Creator extends Component {
     };
 
     handleSlideUpdate = (slide) => {
+        const { activeSlideIndex } = this.state;
         this.setState(state => {
             let newSlides = state.presentation.slides.slice();
-            const indexToChange = findIndex(newSlides, singleSlide => singleSlide.id === slide.id);
-            newSlides[indexToChange] = slide;
+            newSlides[activeSlideIndex] = slide;
             return {
                 presentation: Object.assign({}, state.presentation, {
                     slides: newSlides
@@ -72,6 +72,7 @@ class Creator extends Component {
             <div className="creator-wrapper">
                 <EditorPanel
                     slide={slide}
+                    slideIndex={activeSlideIndex}
                     activeEntity={selectedEntity}
                     onUpdate={this.handleSlideUpdate}
                 />

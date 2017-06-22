@@ -23,8 +23,7 @@ class EditorPanel extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.slide.id !== nextProps.slide.id) {
-            // Slide id not the same. Probably a new slide has been given
+        if(this.props.slideIndex !== nextProps.slideIndex) {
             this.setState(this.getInitialState(nextProps));
             return;
         }
@@ -155,7 +154,6 @@ class EditorPanel extends Component {
         if (! onUpdate) return;
         if (!isEqual(sort(prevTargets), sort(curTargets)) || prevTitle !== curTitle) {
             onUpdate({
-                id: this.state.id,
                 title: curTitle,
                 targets: curTargets,
             });
@@ -261,6 +259,7 @@ EditorPanel.propTypes = {
     activeEntity: PropTypes.object,
     onUpdate: PropTypes.func,
     slide: PropTypes.object.isRequired,
+    slideIndex: PropTypes.object.isRequired, // Required to detect when slide has changed
 };
 
 export default EditorPanel;
