@@ -41,17 +41,14 @@ class Adder extends Component {
 
     render() {
         return (
-            <div className="adder-wrapper">
-                <Paper zDepth={1}>
-                    <TextField hintText="Title" onChange={this.handleTitleChange} />
-                    <Divider/>
-                    <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} />
-                    <Divider/>
-                    <TextField hintText="version" onChange={this.handleVersionChange} />
-                    <Divider/>
-                    <FlatButton label="Create" primary={true} onClick={this.handleSubmit} />
-                </Paper>
-            </div>
+            <Paper zDepth={1} className="adder-wrapper">
+                <h3>Create a Pathway Presentation</h3>
+                <TextField hintText="Title" onChange={this.handleTitleChange} fullWidth={true} />
+                <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} fullWidth={true} />
+                <TextField hintText="Version" onChange={this.handleVersionChange} fullWidth={true} />
+                <FlatButton label="Create" primary={true} onClick={this.handleSubmit} fullWidth={true}
+                            className="create-button"/>
+            </Paper>
         )
     }
 }
