@@ -259,7 +259,7 @@ EditorPanel.propTypes = {
     activeEntity: PropTypes.object,
     onUpdate: PropTypes.func,
     slide: PropTypes.object.isRequired,
-    slideIndex: PropTypes.object.isRequired, // Required to detect when slide has changed
+    slideIndex: PropTypes.number.isRequired, // Required to detect when slide has changed
 };
 
 export default EditorPanel;
