@@ -1,17 +1,11 @@
 import './index.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Diagram from '../Diagram';
 import presentations from '../../data/presentations';
-import PreviewPanel from './components/PreviewPanel';
-import EditorPanel from './components/EditorPanel';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import Divider from 'material-ui/Divider';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import Title from '../Title';
-import { findIndex } from 'lodash';
-const uuidV4 = require('uuid/v4');
+import Adder from './components/Adder';
+import Creator from './components/Creator';
+import ErrorMessage from '../ErrorMessage';
 
 class Editor extends Component {
     constructor(props) {
@@ -19,14 +13,13 @@ class Editor extends Component {
         this.state = {
             presentation: null,
             loading: true,
-            activeSlideIndex: 0,
-            error: null,
-            selectedEntity: null,
+            error: null
         };
     }
 
     componentDidMount() {
         const { presId } = this.props;
+        if (! presId) return;
         presentations.get(presId)
             .then(presentation => {
                 // Don't show title slide
@@ -36,7 +29,6 @@ class Editor extends Component {
                 this.setState({
                     presentation: presToShow,
                     loading: false,
-                    activeSlideIndex: 0,
                 })
             })
             .catch(err => {
@@ -47,87 +39,45 @@ class Editor extends Component {
             })
     }
 
-    handlePreviewClick = (slideNumber) => {
-          this.setState({
-              // slideNumber is not a 0th index
-              activeSlideIndex: slideNumber - 1,
-              selectedEntity: null,
-          });
-    };
-
-    handleEntityClick = (entity) => {
-        // For now we only allow entities with text (nodes)
-        if (! entity.textContent ) return;
-        this.setState({selectedEntity: entity})
-    };
-
-    handleSlideUpdate = (slide) => {
-        this.setState(state => {
-            let newSlides = state.presentation.slides.slice();
-            const indexToChange = findIndex(newSlides, singleSlide => singleSlide.id === slide.id);
-            newSlides[indexToChange] = slide;
-            return {
-                presentation: Object.assign({}, state.presentation, {
-                    slides: newSlides
-                }),
-                selectedEntity: null,
-            }
-        })
-    };
-
-    onSlideAdd = () => {
-        this.setState(state => {
-            return {
-                presentation: Object.assign({}, state.presentation, {
-                    slides: state.presentation.slides.concat({
-                        id: uuidV4(),
-                        targets: [],
-                        title: null
-                    }),
-                }),
-                // Since added one slide, new index is the length
-                activeSlideIndex: state.presentation.slides.length,
-                selectedEntity: null,
+    handlePathwaySelect = (toCreate) => {
+        this.setState({
+            presentation: {
+                wpId: toCreate.wpId,
+                version: toCreate.version || 0,
+                title: toCreate.title || null,
+                description: toCreate.description || null,
+                slides: [{
+                    targets: [],
+                }],
             }
         })
     };
 
     render() {
-        const { loading, error, presentation, activeSlideIndex, selectedEntity } = this.state;
+        const { loading, error, presentation } = this.state;
 
-        if(! presentation) return null;
-        const slide = presentation.slides[activeSlideIndex];
+        const SuccessContent = () => {
+            if (error) return null;
+            return (
+                <div className="editor-wrapper">
+                    { presentation ?
+                        <Creator presentation={presentation} /> :
+                        <Adder handleSubmit={this.handlePathwaySelect}/>
+                    }
+                </div>
+            )
+        };
+
+        const ErrorContent = () => {
+            if (! error) return null;
+            return <ErrorMessage message={error.message} />
+        };
 
         return (
             <MuiThemeProvider>
                 <div className="editor-wrapper">
-                    <EditorPanel
-                        slide={slide}
-                        activeEntity={selectedEntity}
-                        onUpdate={this.handleSlideUpdate}
-                    />
-                    <div className="right-section">
-                        <div className="diagram-comp-wrapper">
-                            { slide.title ? <Title title={slide.title} /> : null }
-                            <Diagram
-                                wpId={presentation.wpId}
-                                version={presentation.version}
-                                detailPanelEnabled={false}
-                                onEntityClick={this.handleEntityClick}
-                                slide={slide}
-                                showPanZoomControls={true} />
-                        </div>
-                        <Divider/>
-                        <PreviewPanel
-                            slides={presentation.slides}
-                            wpId={presentation.wpId}
-                            version={presentation.version}
-                            onClick={this.handlePreviewClick}
-                        />
-                        <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
-                            <ContentAdd />
-                        </FloatingActionButton>
-                    </div>
+                    <ErrorContent />
+                    <SuccessContent />
                 </div>
             </MuiThemeProvider>
         )
@@ -135,7 +85,7 @@ class Editor extends Component {
 }
 
 Editor.propTypes = {
-    presId: PropTypes.string.isRequired
+    presId: PropTypes.string,
 };
 
 export default Editor;

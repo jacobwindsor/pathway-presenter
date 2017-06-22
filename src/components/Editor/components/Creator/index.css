@@ -1,0 +1,24 @@
+.creator-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.creator-wrapper .right-section {
+    width: 70%;
+    margin-left: calc(30% + 2rem);
+    height: 100%;
+}
+
+.creator-wrapper .right-section .diagram-comp-wrapper {
+    height: 80%;
+    width: 100%;
+}
+
+.creator-wrapper .add-slide-button {
+    position: absolute;
+    bottom: 10%;
+    transform: translateY(50%);
+    right: 3rem;
+}
