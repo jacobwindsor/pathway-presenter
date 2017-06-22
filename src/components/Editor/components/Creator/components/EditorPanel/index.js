@@ -241,12 +241,12 @@ class EditorPanel extends Component {
                     {chips}
                 </div>
             )
-        }
+        };
 
         return (
             <Drawer open={true} containerClassName="editor-panel-container" >
                 <TextField hintText="Slide title" fullWidth={true} className="title-input"
-                           onChange={this.handleTitleChange} />
+                           onChange={this.handleTitleChange} value={this.state.title} />
                 <TargetEmptyState/>
                 <TargetControls/>
                 <TargetChips/>
