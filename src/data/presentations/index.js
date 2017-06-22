@@ -1,12 +1,11 @@
-import presentationData from './presentationsData';
-import { find, defaultsDeep } from 'lodash/fp';
+import { defaultsDeep } from 'lodash/fp';
 const uuidV4 = require('uuid/v4');
 
 export default {
     get: (id) => {
         return new Promise(resolve => {
-            const presentation = find(singlePresentation => singlePresentation.id === id)(presentationData);
-            if (! presentation) throw new Error(`No presentation with ID ${id} found!`);
+            const presentation = localStorage.getItem(`presentation-${id}`);
+            if (! presentation) throw new Error(`No presentation with ID ${id} found.`);
             resolve(presentation);
         })
     },
@@ -22,7 +21,7 @@ export default {
                     slides: presentation.slides.map(singleSlide => Object.assign({}, singleSlide, {id: uuidV4()}))
                 };
                 localStorage.setItem(`presentation-${toSave.id}`, toSave);
-                resolve();
+                resolve(toSave);
             }
         )
     },
@@ -31,10 +30,10 @@ export default {
             const toUpdate = localStorage.getItem(`presentation-${id}`);
             if (! toUpdate) throw new Error(`Presentation with ID ${id} not found.`);
 
-            const toSave = defaultsDeep(presentation, toUpdate);
+            const toSave = defaultsDeep(toUpdate, presentation);
             localStorage.removeItem(`presentation-${id}`);
             localStorage.setItem(`presentation-${id}`, toSave);
-            resolve();
+            resolve(toSave);
         });
     }
 }
