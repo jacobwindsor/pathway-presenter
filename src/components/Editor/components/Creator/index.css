@@ -5,10 +5,21 @@
     overflow: hidden;
 }
 
+.creator-wrapper .editor-toolbar {
+    width: 100%;
+    height: 56px;
+    overflow: hidden;
+}
+
+.creator-wrapper .editor-panel {
+    top: 56px !important;
+    height: calc(100% - 56px) !important;
+}
+
 .creator-wrapper .right-section {
     width: 70%;
     margin-left: calc(30% + 2rem);
-    height: 100%;
+    height: calc(100% - 56px);
 }
 
 .creator-wrapper .right-section .diagram-comp-wrapper {

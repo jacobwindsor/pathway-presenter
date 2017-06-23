@@ -39,6 +39,16 @@ class Editor extends Component {
             })
     }
 
+    savePresentation = presentation => {
+        console.log(presentation);
+        presentations.create(presentation)
+            .catch(error => {
+                this.setState({
+                    error
+                })
+            })
+    };
+
     handlePathwaySelect = (toCreate) => {
         this.setState({
             presentation: {
@@ -59,9 +69,9 @@ class Editor extends Component {
         const SuccessContent = () => {
             if (error) return null;
             return (
-                <div className="editor-wrapper">
+                <div className="full editor-wrapper">
                     { presentation ?
-                        <Creator presentation={presentation} /> :
+                        <Creator presentation={presentation} handleSave={this.savePresentation} /> :
                         <Adder handleSubmit={this.handlePathwaySelect}/>
                     }
                 </div>
@@ -75,7 +85,7 @@ class Editor extends Component {
 
         return (
             <MuiThemeProvider>
-                <div className="editor-wrapper">
+                <div className="full">
                     <ErrorContent />
                     <SuccessContent />
                 </div>

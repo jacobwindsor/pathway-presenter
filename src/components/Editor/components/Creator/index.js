@@ -8,6 +8,7 @@ import Divider from 'material-ui/Divider';
 import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { findIndex, cloneDeep } from 'lodash';
+import Toolbar from './components/Toolbar';
 import './index.css'
 
 class Creator extends Component {
@@ -64,17 +65,25 @@ class Creator extends Component {
         })
     };
 
+    handleSave = () => {
+        const { presentation } = this.state;
+        const { handleSave } = this.props;
+        handleSave(presentation);
+    };
+
     render() {
         const { activeSlideIndex, selectedEntity, presentation } = this.state;
         const slide = presentation.slides[activeSlideIndex];
 
         return (
             <div className="creator-wrapper">
+                <Toolbar handleSave={this.handleSave} className="editor-toolbar" />
                 <EditorPanel
                     slide={slide}
                     slideIndex={activeSlideIndex}
                     activeEntity={selectedEntity}
                     onUpdate={this.handleSlideUpdate}
+                    className="editor-panel"
                 />
                 <div className="right-section">
                     <div className="diagram-comp-wrapper">
@@ -105,6 +114,7 @@ class Creator extends Component {
 
 Creator.propTypes = {
     presentation: PropTypes.object.isRequired,
+    handleSave: PropTypes.func.isRequired,
 };
 
 export default Creator;
