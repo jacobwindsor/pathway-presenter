@@ -45,7 +45,7 @@ class Editor extends Component {
             promise = presentations.update(presentation.id, presentation)
         }
         else {
-            promise = presentation.create(presentation);
+            promise = presentations.create(presentation);
         }
 
         promise
