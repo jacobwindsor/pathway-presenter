@@ -40,8 +40,15 @@ class Editor extends Component {
     }
 
     savePresentation = presentation => {
-        console.log(presentation);
+        if(presentation.id) {
+            presentations.update(presentation.id, presentation)
+                .then(presentation => this.setState({presentation}))
+                .catch(error => this.setState({error}));
+            return
+        }
+
         presentations.create(presentation)
+            .then(presentation => this.setState({presentation}))
             .catch(error => {
                 this.setState({
                     error
