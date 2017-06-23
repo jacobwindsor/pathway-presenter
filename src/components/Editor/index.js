@@ -40,14 +40,15 @@ class Editor extends Component {
     }
 
     savePresentation = presentation => {
+        let promise;
         if(presentation.id) {
-            presentations.update(presentation.id, presentation)
-                .then(presentation => this.setState({presentation}))
-                .catch(error => this.setState({error}));
-            return
+            promise = presentations.update(presentation.id, presentation)
+        }
+        else {
+            promise = presentation.create(presentation);
         }
 
-        presentations.create(presentation)
+        promise
             .then(presentation => this.setState({presentation}))
             .catch(error => {
                 this.setState({
