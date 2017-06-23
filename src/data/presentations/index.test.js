@@ -93,4 +93,27 @@ describe('The presentation data service', () => {
            expect(res).toEqual(Object.assign({}, presentation, {wpId: 'WP6', title: 'A title 2'}));
        })
     });
+
+    it('should assign an id to the new slide', () => {
+        presentation = Object.assign({}, presentation, {
+            slides: presentation.slides.concat([{
+                title: 'A new slide',
+                targets: [],
+            }])
+        });
+
+        presentations.update(presentation.id, presentation)
+            .then(newPres => {
+                expect(newPres.slides[newPres.slides.length - 1]).toHaveProperty('id');
+                presentation = newPres;
+            })
+    });
+
+    it('should remove the presentation', () => {
+        presentations.remove(presentation.id)
+            .then(res => expect(res).toBeUndefined());
+
+        return presentations.get(presentation.id)
+            .catch(err => expect(err).not.toBeUndefined())
+    })
 });
