@@ -6,7 +6,7 @@ export default {
         return new Promise(resolve => {
             const presentation = localStorage.getItem(`presentation-${id}`);
             if (! presentation) throw new Error(`No presentation with ID ${id} found.`);
-            resolve(presentation);
+            resolve(JSON.parse(presentation));
         })
     },
     create: (presentation) => {
@@ -20,7 +20,7 @@ export default {
                     description: presentation.description,
                     slides: presentation.slides.map(singleSlide => Object.assign({}, singleSlide, {id: uuidV4()}))
                 };
-                localStorage.setItem(`presentation-${toSave.id}`, toSave);
+                localStorage.setItem(`presentation-${toSave.id}`, JSON.stringify(toSave));
                 resolve(toSave);
             }
         )
