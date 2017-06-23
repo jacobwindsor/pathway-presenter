@@ -1,15 +1,16 @@
 import { defaultsDeep } from 'lodash/fp';
 const uuidV4 = require('uuid/v4');
 
-export default {
-    get: (id) => {
+class Presentations {
+    get(id) {
         return new Promise(resolve => {
             const presentation = localStorage.getItem(`presentation-${id}`);
             if (! presentation) throw new Error(`No presentation with ID ${id} found.`);
             resolve(JSON.parse(presentation));
         })
-    },
-    create: (presentation) => {
+    }
+
+    create(presentation) {
         // Todo: validate the input
         return new Promise(resolve => {
                 const toSave = {
@@ -24,16 +25,22 @@ export default {
                 resolve(toSave);
             }
         )
-    },
-    update: (id, presentation) => {
-        return new Promise(resolve => {
-            const toUpdate = localStorage.getItem(`presentation-${id}`);
-            if (! toUpdate) throw new Error(`Presentation with ID ${id} not found.`);
+    }
 
-            const toSave = defaultsDeep(toUpdate, presentation);
-            localStorage.removeItem(`presentation-${id}`);
-            localStorage.setItem(`presentation-${id}`, toSave);
-            resolve(toSave);
-        });
+    update(id, presentation) {
+        return this.get(id)
+            .then(toUpdate => defaultsDeep(toUpdate, presentation))
+            .then(updated => {
+                localStorage.removeItem(`presentation-${updated.id}`);
+                localStorage.setItem(`presentation-${updated.id}`, JSON.stringify(updated));
+                return updated
+            });
+    }
+
+    remove(id) {
+        return this.get(id)
+            .then(toRemove => localStorage.removeItem(`presentation-${id}`))
     }
 }
+
+export default new Presentations();

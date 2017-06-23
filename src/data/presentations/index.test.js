@@ -48,6 +48,11 @@ describe('The presentation data service', () => {
         })
     });
 
+    it('should create a completely new presentation', (() => {
+        return presentations.create(presentation)
+            .then(newPres => expect(presentation.id).not.toEqual(newPres.id));
+    }));
+
     it('should only update the wpId', () => {
         return presentations.update(presentation.id, {
             wpId: 'WP5',
