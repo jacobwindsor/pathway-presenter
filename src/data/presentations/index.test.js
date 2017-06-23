@@ -53,6 +53,24 @@ describe('The presentation data service', () => {
             .then(newPres => expect(presentation.id).not.toEqual(newPres.id));
     }));
 
+    it('Every slide should have a unique ID', () => {
+        presentation = Object.assign({}, presentation, {
+            slides: presentation.slides.concat([{
+                title: 'a second slide',
+                targets: [],
+            }])
+        });
+
+        return presentations.create(presentation)
+            .then(newPres => {
+                const slides = newPres.slides;
+                expect(slides[0]).toHaveProperty('id');
+                expect(slides[1]).toHaveProperty('id');
+                expect(slides[0].id).not.toEqual(slides[1].id);
+                presentation = newPres;
+            })
+    });
+
     it('should only update the wpId', () => {
         return presentations.update(presentation.id, {
             wpId: 'WP5',
