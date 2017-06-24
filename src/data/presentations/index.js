@@ -1,6 +1,17 @@
 import { defaultsDeep, cloneDeep } from 'lodash/fp';
 const uuidV4 = require('uuid/v4');
 
+const list = () => {
+    return new Promise(resolve => {
+        const arr = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            if(localStorage.key(i).startsWith('presentation')){
+                arr.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+            }
+        }
+        resolve(arr);
+    })
+};
 
 const get = (id) => {
     return new Promise(resolve => {
@@ -52,6 +63,7 @@ const remove = id => {
 };
 
 export default {
+    list,
     get,
     create,
     update,

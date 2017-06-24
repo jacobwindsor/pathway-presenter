@@ -19,6 +19,7 @@
   "devDependencies": {
     "enzyme": "^2.8.2",
     "flow-bin": "^0.47.0",
+    "jest-localstorage-mock": "^1.2.0",
     "react-scripts": "1.0.7",
     "react-test-renderer": "^15.5.4"
   },

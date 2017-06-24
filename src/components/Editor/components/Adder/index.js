@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
-import Divider from 'material-ui/Divider';
+import AutoComplete from 'material-ui/AutoComplete';
+import presentations from '../../../../data/presentations';
 import { cloneDeep } from 'lodash';
 import './index.css';
 
@@ -13,7 +14,13 @@ class Adder extends Component {
 
         this.state = {
             wpId: null,
+            dataSource: [],
         }
+    }
+
+    componentDidMount() {
+        presentations.list()
+            .then(res=> this.setState({dataSource: res.map(single => single.title)}))
     }
 
     handleWpIdChange = e => {
@@ -42,6 +49,8 @@ class Adder extends Component {
     render() {
         return (
             <Paper zDepth={1} className="adder-wrapper">
+                <h3>Select a Pathway Presentation</h3>
+                <AutoComplete fullWidth={true} hintText={"Search by title"} dataSource={this.state.dataSource} />
                 <h3>Create a Pathway Presentation</h3>
                 <TextField hintText="Title" onChange={this.handleTitleChange} fullWidth={true} />
                 <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} fullWidth={true} />
