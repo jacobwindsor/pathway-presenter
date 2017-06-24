@@ -17,10 +17,8 @@ class Editor extends Component {
         };
     }
 
-    componentDidMount() {
-        const { presId } = this.props;
-        if (! presId) return;
-        presentations.get(presId)
+    getPresentation = id => {
+        presentations.get(id)
             .then(presentation => {
                 // Don't show title slide
                 const slidesToShow = presentation.slides.filter(singleSlide => !singleSlide.isTitleSlide);
@@ -37,6 +35,12 @@ class Editor extends Component {
                     loading: false,
                 })
             })
+    }
+
+    componentDidMount() {
+        const { presId } = this.props;
+        if (! presId) return;
+        this.getPresentation(presId);
     }
 
     savePresentation = presentation => {
@@ -57,7 +61,7 @@ class Editor extends Component {
             })
     };
 
-    handlePathwaySelect = (toCreate) => {
+    handlePresentationCreate = toCreate => {
         this.setState({
             presentation: {
                 wpId: toCreate.wpId,
@@ -80,7 +84,7 @@ class Editor extends Component {
                 <div className="full editor-wrapper">
                     { presentation ?
                         <Creator presentation={presentation} handleSave={this.savePresentation} /> :
-                        <Adder handleSubmit={this.handlePathwaySelect}/>
+                        <Adder handleSelect={this.getPresentation} handleCreate={this.handlePresentationCreate}/>
                     }
                 </div>
             )

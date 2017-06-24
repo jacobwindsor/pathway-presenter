@@ -20,7 +20,14 @@ class Adder extends Component {
 
     componentDidMount() {
         presentations.list()
-            .then(res=> this.setState({dataSource: res.map(single => single.title)}))
+            .then(res=> this.setState({
+                dataSource: res.map(single => {
+                    return {
+                        text: single.title,
+                        value: single.id
+                    }
+                })
+            }))
     }
 
     handleWpIdChange = e => {
@@ -42,15 +49,25 @@ class Adder extends Component {
     };
 
     handleSubmit = () => {
-      const { handleSubmit } = this.props;
-      handleSubmit(cloneDeep(this.state));
+      const { handleCreate } = this.props;
+      handleCreate(cloneDeep(this.state));
+    };
+
+    handleSelect = (chosenRequest, index) => {
+        const { handleSelect } = this.props;
+        const { dataSource } = this.state;
+        if(index < 0) return;
+        handleSelect(dataSource[index].value)
     };
 
     render() {
         return (
             <Paper zDepth={1} className="adder-wrapper">
                 <h3>Select a Pathway Presentation</h3>
-                <AutoComplete fullWidth={true} hintText={"Search by title"} dataSource={this.state.dataSource} />
+                <AutoComplete fullWidth={true}
+                              hintText={"Search by title"}
+                              dataSource={this.state.dataSource}
+                              onNewRequest={this.handleSelect} />
                 <h3>Create a Pathway Presentation</h3>
                 <TextField hintText="Title" onChange={this.handleTitleChange} fullWidth={true} />
                 <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} fullWidth={true} />
@@ -63,7 +80,8 @@ class Adder extends Component {
 }
 
 Adder.propTypes = {
-    handleSubmit: PropTypes.func.isRequired,
+    handleCreate: PropTypes.func.isRequired,
+    handleSelect: PropTypes.func.isRequired,
 };
 
 export default Adder;
