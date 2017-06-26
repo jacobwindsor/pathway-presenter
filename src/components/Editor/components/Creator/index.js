@@ -77,14 +77,15 @@ class Creator extends Component {
 
         return (
             <div className="creator-wrapper">
-                <Toolbar handleSave={this.handleSave} className="editor-toolbar" />
-                <EditorPanel
-                    slide={slide}
-                    slideIndex={activeSlideIndex}
-                    activeEntity={selectedEntity}
-                    onUpdate={this.handleSlideUpdate}
-                    className="editor-panel"
-                />
+                <Toolbar handleSave={this.handleSave} />
+                <div className="left-section">
+                    <EditorPanel
+                        slide={slide}
+                        slideIndex={activeSlideIndex}
+                        activeEntity={selectedEntity}
+                        onUpdate={this.handleSlideUpdate}
+                    />
+                </div>
                 <div className="right-section">
                     <div className="diagram-comp-wrapper">
                         { slide.title ? <Title title={slide.title} /> : null }

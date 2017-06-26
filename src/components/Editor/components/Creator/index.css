@@ -5,15 +5,13 @@
     overflow: hidden;
 }
 
-.creator-wrapper .editor-toolbar {
-    width: 100%;
-    height: 56px;
-    overflow: hidden;
+.creator-wrapper .left-section,.right-section {
+    height: 100%;
 }
 
-.creator-wrapper .editor-panel {
-    top: 56px !important;
-    height: calc(100% - 56px) !important;
+.creator-wrapper .left-section {
+    width: 30%;
+    float: left;
 }
 
 .creator-wrapper .right-section {

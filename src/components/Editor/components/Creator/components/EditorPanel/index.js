@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './index.css';
-import Drawer from 'material-ui/Drawer';
+import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
@@ -244,13 +244,13 @@ class EditorPanel extends Component {
         };
 
         return (
-            <Drawer open={true} containerClassName="editor-panel-container" >
+            <Paper className="editor-panel-container" >
                 <TextField hintText="Slide title" fullWidth={true} className="title-input"
                            onChange={this.handleTitleChange} value={this.state.title} />
                 <TargetEmptyState/>
                 <TargetControls/>
                 <TargetChips/>
-            </Drawer>
+            </Paper>
         )
     }
 }
