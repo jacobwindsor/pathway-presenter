@@ -1,8 +1,9 @@
 .static-slide {
     width: 250px;
-    height: 100%;
+    height: calc(100% - .6rem);
     position: relative;
     margin-right: .8rem;
+    margin-bottom: .6rem;
     cursor: pointer;
     display: inline-block;
 }

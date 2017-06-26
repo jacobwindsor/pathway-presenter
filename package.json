@@ -9,6 +9,7 @@
     "moize": "^2.3.3",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
+    "react-custom-scrollbars": "^4.1.2",
     "react-dom": "^15.5.4",
     "react-spinkit": "^3.0.0",
     "react-tap-event-plugin": "^2.0.1",

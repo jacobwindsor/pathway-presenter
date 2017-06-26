@@ -103,6 +103,8 @@ class Creator extends Component {
                         wpId={presentation.wpId}
                         version={presentation.version}
                         onClick={this.handlePreviewClick}
+                        width="100%"
+                        height="20%"
                     />
                     <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
                         <ContentAdd />
