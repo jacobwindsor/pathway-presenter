@@ -9,3 +9,7 @@
 .adder-wrapper .create-button {
     margin-top: .8rem !important;
 }
+
+.adder-wrapper .header {
+    text-align: center;
+}

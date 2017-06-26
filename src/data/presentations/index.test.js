@@ -64,7 +64,7 @@ describe('The presentation data service', () => {
                 expect(res.slides[0].id).not.toEqual(res.slides[1].id)
             });
     });
-
+    
     it('should list the presentations', () => {
         return presentations.create({title: 'A pres', wpId:'WP4', version: 0, slides:[]})
             .then(pres => presentations.list().then(theList => {

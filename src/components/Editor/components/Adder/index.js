@@ -6,6 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AutoComplete from 'material-ui/AutoComplete';
 import presentations from '../../../../data/presentations';
 import { cloneDeep } from 'lodash';
+import logo from '../../../../assets/logo.svg';
 import './index.css';
 
 class Adder extends Component {
@@ -63,6 +64,13 @@ class Adder extends Component {
     render() {
         return (
             <Paper zDepth={1} className="adder-wrapper">
+                <div className="header">
+                    <h1>Pathway Presenter</h1>
+                    <p>
+                        Create interactive presentations from pathways on <a href="http://wikipathways.org" target="_blank">WikiPathways</a>.
+                    </p>
+                    <img src={logo}  />
+                </div>
                 <h3>Select a Pathway Presentation</h3>
                 <AutoComplete fullWidth={true}
                               hintText={"Search by title"}
