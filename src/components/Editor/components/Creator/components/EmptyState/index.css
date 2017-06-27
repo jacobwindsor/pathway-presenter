@@ -1,0 +1,28 @@
+.empty-creator-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1.6rem;
+    width: 60%;
+    height: 60%;
+}
+
+.empty-creator-state .clickable {
+    position: absolute;
+    /* 100% - padding - padding - borderWidth - borderWidth - parentPadding - parentPadding */
+    height: calc(100% - 1.6rem - 1.6rem - 4px - 4px - 1.6rem - 1.6rem);
+    width: calc(100% - 1.6rem - 1.6rem - 4px - 4px - 1.6rem - 1.6rem);
+    cursor: pointer;
+    text-align: center;
+    border: 4px dashed rgb(232, 232, 232);
+    border-radius: 1.2rem;
+    padding: 1.6rem;
+}
+
+.empty-creator-state .clickable .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

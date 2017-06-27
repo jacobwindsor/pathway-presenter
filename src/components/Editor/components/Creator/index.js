@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import EmptyState from './components/EmptyState';
 import PreviewPanel from './components/PreviewPanel';
 import EditorPanel from './components/EditorPanel';
 import Paper from 'material-ui/Paper';
@@ -91,54 +92,69 @@ class Creator extends Component {
 
     render() {
         const { activeSlideIndex, selectedEntity, presentation } = this.state;
-        const slide = presentation.slides[activeSlideIndex];
+
+        const EmptyComps = () => {
+          if (presentation.slides.length > 0) return null;
+          return <EmptyState handleClick={this.onSlideAdd} />
+        };
+
+        const NonEmptyComps = () => {
+            if (presentation.slides.length < 1) return null;
+            const slide = presentation.slides[activeSlideIndex];
+            return (
+                <span>
+                    <div className="left-section">
+                        <EditorPanel
+                            slide={slide}
+                            slideIndex={activeSlideIndex}
+                            activeEntity={selectedEntity}
+                            onUpdate={this.handleSlideUpdate}
+                        />
+                    </div>
+                    <div className="right-section">
+                        <div className="previewer">
+                            <div className="slide-wrapper">
+                                <div className="slide">
+                                    <Paper className="content" zDepth={2}>
+                                        { slide.title ? <Title title={slide.title}/> : null }
+                                        <Diagram
+                                            wpId={presentation.wpId}
+                                            version={presentation.version}
+                                            detailPanelEnabled={false}
+                                            onEntityClick={this.handleEntityClick}
+                                            slide={slide}
+                                            showPanZoomControls={true}/>
+                                    </Paper>
+                                </div>
+                            </div>
+                        </div>
+                        <Paper className="footer">
+                            <PreviewPanel
+                                slides={presentation.slides}
+                                wpId={presentation.wpId}
+                                version={presentation.version}
+                                onClick={this.handlePreviewClick}
+                                handleSlideRemove={this.handleSlideRemove}
+                                width={'calc(100% - 10rem)'}
+                                height="100%"
+                            />
+                            <FloatingActionButton
+                                className="add-slide-button"
+                                onTouchTap={this.onSlideAdd}
+                            >
+                                <ContentAdd />
+                            </FloatingActionButton>
+                        </Paper>
+                    </div>
+                </span>
+            );
+        };
 
         return (
             <div className="creator-wrapper">
                 <Toolbar handleSave={this.handleSave} />
-                <div className="left-section">
-                    <EditorPanel
-                        slide={slide}
-                        slideIndex={activeSlideIndex}
-                        activeEntity={selectedEntity}
-                        onUpdate={this.handleSlideUpdate}
-                    />
-                </div>
-                <div className="right-section">
-                    <div className="previewer">
-                        <div className="slide-wrapper">
-                            <div className="slide">
-                                <Paper className="content" zDepth={2}>
-                                    { slide.title ? <Title title={slide.title} /> : null }
-                                    <Diagram
-                                        wpId={presentation.wpId}
-                                        version={presentation.version}
-                                        detailPanelEnabled={false}
-                                        onEntityClick={this.handleEntityClick}
-                                        slide={slide}
-                                        showPanZoomControls={true} />
-                                </Paper>
-                            </div>
-                        </div>
-                    </div>
-                    <Paper className="footer">
-                        <PreviewPanel
-                            slides={presentation.slides}
-                            wpId={presentation.wpId}
-                            version={presentation.version}
-                            onClick={this.handlePreviewClick}
-                            handleSlideRemove={this.handleSlideRemove}
-                            width={'calc(100% - 10rem)'}
-                            height="100%"
-                        />
-                        <FloatingActionButton
-                            className="add-slide-button"
-                            onTouchTap={this.onSlideAdd}
-                        >
-                            <ContentAdd />
-                        </FloatingActionButton>
-                    </Paper>
-                </div>
+                <EmptyComps/>
+                <NonEmptyComps/>
             </div>
         )
     }
