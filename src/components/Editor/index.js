@@ -20,12 +20,8 @@ class Editor extends Component {
     getPresentation = id => {
         presentations.get(id)
             .then(presentation => {
-                // Don't show title slide
-                const slidesToShow = presentation.slides.filter(singleSlide => !singleSlide.isTitleSlide);
-                const presToShow = Object.assign({}, presentation, {slides: slidesToShow});
-
                 this.setState({
-                    presentation: presToShow,
+                    presentation,
                     loading: false,
                 })
             })
@@ -35,7 +31,7 @@ class Editor extends Component {
                     loading: false,
                 })
             })
-    }
+    };
 
     componentDidMount() {
         const { presId } = this.props;
