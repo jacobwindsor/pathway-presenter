@@ -1,4 +1,5 @@
 import presentations from './index';
+import { cloneDeep } from 'lodash';
 require('jest-localstorage-mock');
 
 describe('The presentation data service', () => {
@@ -77,4 +78,17 @@ describe('The presentation data service', () => {
             .then(pres => presentations.remove(pres.id))
             .then(() => expect(localStorage).toHaveLength(0))
     });
+
+    it('should remove the slide', () => {
+        return presentations.create({title: 'A pres', wpId: 'WP4', version: 0,
+            slides: [{title: 'First', targets: []}, {title: 'second', targets: []}]})
+            .then(pres => {
+                const copy = cloneDeep(pres);
+                copy.slides = copy.slides.slice(0, 1);
+                return presentations.update(pres.id, copy);
+            })
+            .then(updated => {
+                expect(updated.slides).toHaveLength(1);
+            })
+    })
 });

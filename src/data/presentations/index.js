@@ -39,8 +39,18 @@ const create = presentation => {
 };
 
 const update = (id, presentation) => {
+    const copy = cloneDeep(presentation);
+
     return get(id)
-        .then(toUpdate => defaultsDeep(toUpdate, presentation))
+        .then(toUpdate => cloneDeep(toUpdate))
+        .then(toUpdate => {
+            if(copy.slides) {
+                // Allows for slides to be removed
+                toUpdate.slides = copy.slides;
+            }
+            return toUpdate;
+        })
+        .then(toUpdate => defaultsDeep(toUpdate, copy))
         .then(toUpdate => {
             toUpdate.slides = toUpdate.slides.map(singleSlide => {
                 if(! singleSlide.id) singleSlide.id = uuidV4();
