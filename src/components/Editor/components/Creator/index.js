@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PreviewPanel from './components/PreviewPanel';
 import EditorPanel from './components/EditorPanel';
+import Paper from 'material-ui/Paper';
 import Title from '../../../Title';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Divider from 'material-ui/Divider';
@@ -87,7 +88,7 @@ class Creator extends Component {
                     />
                 </div>
                 <div className="right-section">
-                    <div className="diagram-comp-wrapper">
+                    <Paper className="diagram-comp-wrapper">
                         { slide.title ? <Title title={slide.title} /> : null }
                         <Diagram
                             wpId={presentation.wpId}
@@ -96,7 +97,7 @@ class Creator extends Component {
                             onEntityClick={this.handleEntityClick}
                             slide={slide}
                             showPanZoomControls={true} />
-                    </div>
+                    </Paper>
                     <Divider/>
                     <PreviewPanel
                         slides={presentation.slides}

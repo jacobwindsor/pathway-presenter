@@ -21,8 +21,9 @@
 }
 
 .creator-wrapper .right-section .diagram-comp-wrapper {
-    height: 80%;
-    width: 100%;
+    height: calc(80% - 2rem);
+    width: calc(100% - 2rem);
+    position: relative;
 }
 
 .creator-wrapper .add-slide-button {
