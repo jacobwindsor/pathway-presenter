@@ -60,7 +60,7 @@ class EditorPanel extends Component {
             isZoomed: false,
             highlightedColor: null,
             targets: props.slide.targets || [],
-            title: props.slide.title,
+            title: props.slide.title || '',
             id: props.slide.id,
             isDuplicate: false
         }
@@ -140,7 +140,7 @@ class EditorPanel extends Component {
     handleTitleChange = (e) => {
         const val = e.target.value;
         this.setState({
-            title: val,
+            title: val || '',
         })
     };
 

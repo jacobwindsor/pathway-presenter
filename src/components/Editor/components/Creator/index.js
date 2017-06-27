@@ -86,6 +86,7 @@ class Creator extends Component {
     render() {
         const { activeSlideIndex, selectedEntity, presentation } = this.state;
         const slide = presentation.slides[activeSlideIndex];
+        console.log(activeSlideIndex);
 
         return (
             <div className="creator-wrapper">
