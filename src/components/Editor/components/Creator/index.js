@@ -125,7 +125,11 @@ class Creator extends Component {
                             width={'calc(100% - 10rem)'}
                             height="100%"
                         />
-                        <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
+                        <FloatingActionButton
+                            className="add-slide-button"
+                            onTouchTap={this.onSlideAdd}
+                            tooltip="Add a new slide"
+                        >
                             <ContentAdd />
                         </FloatingActionButton>
                     </Paper>
