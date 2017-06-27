@@ -54,9 +54,15 @@ class Creator extends Component {
         this.setState(state => {
             const copy = cloneDeep(state.presentation);
             copy.slides.splice(slideIndex, 1);
+            let newSlideIndex = state.activeSlideIndex;
+            if (slideIndex === state.activeSlideIndex)
+                newSlideIndex = slideIndex - 1;
+            newSlideIndex = Math.max(0, newSlideIndex);
+            newSlideIndex = Math.min(newSlideIndex, copy.slides.length - 1);
             return {
                 presentation: copy,
-                selectedEntity: null
+                selectedEntity: null,
+                activeSlideIndex: newSlideIndex,
             }
         })
     };
