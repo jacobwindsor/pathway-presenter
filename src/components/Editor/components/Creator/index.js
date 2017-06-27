@@ -128,7 +128,6 @@ class Creator extends Component {
                         <FloatingActionButton
                             className="add-slide-button"
                             onTouchTap={this.onSlideAdd}
-                            tooltip="Add a new slide"
                         >
                             <ContentAdd />
                         </FloatingActionButton>
