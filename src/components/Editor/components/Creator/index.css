@@ -16,7 +16,7 @@
 
 .creator-wrapper .right-section {
     width: 70%;
-    margin-left: calc(30% + 2rem);
+    margin-left: calc(30%);
     height: calc(100% - 56px);
 }
 

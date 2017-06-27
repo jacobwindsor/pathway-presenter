@@ -16,7 +16,7 @@ const PreviewPanel = (props) => {
             onClick={onClick} />);
 
     return (
-        <Scrollbars style={{ width, height, whiteSpace: 'nowrap', overflowY: 'hidden' }}>
+        <Scrollbars className="preview-panel" style={{ width, height, whiteSpace: 'nowrap', overflowY: 'hidden' }}>
             {staticSlides}
         </Scrollbars>
     )

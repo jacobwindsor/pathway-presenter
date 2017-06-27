@@ -1,6 +1,7 @@
 import React from 'react';
 import './index.css';
 import board from '../../../../../../../../assets/board_64.svg';
+import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 
 const StaticSlide = (props) => {
@@ -11,12 +12,12 @@ const StaticSlide = (props) => {
     };
 
     return (
-        <div className="static-slide" onClick={handleClick}>
+        <Paper className="static-slide" onClick={handleClick}>
             <img src={board} style={{margin: '0 auto', display: 'block', transform: 'translateY(50%)', top: '50%'}} />
             <div className="title">
                 {slideNumber}
             </div>
-        </div>
+        </Paper>
     )
 };
 
