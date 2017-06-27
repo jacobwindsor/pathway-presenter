@@ -88,16 +88,18 @@ class Creator extends Component {
                     />
                 </div>
                 <div className="right-section">
-                    <Paper className="diagram-comp-wrapper">
-                        { slide.title ? <Title title={slide.title} /> : null }
-                        <Diagram
-                            wpId={presentation.wpId}
-                            version={presentation.version}
-                            detailPanelEnabled={false}
-                            onEntityClick={this.handleEntityClick}
-                            slide={slide}
-                            showPanZoomControls={true} />
-                    </Paper>
+                    <div className="slide">
+                        <Paper className="content">
+                            { slide.title ? <Title title={slide.title} /> : null }
+                            <Diagram
+                                wpId={presentation.wpId}
+                                version={presentation.version}
+                                detailPanelEnabled={false}
+                                onEntityClick={this.handleEntityClick}
+                                slide={slide}
+                                showPanZoomControls={true} />
+                        </Paper>
+                    </div>
                     <Divider/>
                     <PreviewPanel
                         slides={presentation.slides}
