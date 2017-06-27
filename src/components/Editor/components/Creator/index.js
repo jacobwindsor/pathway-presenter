@@ -100,18 +100,19 @@ class Creator extends Component {
                                 showPanZoomControls={true} />
                         </Paper>
                     </div>
-                    <Divider/>
-                    <PreviewPanel
-                        slides={presentation.slides}
-                        wpId={presentation.wpId}
-                        version={presentation.version}
-                        onClick={this.handlePreviewClick}
-                        width="100%"
-                        height="20%"
-                    />
-                    <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
-                        <ContentAdd />
-                    </FloatingActionButton>
+                    <div className="footer">
+                        <PreviewPanel
+                            slides={presentation.slides}
+                            wpId={presentation.wpId}
+                            version={presentation.version}
+                            onClick={this.handlePreviewClick}
+                            width="80%"
+                            height="100%"
+                        />
+                        <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
+                            <ContentAdd />
+                        </FloatingActionButton>
+                    </div>
                 </div>
             </div>
         )
