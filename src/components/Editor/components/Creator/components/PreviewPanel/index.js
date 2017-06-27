@@ -5,10 +5,11 @@ import StaticSlide from './components/StaticSlide';
 import { Scrollbars } from 'react-custom-scrollbars';
 
 const PreviewPanel = (props) => {
-    const { slides, wpId, version, onClick, height, width } = props;
+    const { slides, wpId, version, onClick, height, width, handleSlideRemove } = props;
 
     const staticSlides = slides
         .map((singleSlide, index) => <StaticSlide
+            handleRemove={() => handleSlideRemove(index)}
             key={`static-slide-${index}`}
             slide={singleSlide} wpId={wpId}
             slideNumber={index + 1}
@@ -29,6 +30,7 @@ PreviewPanel.propTypes = {
     onClick: PropTypes.func.isRequired,
     height: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
+    handleSlideRemove: PropTypes.func.isRequired, // Called with the index to remove
 };
 
 export default PreviewPanel;

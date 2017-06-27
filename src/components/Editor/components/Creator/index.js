@@ -50,6 +50,17 @@ class Creator extends Component {
         })
     };
 
+    handleSlideRemove = slideIndex => {
+        this.setState(state => {
+            const copy = cloneDeep(state.presentation);
+            copy.slides.splice(slideIndex, 1);
+            return {
+                presentation: copy,
+                selectedEntity: null
+            }
+        })
+    };
+
     onSlideAdd = () => {
         this.setState(state => {
             return {
@@ -110,6 +121,7 @@ class Creator extends Component {
                             wpId={presentation.wpId}
                             version={presentation.version}
                             onClick={this.handlePreviewClick}
+                            handleSlideRemove={this.handleSlideRemove}
                             width={'calc(100% - 10rem)'}
                             height="100%"
                         />
