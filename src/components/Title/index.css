@@ -1,6 +1,5 @@
 .slide-title {
-    position: absolute;
-    top:0;
+    float: left;
     width:100%;
     z-index: 10;
     background-color: #80deea;

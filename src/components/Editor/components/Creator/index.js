@@ -88,31 +88,35 @@ class Creator extends Component {
                     />
                 </div>
                 <div className="right-section">
-                    <div className="slide">
-                        <Paper className="content">
-                            { slide.title ? <Title title={slide.title} /> : null }
-                            <Diagram
-                                wpId={presentation.wpId}
-                                version={presentation.version}
-                                detailPanelEnabled={false}
-                                onEntityClick={this.handleEntityClick}
-                                slide={slide}
-                                showPanZoomControls={true} />
-                        </Paper>
+                    <div className="previewer">
+                        <div className="slide-wrapper">
+                            <div className="slide">
+                                <Paper className="content" zDepth={2}>
+                                    { slide.title ? <Title title={slide.title} /> : null }
+                                    <Diagram
+                                        wpId={presentation.wpId}
+                                        version={presentation.version}
+                                        detailPanelEnabled={false}
+                                        onEntityClick={this.handleEntityClick}
+                                        slide={slide}
+                                        showPanZoomControls={true} />
+                                </Paper>
+                            </div>
+                        </div>
                     </div>
-                    <div className="footer">
+                    <Paper className="footer">
                         <PreviewPanel
                             slides={presentation.slides}
                             wpId={presentation.wpId}
                             version={presentation.version}
                             onClick={this.handlePreviewClick}
-                            width="80%"
+                            width={'calc(100% - 10rem)'}
                             height="100%"
                         />
                         <FloatingActionButton className="add-slide-button" onTouchTap={this.onSlideAdd}>
                             <ContentAdd />
                         </FloatingActionButton>
-                    </div>
+                    </Paper>
                 </div>
             </div>
         )
