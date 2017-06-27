@@ -13,9 +13,15 @@ const StaticSlide = (props) => {
         onClick(slideNumber)
     };
 
+    const onRemoveClick = e => {
+        // Stop event bubbling to handleClick
+        e.stopPropagation();
+        handleRemove()
+    };
+
     return (
         <Paper className="static-slide" onClick={handleClick}>
-            <IconButton className="remove-button" tooltip="Remove slide" onClick={handleRemove}>
+            <IconButton className="remove-button" tooltip="Remove slide" onClick={onRemoveClick}>
                 <RemoveCircle/>
             </IconButton>
             <img src={board} style={{margin: '0 auto', display: 'block', transform: 'translateY(50%)', top: '50%'}} />
