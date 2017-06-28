@@ -1,5 +1,6 @@
 .editor-toolbar {
     background-color: #80deea !important;
+    overflow: hidden;
 }
 
 .editor-toolbar .logo-wrapper {
