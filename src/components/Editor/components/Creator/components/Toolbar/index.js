@@ -7,6 +7,7 @@ import Logo from '../../../../../../assets/logo-white.svg';
 import RaisedButton from 'material-ui/RaisedButton';
 import AVPlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
 import './index.css';
+import { truncate } from 'lodash';
 
 const EditorToolbar = (props) => {
     return (
@@ -15,6 +16,9 @@ const EditorToolbar = (props) => {
                 <div className="logo-wrapper">
                     <img src={Logo} className="logo" />
                 </div>
+                <ToolbarTitle
+                    text={<span><strong>{truncate(props.title)}</strong>, {truncate(props.authorName)}</span>}
+                    className="title" />
             </ToolbarGroup>
             <ToolbarGroup>
                 <FlatButton
@@ -39,6 +43,8 @@ const EditorToolbar = (props) => {
 EditorToolbar.propTypes = {
     handleSave: PropTypes.func.isRequired,
     handleSettingsClick: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    authorName: PropTypes.string.isRequired,
 };
 
 export default EditorToolbar

@@ -26,3 +26,7 @@
 .editor-toolbar .action-button {
     margin: 0 0 0 1.6rem !important;
 }
+
+.editor-toolbar .title {
+    margin-left: 1.6rem;
+}

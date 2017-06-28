@@ -167,7 +167,11 @@ class Creator extends Component {
 
         return (
             <div className="creator-wrapper">
-                <Toolbar handleSave={this.handleSave} handleSettingsClick={this.handleSettingsClick} />
+                <Toolbar
+                    authorName={presentation.authorName}
+                    title={presentation.title}
+                    handleSave={this.handleSave}
+                    handleSettingsClick={this.handleSettingsClick} />
                 <SettingsDialog
                     handleDelete={handleDelete}
                     isOpen={settingsDialogOpen}
