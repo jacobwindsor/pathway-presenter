@@ -2,7 +2,7 @@
     width: 200px;
     height: 113px; /* 16:9 */
     position: relative;
-    margin: 1rem 0 .8rem 1rem;
+    margin: 1rem 0  0 1rem;
     cursor: pointer;
     display: inline-block;
 }
