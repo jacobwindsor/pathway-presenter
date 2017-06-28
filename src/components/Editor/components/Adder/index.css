@@ -9,7 +9,8 @@
 .adder-wrapper .header {
     text-align: center;
     color: white;
-    background-color: #008ba3 !important; /* Cyan500 dark */
+    /* cyan500 -> cyan200 light */
+    background: radial-gradient(circle farthest-side, #00bcd4, #80deea);
     margin: -1.6rem;
     margin-bottom: 1.6rem;
     padding: 1.6rem;
