@@ -8,12 +8,17 @@
 
 .adder-wrapper .header {
     text-align: center;
-    background-color: #80deea !important;
+    color: white;
+    background-color: #008ba3 !important; /* Cyan500 dark */
     margin: -1.6rem;
     margin-bottom: 1.6rem;
     padding: 1.6rem;
     padding-bottom: calc(1.6rem + 32px);
     position: relative;
+}
+
+.adder-wrapper .header a {
+    color: white !important;
 }
 
 .adder-wrapper .header .logo-wrapper {
