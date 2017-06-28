@@ -104,22 +104,11 @@ class Creator extends Component {
     };
 
     renderNonEmptyComps() {
-        const { activeSlideIndex, selectedEntity, presentation, settingsDialogOpen } = this.state;
-        const { handleDelete } = this.props;
+        const { activeSlideIndex, selectedEntity, presentation } = this.state;
         if (presentation.slides.length < 1) return null;
         const slide = presentation.slides[activeSlideIndex];
         return (
             <span>
-                    <SettingsDialog
-                        handleDelete={handleDelete}
-                        isOpen={settingsDialogOpen}
-                        handleClose={() => this.setState({ settingsDialogOpen: false })}
-                        handleSave={this.handleSettingsSave}
-                        version={presentation.version}
-                        wpId={presentation.wpId}
-                        authorName={presentation.authorName}
-                        title={presentation.title}
-                    />
                     <div className="left-section">
                         <EditorPanel
                             slide={slide}
@@ -168,7 +157,8 @@ class Creator extends Component {
     }
 
     render() {
-        const { activeSlideIndex, selectedEntity, presentation } = this.state;
+        const { presentation, settingsDialogOpen } = this.state;
+        const { handleDelete } = this.props;
 
         const EmptyComps = () => {
           if (presentation.slides.length > 0) return null;
@@ -178,6 +168,16 @@ class Creator extends Component {
         return (
             <div className="creator-wrapper">
                 <Toolbar handleSave={this.handleSave} handleSettingsClick={this.handleSettingsClick} />
+                <SettingsDialog
+                    handleDelete={handleDelete}
+                    isOpen={settingsDialogOpen}
+                    handleClose={() => this.setState({ settingsDialogOpen: false })}
+                    handleSave={this.handleSettingsSave}
+                    version={presentation.version}
+                    wpId={presentation.wpId}
+                    authorName={presentation.authorName}
+                    title={presentation.title}
+                />
                 <EmptyComps/>
                 {this.renderNonEmptyComps()}
             </div>
