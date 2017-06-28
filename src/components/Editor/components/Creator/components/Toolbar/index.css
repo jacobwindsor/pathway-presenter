@@ -1,5 +1,6 @@
 .editor-toolbar {
-    background-color: #80deea !important;
+    /*background-color: #80deea !important;*/
+    background: linear-gradient(to right, #80deea, #00bcd4);
     overflow: hidden;
 }
 
