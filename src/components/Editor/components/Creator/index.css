@@ -26,7 +26,7 @@
 
 .creator-wrapper .right-section .previewer {
     padding: 2rem;
-    height: calc(100% - (113px + 2rem)); /* Minus footer height */
+    height: calc(100% - (113px + 2rem) - 4rem); /* Minus footer height and padding */
     position: relative;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .creator-wrapper .right-section .slide .content {
-    max-height: calc(100% - .1rem);
+    max-height: 100%;
     position: absolute;
     top: 0;
     right: 0;
