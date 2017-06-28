@@ -63,10 +63,14 @@ class Adder extends Component {
                 </div>
                 <div className="content">
                     <h3>Select a Pathway Presentation</h3>
-                    <AutoComplete fullWidth={true}
-                                  hintText={"Search by title"}
-                                  dataSource={this.state.dataSource}
-                                  onNewRequest={this.handleSelect} />
+                    <AutoComplete
+                        filter={AutoComplete.fuzzyFilter}
+                        maxSearchResults={5}
+                        fullWidth={true}
+                        openOnFocus={true}
+                        hintText={"Search by title"}
+                        dataSource={this.state.dataSource}
+                        onNewRequest={this.handleSelect} />
                     <h3>Create a Pathway Presentation</h3>
                     <TextField
                         hintText="The TCA Cycle"
