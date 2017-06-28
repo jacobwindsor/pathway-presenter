@@ -22,3 +22,7 @@
     height: 52px;
     width: auto;
 }
+
+.editor-toolbar .action-button {
+    margin: 0 0 0 1.6rem !important;
+}

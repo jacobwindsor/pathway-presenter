@@ -18,11 +18,19 @@ const EditorToolbar = (props) => {
             </ToolbarGroup>
             <ToolbarGroup>
                 <FlatButton
+                    className="action-button"
                     icon={<ActionSettings/>}
                     style={{color: 'white'}}
                     onClick={props.handleSettingsClick} />
-                <RaisedButton icon={<AVPlayCircleFilled/>} label="Present" labelPosition="before"/>
-                <RaisedButton onClick={props.handleSave}>Save</RaisedButton>
+                <RaisedButton
+                    className="action-button"
+                    icon={<AVPlayCircleFilled/>}
+                    label="Present"
+                    labelPosition="before"/>
+                <RaisedButton
+                    className="action-button"
+                    onClick={props.handleSave}
+                    label="Save" />
             </ToolbarGroup>
         </Toolbar>
     )
