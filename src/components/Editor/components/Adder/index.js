@@ -6,7 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AutoComplete from 'material-ui/AutoComplete';
 import presentations from '../../../../data/presentations';
 import { cloneDeep } from 'lodash';
-import logo from '../../../../assets/logo.svg';
+import LogoWhite from '../../../../assets/logo-white.svg';
 import './index.css';
 
 class Adder extends Component {
@@ -69,19 +69,23 @@ class Adder extends Component {
                     <p>
                         Create interactive presentations from pathways on <a href="http://wikipathways.org" target="_blank">WikiPathways</a>.
                     </p>
-                    <img src={logo}  />
+                    <div className="logo-wrapper">
+                        <img src={LogoWhite}  />
+                    </div>
                 </div>
-                <h3>Select a Pathway Presentation</h3>
-                <AutoComplete fullWidth={true}
-                              hintText={"Search by title"}
-                              dataSource={this.state.dataSource}
-                              onNewRequest={this.handleSelect} />
-                <h3>Create a Pathway Presentation</h3>
-                <TextField hintText="Title" onChange={this.handleTitleChange} fullWidth={true} />
-                <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} fullWidth={true} />
-                <TextField hintText="Version" onChange={this.handleVersionChange} fullWidth={true} />
-                <FlatButton label="Create" primary={true} onClick={this.handleSubmit} fullWidth={true}
-                            className="create-button"/>
+                <div className="content">
+                    <h3>Select a Pathway Presentation</h3>
+                    <AutoComplete fullWidth={true}
+                                  hintText={"Search by title"}
+                                  dataSource={this.state.dataSource}
+                                  onNewRequest={this.handleSelect} />
+                    <h3>Create a Pathway Presentation</h3>
+                    <TextField hintText="Title" onChange={this.handleTitleChange} fullWidth={true} />
+                    <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} fullWidth={true} />
+                    <TextField hintText="Version" onChange={this.handleVersionChange} fullWidth={true} />
+                    <FlatButton label="Create" primary={true} onClick={this.handleSubmit} fullWidth={true}
+                                className="create-button"/>
+                </div>
             </Paper>
         )
     }

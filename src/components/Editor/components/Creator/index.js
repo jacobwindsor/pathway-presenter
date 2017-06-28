@@ -90,19 +90,12 @@ class Creator extends Component {
         handleSave(presentation);
     };
 
-    render() {
+    renderNonEmptyComps() {
         const { activeSlideIndex, selectedEntity, presentation } = this.state;
-
-        const EmptyComps = () => {
-          if (presentation.slides.length > 0) return null;
-          return <EmptyState handleClick={this.onSlideAdd} />
-        };
-
-        const NonEmptyComps = () => {
-            if (presentation.slides.length < 1) return null;
-            const slide = presentation.slides[activeSlideIndex];
-            return (
-                <span>
+        if (presentation.slides.length < 1) return null;
+        const slide = presentation.slides[activeSlideIndex];
+        return (
+            <span>
                     <div className="left-section">
                         <EditorPanel
                             slide={slide}
@@ -147,14 +140,22 @@ class Creator extends Component {
                         </Paper>
                     </div>
                 </span>
-            );
+        );
+    }
+
+    render() {
+        const { activeSlideIndex, selectedEntity, presentation } = this.state;
+
+        const EmptyComps = () => {
+          if (presentation.slides.length > 0) return null;
+          return <EmptyState handleClick={this.onSlideAdd} />;
         };
 
         return (
             <div className="creator-wrapper">
                 <Toolbar handleSave={this.handleSave} />
                 <EmptyComps/>
-                <NonEmptyComps/>
+                {this.renderNonEmptyComps()}
             </div>
         )
     }

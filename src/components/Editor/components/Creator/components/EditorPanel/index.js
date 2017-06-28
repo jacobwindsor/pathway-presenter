@@ -160,96 +160,96 @@ class EditorPanel extends Component {
         }
     }
 
-    render() {
+    renderTargetControls() {
         const { activeEntity } = this.props;
-        const { targets } = this.state;
-
-        const TargetEmptyState = () => {
-            if (activeEntity) return null;
-            return (
-                <div className="empty-state">
-                    <h1>Select an entity!</h1>
-                    <p>Click on an entity in the diagram to start adding manipulations.</p>
-                </div>
-            )
-        };
-
-        const TargetControls = () => {
-            if (! activeEntity) return null;
-
-            return (
-                <div className="controls">
-                    <List>
-                        <Subheader>{activeEntity.textContent}</Subheader>
-                        <ListItem primaryText="Zoom" rightToggle={<Toggle
-                            onToggle={this.handleZoomToggle}
-                            toggled={this.state.isZoomed} />} />
-                        <Divider/>
-                        <ListItem primaryText="Pan" rightToggle={<Toggle
-                            onToggle={this.handlePanToggle}
-                            toggled={this.state.isPanned} />}/>
-                        <Divider/>
-                        <ListItem primaryText="Hide" rightToggle={<Toggle
-                            onToggle={this.handleHiddenToggle}
-                            toggled={this.state.isHidden} />} />
-                        <Divider/>
-                        <ListItem primaryText="Highlight"
-                                  rightToggle={<Toggle
-                                      onToggle={this.handleHighlightToggle}
-                                      toggled={this.state.isHighlighted} />}
-                                  open={this.state.isHighlighted}
-                                  nestedItems={[
-                                      <RadioButtonGroup
-                                          name="highlightColor"
-                                          defaultSelected="red"
-                                          className="color-options"
-                                          onChange={this.handleColorChange}
-                                          valueSelected={this.state.highlightedColor}
-                                          key={1} >
-                                          <RadioButton value="red" label="Red" className="color-choice" key={1}/>
-                                          <RadioButton value="green" label="Green" className="color-choice" key={2}/>
-                                          <RadioButton value="blue" label="Blue" className="color-choice" key={3}/>
-                                          <RadioButton value="yellow" label="Yellow" className="color-choice" key={4}/>
-                                      </RadioButtonGroup>
-                                  ]} />
-                        <Divider/>
-                    </List>
-                    <IconButton className="add-target-button" onClick={this.handleAdd}>
-                        <ActionDone/>
-                    </IconButton>
-                    <Snackbar
-                        open={this.state.isDuplicate}
-                        message="No duplicate entities!"
-                        autoHideDuration={3000}
-                        onRequestClose={this.handleSnackbarRequestClose}
-                    />
-                </div>
-            )
-        };
-
-        const TargetChips = () => {
-            const chips = targets.map((singleTarget,i) => <Chip
-                key={i}
-                className="target-chip"
-                onRequestDelete={() => this.handleRequestChipDelete(singleTarget.entityId)}>
-                {singleTarget.textContent}
-            </Chip>);
-
-            if (chips.length < 1) return null;
-            return (
-                <div className="chip-wrapper">
-                    {chips}
-                </div>
-            )
-        };
+        if (! activeEntity) return null;
 
         return (
-            <Paper className="editor-panel-container" >
-                <TextField hintText="Slide title" fullWidth={true} className="title-input"
+            <div className="controls">
+                <List>
+                    <Subheader>{activeEntity.textContent}</Subheader>
+                    <ListItem primaryText="Zoom" rightToggle={<Toggle
+                        onToggle={this.handleZoomToggle}
+                        toggled={this.state.isZoomed} />} />
+                    <Divider/>
+                    <ListItem primaryText="Pan" rightToggle={<Toggle
+                        onToggle={this.handlePanToggle}
+                        toggled={this.state.isPanned} />}/>
+                    <Divider/>
+                    <ListItem primaryText="Hide" rightToggle={<Toggle
+                        onToggle={this.handleHiddenToggle}
+                        toggled={this.state.isHidden} />} />
+                    <Divider/>
+                    <ListItem primaryText="Highlight"
+                              rightToggle={<Toggle
+                                  onToggle={this.handleHighlightToggle}
+                                  toggled={this.state.isHighlighted} />}
+                              open={this.state.isHighlighted}
+                              nestedItems={[
+                                  <RadioButtonGroup
+                                      name="highlightColor"
+                                      defaultSelected="red"
+                                      className="color-options"
+                                      onChange={this.handleColorChange}
+                                      valueSelected={this.state.highlightedColor}
+                                      key={1} >
+                                      <RadioButton value="red" label="Red" className="color-choice" key={1}/>
+                                      <RadioButton value="green" label="Green" className="color-choice" key={2}/>
+                                      <RadioButton value="blue" label="Blue" className="color-choice" key={3}/>
+                                      <RadioButton value="yellow" label="Yellow" className="color-choice" key={4}/>
+                                  </RadioButtonGroup>
+                              ]} />
+                    <Divider/>
+                </List>
+                <IconButton className="add-target-button" onClick={this.handleAdd}>
+                    <ActionDone/>
+                </IconButton>
+                <Snackbar
+                    open={this.state.isDuplicate}
+                    message="No duplicate entities!"
+                    autoHideDuration={3000}
+                    onRequestClose={this.handleSnackbarRequestClose}
+                />
+            </div>
+        )
+    }
+
+    renderTargetEmptyState() {
+        const { activeEntity } = this.props;
+        if (activeEntity) return null;
+        return (
+            <div className="empty-state">
+                <h1>Select an entity!</h1>
+                <p>Click on an entity in the diagram to start adding manipulations.</p>
+            </div>
+        )
+    }
+
+    renderTargetChips() {
+        const { targets } = this.state;
+        const chips = targets.map((singleTarget,i) => <Chip
+            key={i}
+            className="target-chip"
+            onRequestDelete={() => this.handleRequestChipDelete(singleTarget.entityId)}>
+            {singleTarget.textContent}
+        </Chip>);
+
+        if (chips.length < 1) return null;
+        return (
+            <div className="chip-wrapper">
+                {chips}
+            </div>
+        )
+    }
+
+    render() {
+        return (
+            <Paper className="editor-panel-container" key={1}>
+                <TextField key={2} id="my-unique-id" hintText="Slide title" fullWidth={true} className="title-input"
                            onChange={this.handleTitleChange} value={this.state.title} />
-                <TargetEmptyState/>
-                <TargetControls/>
-                <TargetChips/>
+                {this.renderTargetEmptyState()}
+                {this.renderTargetControls()}
+                {this.renderTargetChips()}
             </Paper>
         )
     }
