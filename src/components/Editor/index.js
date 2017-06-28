@@ -57,16 +57,15 @@ class Editor extends Component {
             })
     };
 
-    handlePresentationCreate = toCreate => {
+    handlePresentationCreate = ({ wpId, version = 0, title, authorName, description, slides = [{targets: []}]}) => {
         this.setState({
             presentation: {
-                wpId: toCreate.wpId,
-                version: toCreate.version || 0,
-                title: toCreate.title || null,
-                description: toCreate.description || null,
-                slides: [{
-                    targets: [],
-                }],
+                wpId,
+                version,
+                title,
+                authorName,
+                description,
+                slides,
             }
         })
     };

@@ -31,23 +31,11 @@ class Adder extends Component {
             }))
     }
 
-    handleWpIdChange = e => {
-        this.setState({
-            wpId: e.target.value,
-        })
-    };
-
-    handleTitleChange = e => {
-        this.setState({
-            title: e.target.value,
-        })
-    };
-
-    handleVersionChange = e => {
-        this.setState({
-            version: parseInt(e.target.value, 10),
-        })
-    };
+    handleChange = targetName => e => this.setState({ [targetName]: e.target.value });
+    handleTitleChange = this.handleChange('title');
+    handleAuthorNameChange = this.handleChange('authorName');
+    handleWpIdChange = this.handleChange('wpId');
+    handleVersionChange = this.handleChange('version');
 
     handleSubmit = () => {
       const { handleCreate } = this.props;
@@ -80,9 +68,30 @@ class Adder extends Component {
                                   dataSource={this.state.dataSource}
                                   onNewRequest={this.handleSelect} />
                     <h3>Create a Pathway Presentation</h3>
-                    <TextField hintText="Title" onChange={this.handleTitleChange} fullWidth={true} />
-                    <TextField hintText="WikiPathways ID" onChange={this.handleWpIdChange} fullWidth={true} />
-                    <TextField hintText="Version" onChange={this.handleVersionChange} fullWidth={true} />
+                    <TextField
+                        hintText="The TCA Cycle"
+                        floatingLabelText="Title"
+                        onChange={this.handleTitleChange}
+                        value={this.state.title}
+                        fullWidth={true}/>
+                    <TextField
+                        hintText="Gregor Mendel, Frederick Sanger"
+                        floatingLabelText="Author Name(s)"
+                        onChange={this.handleAuthorNameChange}
+                        value={this.state.authorName}
+                        fullWidth={true}/>
+                    <TextField
+                        hintText="WP78"
+                        floatingLabelText="WikiPathways ID"
+                        onChange={this.handleWpIdChange}
+                        value={this.state.wpId}
+                        fullWidth={true} />
+                    <TextField
+                        hintText="Type '0' for latest"
+                        floatingLabelText="WikiPathways Version"
+                        onChange={this.handleVersionChange}
+                        value={this.state.version}
+                        fullWidth={true} />
                     <FlatButton label="Create" primary={true} onClick={this.handleSubmit} fullWidth={true}
                                 className="create-button"/>
                 </div>
