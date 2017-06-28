@@ -70,6 +70,19 @@ class Editor extends Component {
         })
     };
 
+    handlePresentationDelete = () => {
+      const { presentation } = this.state;
+      // TODO: Show an error
+      if ( ! presentation.id ) return;
+
+      presentations.remove(presentation.id)
+          .then(() => {
+            this.setState({
+                presentation: null,
+            })
+          })
+    };
+
     render() {
         const { loading, error, presentation } = this.state;
 
@@ -78,8 +91,13 @@ class Editor extends Component {
             return (
                 <div className="full editor-wrapper">
                     { presentation ?
-                        <Creator presentation={presentation} handleSave={this.savePresentation} /> :
-                        <Adder handleSelect={this.getPresentation} handleCreate={this.handlePresentationCreate}/>
+                        <Creator
+                            presentation={presentation}
+                            handleSave={this.savePresentation}
+                            handleDelete={this.handlePresentationDelete }/> :
+                        <Adder
+                            handleSelect={this.getPresentation}
+                            handleCreate={this.handlePresentationCreate}/>
                     }
                 </div>
             )

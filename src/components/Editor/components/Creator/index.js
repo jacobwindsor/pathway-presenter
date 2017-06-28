@@ -105,11 +105,13 @@ class Creator extends Component {
 
     renderNonEmptyComps() {
         const { activeSlideIndex, selectedEntity, presentation, settingsDialogOpen } = this.state;
+        const { handleDelete } = this.props;
         if (presentation.slides.length < 1) return null;
         const slide = presentation.slides[activeSlideIndex];
         return (
             <span>
                     <SettingsDialog
+                        handleDelete={handleDelete}
                         isOpen={settingsDialogOpen}
                         handleClose={() => this.setState({ settingsDialogOpen: false })}
                         handleSave={this.handleSettingsSave}
@@ -186,6 +188,7 @@ class Creator extends Component {
 Creator.propTypes = {
     presentation: PropTypes.object.isRequired,
     handleSave: PropTypes.func.isRequired,
+    handleDelete: PropTypes.func.isRequired,
 };
 
 export default Creator;

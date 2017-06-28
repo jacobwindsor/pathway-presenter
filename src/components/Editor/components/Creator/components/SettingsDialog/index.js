@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import { red500 } from 'material-ui/styles/colors';
+import DeleteConfirmDialog from './components/DeleteConfirmDialog';
 
 class SettingsDialog extends Component {
     constructor(props) {
@@ -13,6 +16,7 @@ class SettingsDialog extends Component {
             authorName: props.authorName || '',
             wpId: props.wpId,
             version: props.version,
+            deleteConfirmDialogOpen: false,
         }
     }
 
@@ -23,7 +27,7 @@ class SettingsDialog extends Component {
     handleVersionChange = this.handleChange('version');
 
     render() {
-        const { handleClose, handleSave, isOpen } = this.props;
+        const { handleClose, handleSave, isOpen, handleDelete } = this.props;
         const { title, authorName, wpId, version } = this.state;
 
         const actions = [
@@ -48,6 +52,10 @@ class SettingsDialog extends Component {
                 autoScrollBodyContent={true}
                 modal={false}
             >
+                <DeleteConfirmDialog
+                    handleDelete={handleDelete}
+                    handleClose={() => this.setState({deleteConfirmDialogOpen: false})}
+                    isOpen={this.state.deleteConfirmDialogOpen} />
                 <TextField
                     hintText="The TCA Cycle"
                     floatingLabelText="Title"
@@ -72,6 +80,13 @@ class SettingsDialog extends Component {
                     onChange={this.handleVersionChange}
                     value={version}
                     fullWidth={true} />
+                <RaisedButton
+                    label="Delete"
+                    fullWidth={true}
+                    backgroundColor={red500}
+                    labelColor={'white'}
+                    onTouchTap={() => this.setState({deleteConfirmDialogOpen: true})}
+                    />
             </Dialog>
         )
     }
@@ -85,6 +100,7 @@ SettingsDialog.propTypes = {
     authorName: PropTypes.string,
     version: PropTypes.number.isRequired,
     wpId: PropTypes.string.isRequired,
+    handleDelete: PropTypes.func.isRequired,
 };
 
 export default SettingsDialog;
