@@ -6,7 +6,7 @@ import EditorPanel from './components/EditorPanel';
 import Paper from 'material-ui/Paper';
 import Title from '../../../Title';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import Divider from 'material-ui/Divider';
+import SettingsDialog from './components/SettingsDialog';
 import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { findIndex, cloneDeep } from 'lodash';
@@ -20,6 +20,7 @@ class Creator extends Component {
             activeSlideIndex: 0,
             selectedEntity: null,
             presentation: cloneDeep(props.presentation),
+            settingsDialogOpen: false,
         }
     }
 
@@ -90,12 +91,33 @@ class Creator extends Component {
         handleSave(presentation);
     };
 
+    handleSettingsClick = () => {
+        this.setState({ settingsDialogOpen: true });
+    };
+
+    handleSettingsSave = ({title, authorName, wpId, version}) => {
+        const toUpdate = cloneDeep(this.state.presentation);
+        const updated = Object.assign(toUpdate, {title, authorName, wpId, version});
+        this.setState({
+            presentation: updated,
+        }, this.handleSave);
+    };
+
     renderNonEmptyComps() {
-        const { activeSlideIndex, selectedEntity, presentation } = this.state;
+        const { activeSlideIndex, selectedEntity, presentation, settingsDialogOpen } = this.state;
         if (presentation.slides.length < 1) return null;
         const slide = presentation.slides[activeSlideIndex];
         return (
             <span>
+                    <SettingsDialog
+                        isOpen={settingsDialogOpen}
+                        handleClose={() => this.setState({ settingsDialogOpen: false })}
+                        handleSave={this.handleSettingsSave}
+                        version={presentation.version}
+                        wpId={presentation.wpId}
+                        authorName={presentation.authorName}
+                        title={presentation.title}
+                    />
                     <div className="left-section">
                         <EditorPanel
                             slide={slide}
@@ -153,7 +175,7 @@ class Creator extends Component {
 
         return (
             <div className="creator-wrapper">
-                <Toolbar handleSave={this.handleSave} />
+                <Toolbar handleSave={this.handleSave} handleSettingsClick={this.handleSettingsClick} />
                 <EmptyComps/>
                 {this.renderNonEmptyComps()}
             </div>

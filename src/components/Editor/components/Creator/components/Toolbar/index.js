@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import FlatButton from 'material-ui/FlatButton';
+import ActionSettings from 'material-ui/svg-icons/action/settings';
 import Logo from '../../../../../../assets/logo-white.svg';
 import RaisedButton from 'material-ui/RaisedButton';
+import AVPlayCircleFilled from 'material-ui/svg-icons/av/play-circle-filled';
 import './index.css';
 
 const EditorToolbar = (props) => {
@@ -14,6 +17,11 @@ const EditorToolbar = (props) => {
                 </div>
             </ToolbarGroup>
             <ToolbarGroup>
+                <FlatButton
+                    icon={<ActionSettings/>}
+                    style={{color: 'white'}}
+                    onClick={props.handleSettingsClick} />
+                <RaisedButton icon={<AVPlayCircleFilled/>} label="Present" labelPosition="before"/>
                 <RaisedButton onClick={props.handleSave}>Save</RaisedButton>
             </ToolbarGroup>
         </Toolbar>
@@ -22,6 +30,7 @@ const EditorToolbar = (props) => {
 
 EditorToolbar.propTypes = {
     handleSave: PropTypes.func.isRequired,
+    handleSettingsClick: PropTypes.func.isRequired,
 };
 
 export default EditorToolbar
