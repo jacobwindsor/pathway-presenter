@@ -29,6 +29,6 @@ body, html {
 }
 
 .viewer-wrapper, .editor-comp-wrapper {
-  width: 99vw;
+  width: 100vw;
   height: 100vh;
 }

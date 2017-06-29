@@ -10,13 +10,15 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Title from '../Title';
 import TitleSlide from './components/TitleSlide';
+import * as screenfull from 'screenfull';
 
 class Viewer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true
-        }
+            loading: true,
+            isFullScreen: false,
+        };
     }
 
     componentDidMount() {
@@ -60,7 +62,7 @@ class Viewer extends Component {
         this.setState({
             activeSlideIndex: activeSlideIndex + 1,
         })
-    }
+    };
 
     prevSlide = () => {
         const { activeSlideIndex } = this.state;
@@ -68,14 +70,25 @@ class Viewer extends Component {
         this.setState({
             activeSlideIndex: activeSlideIndex - 1,
         })
-    }
+    };
 
     onReady = () => {
         this.setState({loading: false})
-    }
+    };
+
+    handleToggleFullScreen = () => {
+        if(screenfull.enabled) {
+            screenfull.toggle();
+            screenfull.onchange(() => {
+                this.setState({
+                    isFullScreen: screenfull.isFullscreen,
+                })
+            })
+        }
+    };
 
     render() {
-        const { loading, presentation, activeSlideIndex, error } = this.state;
+        const { loading, presentation, activeSlideIndex, error, isFullScreen } = this.state;
 
         if (error)  {
             return <ErrorMessage message={error.message} />
@@ -105,7 +118,12 @@ class Viewer extends Component {
                         isHidden={isHidden}
                         onReady={this.onReady}  />
 
-                    <Controls onBackward={this.prevSlide} onForward={this.nextSlide} />
+                    <Controls
+                        onBackward={this.prevSlide}
+                        onForward={this.nextSlide}
+                        handleToggleFullScreen={this.handleToggleFullScreen}
+                        isFullScreen={isFullScreen}
+                    />
                 </div>
             </MuiThemeProvider>
         );
