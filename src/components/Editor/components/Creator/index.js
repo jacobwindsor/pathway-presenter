@@ -23,10 +23,10 @@ class Creator extends Component {
             settingsDialogOpen: false,
         };
 
-        window.onbeforeunload = this.checkSaved;
+        window.onbeforeunload = this.beforeUnload;
     }
 
-    checkSaved = e => {
+    beforeUnload = e => {
         if(! isEqual(this.props.presentation, this.state.presentation)) {
             const confirmationMessage = 'Your presentation has unsaved changed! Are you sure you want to leave?';
 
@@ -117,6 +117,10 @@ class Creator extends Component {
     };
 
     handlePresentClick = () => {
+        if (! isEqual(this.props.presentation, this.state.presentation)) {
+            alert('Unsaved changes! Save before presenting to present your latest changes.');
+            return;
+        }
         const { presentation } = this.state;
         const href = `${window.location.href}?present=true&presId=${presentation.id}`;
         window.open(href, '_blank');
