@@ -124,6 +124,7 @@ class Viewer extends Component {
 
                     <Diagram
                         wpId={presentation.wpId}
+                        detailPanelEnabled={false}
                         version={presentation.version}
                         slide={diagramSlide}
                         showPanZoomControls={false}
