@@ -11,6 +11,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Title from '../Title';
 import TitleSlide from './components/TitleSlide';
 import * as screenfull from 'screenfull';
+import { cloneDeep } from 'lodash';
 
 class Viewer extends Component {
     constructor(props) {
@@ -26,8 +27,17 @@ class Viewer extends Component {
         presentations.get(presId)
             .then(presentation => {
                 this.addEventListeners();
+
+                const copy = cloneDeep(presentation);
+                if (copy.title) {
+                    copy.slides = [{
+                        isTitleSlide: true,
+                        title: copy.title,
+                        authorName: copy.authorName,
+                    }].concat(copy.slides);
+                }
                 this.setState({
-                    presentation,
+                    presentation: copy,
                     loading: false,
                     activeSlideIndex: 0
                 });
@@ -105,7 +115,9 @@ class Viewer extends Component {
         return (
             <MuiThemeProvider>
                 <div className="presentation-viewer">
-                    { activeSlide.isTitleSlide ? <TitleSlide title={presentation.title} authorName={presentation.authorName} />
+                    { activeSlide.isTitleSlide ? <TitleSlide
+                        title={activeSlide.title}
+                        authorName={activeSlide.authorName} />
                         : null }
 
                     { !activeSlide.isTitleSlide && activeSlide.title ? <Title title={activeSlide.title} /> : null }
