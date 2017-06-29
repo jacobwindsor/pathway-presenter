@@ -30,6 +30,7 @@ const EditorToolbar = (props) => {
                     className="action-button"
                     icon={<AVPlayCircleFilled/>}
                     label="Present"
+                    onClick={props.handlePresentClick}
                     labelPosition="before"/>
                 <RaisedButton
                     className="action-button"
@@ -43,6 +44,7 @@ const EditorToolbar = (props) => {
 EditorToolbar.propTypes = {
     handleSave: PropTypes.func.isRequired,
     handleSettingsClick: PropTypes.func.isRequired,
+    handlePresentClick: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
     authorName: PropTypes.string.isRequired,
 };

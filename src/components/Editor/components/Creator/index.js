@@ -103,6 +103,12 @@ class Creator extends Component {
         }, this.handleSave);
     };
 
+    handlePresentClick = () => {
+        const { presentation } = this.state;
+        const href = `${window.location.href}?present=true&presId=${presentation.id}`;
+        window.open(href, '_blank');
+    };
+
     renderNonEmptyComps() {
         const { activeSlideIndex, selectedEntity, presentation } = this.state;
         if (presentation.slides.length < 1) return null;
@@ -171,6 +177,7 @@ class Creator extends Component {
                     authorName={presentation.authorName}
                     title={presentation.title}
                     handleSave={this.handleSave}
+                    handlePresentClick={this.handlePresentClick}
                     handleSettingsClick={this.handleSettingsClick} />
                 <SettingsDialog
                     handleDelete={handleDelete}

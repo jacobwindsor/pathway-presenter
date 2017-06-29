@@ -9,20 +9,35 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 class App extends Component {
-  render() {
-    return (
-        <div>
-            <h1>Editor component</h1>
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isViewerOpen: false,
+            presId: null,
+        }
+    }
+
+    componentDidMount() {
+        const parsedUrl = new URL(window.location.href);
+        this.setState({
+            isViewerOpen: !!parsedUrl.searchParams.get('present'),
+            presId: parsedUrl.searchParams.get('presId'),
+        })
+    }
+
+    render() {
+        const { isViewerOpen, presId } = this.state;
+        return (
             <div className="editor-comp-wrapper">
-                <Editor/>
+                {
+                    isViewerOpen?
+                        <Viewer presId={presId} /> :
+                        <Editor/>
+                }
             </div>
-            {/*<h1>Viewer Component</h1>*/}
-            {/*<div className="viewer-wrapper">*/}
-                {/*<Viewer presId={'906e47f9-8a16-491c-80ac-0df2dd609260'}/>*/}
-            {/*</div>*/}
-        </div>
-    );
-  }
+        );
+    }
 }
 
 export default App;
