@@ -23,17 +23,19 @@ class Creator extends Component {
             settingsDialogOpen: false,
         };
 
-        window.addEventListener('beforeunload', e => {
-          if(! isEqual(props.presentation, this.state.presentation)) {
-              const confirmationMessage = 'Your presentation has unsaved changed! Are you sure you want to leave?';
-
-              // Use both for cross browser
-              // See: https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
-              e.returnValue = confirmationMessage;
-              return confirmationMessage;
-          }
-        })
+        window.onbeforeunload = this.checkSaved;
     }
+
+    checkSaved = e => {
+        if(! isEqual(this.props.presentation, this.state.presentation)) {
+            const confirmationMessage = 'Your presentation has unsaved changed! Are you sure you want to leave?';
+
+            // Use both for cross browser
+            // See: https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
+            e.returnValue = confirmationMessage;
+            return confirmationMessage;
+        }
+    };
 
     handlePreviewClick = (slideNumber) => {
         this.setState({
