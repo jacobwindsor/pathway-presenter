@@ -9,7 +9,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import SettingsDialog from './components/SettingsDialog';
 import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import { findIndex, cloneDeep } from 'lodash';
+import { findIndex, cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import './index.css'
 
@@ -21,7 +21,18 @@ class Creator extends Component {
             selectedEntity: null,
             presentation: cloneDeep(props.presentation),
             settingsDialogOpen: false,
-        }
+        };
+
+        window.addEventListener('beforeunload', e => {
+          if(! isEqual(props.presentation, this.state.presentation)) {
+              const confirmationMessage = 'Your presentation has unsaved changed! Are you sure you want to leave?';
+
+              // Use both for cross browser
+              // See: https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
+              e.returnValue = confirmationMessage;
+              return confirmationMessage;
+          }
+        })
     }
 
     handlePreviewClick = (slideNumber) => {

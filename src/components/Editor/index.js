@@ -13,7 +13,7 @@ class Editor extends Component {
         this.state = {
             presentation: null,
             loading: true,
-            error: null
+            error: null,
         };
     }
 
