@@ -29,6 +29,7 @@ const create = presentation => {
                 title: presentation.title,
                 wpId: presentation.wpId,
                 version: presentation.version,
+                authorName: presentation.authorName,
                 description: presentation.description,
                 slides: presentation.slides.map(singleSlide => Object.assign({}, singleSlide, {id: uuidV4()}))
             };
