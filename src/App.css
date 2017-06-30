@@ -28,7 +28,7 @@ body, html {
   to { transform: rotate(360deg); }
 }
 
-.viewer-wrapper, .editor-comp-wrapper {
+.wrapper {
   width: 100vw;
   height: 100vh;
 }

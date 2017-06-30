@@ -29,7 +29,7 @@ class App extends Component {
     render() {
         const { isViewerOpen, presId } = this.state;
         return (
-            <div className="editor-comp-wrapper">
+            <div className="wrapper">
                 {
                     isViewerOpen?
                         <Viewer presId={presId} /> :
