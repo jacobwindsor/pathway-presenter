@@ -3,5 +3,10 @@ import { shallow } from 'enzyme';
 import EditorPanel from './index';
 
 it('should render correctly', () => {
-   shallow(<EditorPanel/>);
+   shallow(
+       <EditorPanel
+           slideIndex={0}
+           slide={{}}
+       />
+   );
 });
