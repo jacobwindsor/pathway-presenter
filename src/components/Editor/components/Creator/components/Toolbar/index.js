@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import {Toolbar, ToolbarGroup, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import ActionSettings from 'material-ui/svg-icons/action/settings';
 import Logo from '../../../../../../assets/logo-white.svg';
@@ -14,7 +14,7 @@ const EditorToolbar = (props) => {
         <Toolbar className="editor-toolbar">
             <ToolbarGroup>
                 <div className="logo-wrapper">
-                    <img src={Logo} className="logo" />
+                    <img src={Logo} className="logo" alt="Logo" />
                 </div>
                 <ToolbarTitle
                     text={<span><strong>{truncate(props.title)}</strong>, {truncate(props.authorName)}</span>}

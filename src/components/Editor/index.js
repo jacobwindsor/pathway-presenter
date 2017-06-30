@@ -84,7 +84,7 @@ class Editor extends Component {
     };
 
     render() {
-        const { loading, error, presentation } = this.state;
+        const {  error, presentation } = this.state;
 
         const SuccessContent = () => {
             if (error) return null;

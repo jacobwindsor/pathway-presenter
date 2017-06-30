@@ -9,7 +9,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import SettingsDialog from './components/SettingsDialog';
 import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import { findIndex, cloneDeep, isEqual } from 'lodash';
+import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import './index.css'
 

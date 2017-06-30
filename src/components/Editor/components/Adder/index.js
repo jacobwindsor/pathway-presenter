@@ -55,10 +55,10 @@ class Adder extends Component {
                 <div className="header">
                     <h1>Pathway Presenter</h1>
                     <p>
-                        Create interactive presentations from pathways on <a href="http://wikipathways.org" target="_blank">WikiPathways</a>.
+                        Create interactive presentations from pathways on <a href="http://wikipathways.org" target="_blank" rel="noopener noreferrer">WikiPathways</a>.
                     </p>
                     <div className="logo-wrapper">
-                        <img src={LogoWhite}  />
+                        <img src={LogoWhite} alt="Logo"  />
                     </div>
                 </div>
                 <div className="content">

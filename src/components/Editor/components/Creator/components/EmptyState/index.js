@@ -10,7 +10,7 @@ const EmptyState = props => {
         <Paper className="empty-creator-state">
             <div className="clickable" onClick={handleClick}>
                 <div className="content">
-                    <img src={StartFlag} />
+                    <img src={StartFlag} alt="Start flag" />
                     <h1>Get started</h1>
                     <h3><i>Click here to add a slide</i></h3>
                 </div>

@@ -61,7 +61,10 @@ class Viewer extends Component {
                     break;
                 case 37:
                     // Left arrow
-                    this.prevSlide()
+                    this.prevSlide();
+                    break;
+                default:
+                    break;
             }
         })
     }

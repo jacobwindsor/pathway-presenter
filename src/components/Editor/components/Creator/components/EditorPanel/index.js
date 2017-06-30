@@ -5,15 +5,13 @@ import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
-import ContentAdd from 'material-ui/svg-icons/content/add';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import IconButton from 'material-ui/IconButton';
-import FlatButton from 'material-ui/FlatButton'
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 import Chip from 'material-ui/Chip';
 import Snackbar from 'material-ui/Snackbar';
-import { find, sortBy, isEqual } from 'lodash';
+import { sortBy, isEqual } from 'lodash';
 import Subheader from 'material-ui/Subheader';
 
 class EditorPanel extends Component {

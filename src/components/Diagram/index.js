@@ -1,8 +1,7 @@
 import { Pvjs } from '@wikipathways/pvjs';
-import React, { Component } from 'react';
+import React from 'react';
 import './index.css';
 import PropTypes from 'prop-types';
-import { isMatch, difference } from 'lodash';
 
 const Diagram = (props) => {
 
@@ -10,7 +9,7 @@ const Diagram = (props) => {
         const { onReady } = props;
         if (onReady)
             onReady({entities, manipulator});
-    }
+    };
 
     const { wpId, version, showPanZoomControls, isHidden, slide, detailPanelEnabled, onEntityClick } = props;
     const targets = slide.targets;
@@ -43,7 +42,7 @@ const Diagram = (props) => {
                   onReady={onPvjsReady} />
         </div>
     )
-}
+};
 
 Diagram.propTypes = {
     wpId: PropTypes.string.isRequired,

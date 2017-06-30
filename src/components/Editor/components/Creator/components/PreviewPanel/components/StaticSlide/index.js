@@ -24,7 +24,9 @@ const StaticSlide = (props) => {
             <IconButton className="remove-button" tooltip="Remove slide" onClick={onRemoveClick}>
                 <RemoveCircle/>
             </IconButton>
-            <img src={board} style={{margin: '0 auto', display: 'block', transform: 'translateY(50%)', top: '50%'}} />
+            <img src={board}
+                 alt="Slide Preview"
+                 style={{margin: '0 auto', display: 'block', transform: 'translateY(50%)', top: '50%'}} />
             <div className="title">
                 {slideNumber}
             </div>

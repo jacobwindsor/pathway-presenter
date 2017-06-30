@@ -10,7 +10,7 @@ const ErrorMessage =  props => (
     <MuiThemeProvider>
         <div className="error-wrapper">
             <Paper className="error-message">
-                <img src={error} />
+                <img src={error} alt="Error exclamation mark"/>
                 <h1>Woops</h1>
                 <h3>{props.message}</h3>
             </Paper>
