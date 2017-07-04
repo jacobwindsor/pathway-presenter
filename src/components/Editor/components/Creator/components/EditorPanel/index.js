@@ -15,6 +15,7 @@ import Snackbar from 'material-ui/Snackbar';
 import { sortBy, isEqual } from 'lodash';
 import Subheader from 'material-ui/Subheader';
 import addAction from '../../../../../../assets/add-action.svg';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 class EditorPanel extends Component {
     constructor(props) {
@@ -255,17 +256,19 @@ class EditorPanel extends Component {
     render() {
         return (
             <Paper className="editor-panel-container">
-                <TextField id="my-unique-id"
-                           hintText="The Warburg Effect"
-                           floatingLabelText="Slide title"
-                           fullWidth={true}
-                           className="title-input"
-                           onChange={this.handleTitleChange}
-                           value={this.state.title}
-                />
-                {this.renderTargetEmptyState()}
-                {this.renderTargetControls()}
-                {this.renderTargetChips()}
+                <Scrollbars>
+                    <TextField id="my-unique-id"
+                               hintText="The Warburg Effect"
+                               floatingLabelText="Slide title"
+                               fullWidth={true}
+                               className="title-input"
+                               onChange={this.handleTitleChange}
+                               value={this.state.title}
+                    />
+                    {this.renderTargetEmptyState()}
+                    {this.renderTargetControls()}
+                    {this.renderTargetChips()}
+                </Scrollbars>
             </Paper>
         )
     }
