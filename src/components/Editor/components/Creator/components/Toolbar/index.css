@@ -2,6 +2,7 @@
     /* cyan200 light -> cyan500 */
     background: linear-gradient(to right, #80deea, #00bcd4);
     overflow: hidden;
+    height: 56px;
 }
 
 .editor-toolbar .logo-wrapper {

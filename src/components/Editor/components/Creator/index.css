@@ -6,7 +6,8 @@
 }
 
 .creator-wrapper .left-section, .right-section {
-    height: 100%;
+    /* 100% - toolbar height */
+    height: calc(100% - 56px);
 }
 
 .creator-wrapper .left-section {
