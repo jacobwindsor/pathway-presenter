@@ -10,119 +10,140 @@ import LogoWhite from '../../../../assets/logo-white.svg';
 import './index.css';
 
 class Adder extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            wpId: '',
-            dataSource: [],
-            title: '',
-            authorName: '',
-            version: '',
-        };
-    }
-
-    componentDidMount() {
-        this._isMounted = true;
-
-        presentations.list()
-            .then(res => {
-                if(! this._isMounted) throw new Error('Not mounted');
-                return res
-            })
-            .then(res => this.setState({
-                dataSource: res.map(single => {
-                    return {
-                        text: single.title,
-                        value: single.id
-                    }
-                })
-            }))
-          .catch(err => console.log(err))
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false
-    }
-
-    handleChange = targetName => e => this.setState({ [targetName]: e.target.value });
-    handleTitleChange = this.handleChange('title');
-    handleAuthorNameChange = this.handleChange('authorName');
-    handleWpIdChange = this.handleChange('wpId');
-    handleVersionChange = this.handleChange('version');
-
-    handleSubmit = () => {
-      const { handleCreate } = this.props;
-      const copy = cloneDeep(this.state);
-      copy.version = parseInt(copy.version, 10);
-      handleCreate(copy);
+    this.state = {
+      wpId: '',
+      dataSource: [],
+      title: '',
+      authorName: '',
+      version: ''
     };
+  }
 
-    handleSelect = (chosenRequest, index) => {
-        const { handleSelect } = this.props;
-        const { dataSource } = this.state;
-        if(index < 0) return;
-        handleSelect(dataSource[index].value)
-    };
+  componentDidMount() {
+    this._isMounted = true;
 
-    render() {
-        return (
-            <Paper zDepth={1} className="adder-wrapper">
-                <div className="header">
-                    <h1>Pathway Presenter</h1>
-                    <p>
-                        Create interactive presentations from pathways on <a href="http://wikipathways.org" target="_blank" rel="noopener noreferrer">WikiPathways</a>.
-                    </p>
-                    <div className="logo-wrapper">
-                        <img src={LogoWhite} alt="Logo"  />
-                    </div>
-                </div>
-                <div className="content">
-                    <h3>Select a Pathway Presentation</h3>
-                    <AutoComplete
-                        filter={AutoComplete.fuzzyFilter}
-                        maxSearchResults={5}
-                        fullWidth={true}
-                        openOnFocus={true}
-                        hintText={"Search by title"}
-                        dataSource={this.state.dataSource}
-                        onNewRequest={this.handleSelect} />
-                    <h3>Create a Pathway Presentation</h3>
-                    <TextField
-                        hintText="The TCA Cycle"
-                        floatingLabelText="Title"
-                        onChange={this.handleTitleChange}
-                        value={this.state.title}
-                        fullWidth={true}/>
-                    <TextField
-                        hintText="Gregor Mendel, Frederick Sanger"
-                        floatingLabelText="Author Name(s)"
-                        onChange={this.handleAuthorNameChange}
-                        value={this.state.authorName}
-                        fullWidth={true}/>
-                    <TextField
-                        hintText="WP78"
-                        floatingLabelText="WikiPathways ID"
-                        onChange={this.handleWpIdChange}
-                        value={this.state.wpId}
-                        fullWidth={true} />
-                    <TextField
-                        hintText="Type '0' for latest"
-                        floatingLabelText="WikiPathways Version"
-                        onChange={this.handleVersionChange}
-                        value={this.state.version}
-                        fullWidth={true} />
-                    <FlatButton label="Create" primary={true} onClick={this.handleSubmit} fullWidth={true}
-                                className="create-button"/>
-                </div>
-            </Paper>
-        )
-    }
+    presentations
+      .list()
+      .then(res => {
+        if (!this._isMounted) throw new Error('Not mounted');
+        return res;
+      })
+      .then(res =>
+        this.setState({
+          dataSource: res.map(single => {
+            return {
+              text: single.title,
+              value: single.id
+            };
+          })
+        })
+      )
+      .catch(err => console.log(err));
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  handleChange = targetName => e =>
+    this.setState({ [targetName]: e.target.value });
+  handleTitleChange = this.handleChange('title');
+  handleAuthorNameChange = this.handleChange('authorName');
+  handleWpIdChange = this.handleChange('wpId');
+  handleVersionChange = this.handleChange('version');
+
+  handleSubmit = () => {
+    const { handleCreate } = this.props;
+    const copy = cloneDeep(this.state);
+    copy.version = parseInt(copy.version, 10);
+    handleCreate(copy);
+  };
+
+  handleSelect = (chosenRequest, index) => {
+    const { handleSelect } = this.props;
+    const { dataSource } = this.state;
+    if (index < 0) return;
+    handleSelect(dataSource[index].value);
+  };
+
+  render() {
+    return (
+      <Paper zDepth={1} className="adder-wrapper">
+        <div className="header">
+          <h1>Pathway Presenter</h1>
+          <p>
+            Create interactive presentations from pathways on{' '}
+            <a
+              href="http://wikipathways.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WikiPathways
+            </a>.
+          </p>
+          <div className="logo-wrapper">
+            <img src={LogoWhite} alt="Logo" />
+          </div>
+        </div>
+        <div className="content">
+          <h3>Select a Pathway Presentation</h3>
+          <AutoComplete
+            filter={AutoComplete.fuzzyFilter}
+            maxSearchResults={5}
+            fullWidth={true}
+            openOnFocus={true}
+            hintText={'Search by title'}
+            dataSource={this.state.dataSource}
+            onNewRequest={this.handleSelect}
+          />
+          <h3>Create a Pathway Presentation</h3>
+          <TextField
+            hintText="The TCA Cycle"
+            floatingLabelText="Title"
+            onChange={this.handleTitleChange}
+            value={this.state.title}
+            fullWidth={true}
+          />
+          <TextField
+            hintText="Gregor Mendel, Frederick Sanger"
+            floatingLabelText="Author Name(s)"
+            onChange={this.handleAuthorNameChange}
+            value={this.state.authorName}
+            fullWidth={true}
+          />
+          <TextField
+            hintText="WP78"
+            floatingLabelText="WikiPathways ID"
+            onChange={this.handleWpIdChange}
+            value={this.state.wpId}
+            fullWidth={true}
+          />
+          <TextField
+            hintText="Type '0' for latest"
+            floatingLabelText="WikiPathways Version"
+            onChange={this.handleVersionChange}
+            value={this.state.version}
+            fullWidth={true}
+          />
+          <FlatButton
+            label="Create"
+            primary={true}
+            onClick={this.handleSubmit}
+            fullWidth={true}
+            className="create-button"
+          />
+        </div>
+      </Paper>
+    );
+  }
 }
 
 Adder.propTypes = {
-    handleCreate: PropTypes.func.isRequired,
-    handleSelect: PropTypes.func.isRequired,
+  handleCreate: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default Adder;

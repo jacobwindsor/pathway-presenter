@@ -11,209 +11,224 @@ import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
-import './index.css'
+import './index.css';
 
 class Creator extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            activeSlideIndex: 0,
-            selectedEntity: null,
-            presentation: cloneDeep(props.presentation),
-            settingsDialogOpen: false,
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeSlideIndex: 0,
+      selectedEntity: null,
+      presentation: cloneDeep(props.presentation),
+      settingsDialogOpen: false
+    };
 
-        window.onbeforeunload = this.beforeUnload;
+    window.onbeforeunload = this.beforeUnload;
+  }
+
+  beforeUnload = e => {
+    if (!isEqual(this.props.presentation, this.state.presentation)) {
+      const confirmationMessage =
+        'Your presentation has unsaved changed! Are you sure you want to leave?';
+
+      // Use both for cross browser
+      // See: https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
+      e.returnValue = confirmationMessage;
+      return confirmationMessage;
     }
+  };
 
-    beforeUnload = e => {
-        if(! isEqual(this.props.presentation, this.state.presentation)) {
-            const confirmationMessage = 'Your presentation has unsaved changed! Are you sure you want to leave?';
+  handlePreviewClick = slideIndex => {
+    this.setState({
+      activeSlideIndex: slideIndex,
+      selectedEntity: null
+    });
+  };
 
-            // Use both for cross browser
-            // See: https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload
-            e.returnValue = confirmationMessage;
-            return confirmationMessage;
-        }
-    };
+  handleEntityClick = entity => {
+    // For now we only allow entities with text (nodes)
+    if (!entity.textContent) return;
+    this.setState({ selectedEntity: entity });
+  };
 
-    handlePreviewClick = (slideIndex) => {
-        this.setState({
-            activeSlideIndex: slideIndex,
-            selectedEntity: null,
-        });
-    };
+  handleSlideUpdate = slide => {
+    const { activeSlideIndex } = this.state;
+    this.setState(state => {
+      let newSlides = state.presentation.slides.slice();
+      newSlides[activeSlideIndex] = cloneDeep(slide);
+      return {
+        presentation: Object.assign({}, state.presentation, {
+          slides: newSlides
+        }),
+        selectedEntity: null
+      };
+    });
+  };
 
-    handleEntityClick = (entity) => {
-        // For now we only allow entities with text (nodes)
-        if (! entity.textContent ) return;
-        this.setState({selectedEntity: entity})
-    };
+  onSlideAdd = () => {
+    this.setState(state => {
+      return {
+        presentation: Object.assign({}, state.presentation, {
+          slides: state.presentation.slides.concat({
+            targets: [],
+            title: null
+          })
+        }),
+        // Since added one slide, new index is the length
+        activeSlideIndex: state.presentation.slides.length,
+        selectedEntity: null
+      };
+    });
+  };
 
-    handleSlideUpdate = (slide) => {
-        const { activeSlideIndex } = this.state;
-        this.setState(state => {
-            let newSlides = state.presentation.slides.slice();
-            newSlides[activeSlideIndex] = cloneDeep(slide);
-            return {
-                presentation: Object.assign({}, state.presentation, {
-                    slides: newSlides
-                }),
-                selectedEntity: null,
-            }
-        })
-    };
+  handleSlidesUpdate = ({ slides, newActiveIndex }) => {
+    this.setState(state => {
+      const copy = cloneDeep(state.presentation);
+      copy.slides = slides;
+      return {
+        presentation: copy,
+        selectedEntity: null,
+        activeSlideIndex: newActiveIndex
+      };
+    });
+  };
 
-    onSlideAdd = () => {
-        this.setState(state => {
-            return {
-                presentation: Object.assign({}, state.presentation, {
-                    slides: state.presentation.slides.concat({
-                        targets: [],
-                        title: null
-                    }),
-                }),
-                // Since added one slide, new index is the length
-                activeSlideIndex: state.presentation.slides.length,
-                selectedEntity: null,
-            }
-        })
-    };
+  handleSave = () => {
+    const { presentation } = this.state;
+    const { handleSave } = this.props;
+    handleSave(presentation);
+  };
 
-    handleSlidesUpdate =  ({ slides, newActiveIndex }) => {
-      this.setState(state => {
-        const copy = cloneDeep(state.presentation);
-        copy.slides = slides;
-        return {
-          presentation: copy,
-          selectedEntity: null,
-          activeSlideIndex: newActiveIndex,
-        }
-      })
-    };
+  handleSettingsClick = () => {
+    this.setState({ settingsDialogOpen: true });
+  };
 
-    handleSave = () => {
-        const { presentation } = this.state;
-        const { handleSave } = this.props;
-        handleSave(presentation);
-    };
+  handleSettingsSave = ({ title, authorName, wpId, version }) => {
+    const toUpdate = cloneDeep(this.state.presentation);
+    const updated = Object.assign(toUpdate, {
+      title,
+      authorName,
+      wpId,
+      version
+    });
+    this.setState(
+      {
+        presentation: updated
+      },
+      this.handleSave
+    );
+  };
 
-    handleSettingsClick = () => {
-        this.setState({ settingsDialogOpen: true });
-    };
-
-    handleSettingsSave = ({title, authorName, wpId, version}) => {
-        const toUpdate = cloneDeep(this.state.presentation);
-        const updated = Object.assign(toUpdate, {title, authorName, wpId, version});
-        this.setState({
-            presentation: updated,
-        }, this.handleSave);
-    };
-
-    handlePresentClick = () => {
-        if (! isEqual(this.props.presentation, this.state.presentation)) {
-            alert('Unsaved changes! Save before presenting to present your latest changes.');
-            return;
-        }
-        const { presentation } = this.state;
-        const href = `${window.location.href}?present=true&presId=${presentation.id}`;
-        window.open(href, '_blank');
-    };
-
-    renderNonEmptyComps() {
-        const { activeSlideIndex, selectedEntity, presentation } = this.state;
-        if (presentation.slides.length < 1) return null;
-        const slide = presentation.slides[activeSlideIndex];
-        return (
-            <span>
-                    <div className="left-section">
-                        <EditorPanel
-                            slide={slide}
-                            slideIndex={activeSlideIndex}
-                            activeEntity={selectedEntity}
-                            onUpdate={this.handleSlideUpdate}
-                            handleCancelTarget={() => this.setState({ selectedEntity: null })}
-                            handleTargetChipClick={(entity) => this.setState({ selectedEntity: entity })}
-                        />
-                    </div>
-                    <div className="right-section">
-                        <div className="previewer">
-                            <div className="slide-wrapper">
-                                <div className="slide">
-                                    <Paper className="content" zDepth={2}>
-                                        { slide.title ? <Title title={slide.title}/> : null }
-                                        <Diagram
-                                            wpId={presentation.wpId}
-                                            version={presentation.version}
-                                            detailPanelEnabled={false}
-                                            onEntityClick={this.handleEntityClick}
-                                            slide={slide}
-                                            showPanZoomControls={true}/>
-                                    </Paper>
-                                </div>
-                            </div>
-                        </div>
-                        <Paper className="footer">
-                            <PreviewPanel
-                                slides={presentation.slides}
-                                wpId={presentation.wpId}
-                                version={presentation.version}
-                                onClick={this.handlePreviewClick}
-                                handleUpdate={this.handleSlidesUpdate}
-                                width={'calc(100% - 10rem)'}
-                                height="100%"
-                                activeSlideIndex={activeSlideIndex}
-                            />
-                            <FloatingActionButton
-                                className="add-slide-button"
-                                onTouchTap={this.onSlideAdd}
-                            >
-                                <ContentAdd />
-                            </FloatingActionButton>
-                        </Paper>
-                    </div>
-                </span>
-        );
+  handlePresentClick = () => {
+    if (!isEqual(this.props.presentation, this.state.presentation)) {
+      alert(
+        'Unsaved changes! Save before presenting to present your latest changes.'
+      );
+      return;
     }
+    const { presentation } = this.state;
+    const href = `${window.location
+      .href}?present=true&presId=${presentation.id}`;
+    window.open(href, '_blank');
+  };
 
-    render() {
-        const { presentation, settingsDialogOpen } = this.state;
-        const { handleDelete } = this.props;
-
-        const EmptyComps = () => {
-          if (presentation.slides.length > 0) return null;
-          return <EmptyState handleClick={this.onSlideAdd} />;
-        };
-
-        return (
-            <div className="creator-wrapper">
-                <Toolbar
-                    authorName={presentation.authorName}
-                    title={presentation.title}
-                    handleSave={this.handleSave}
-                    handlePresentClick={this.handlePresentClick}
-                    handleSettingsClick={this.handleSettingsClick} />
-                <SettingsDialog
-                    handleDelete={handleDelete}
-                    isOpen={settingsDialogOpen}
-                    handleClose={() => this.setState({ settingsDialogOpen: false })}
-                    handleSave={this.handleSettingsSave}
-                    version={presentation.version}
+  renderNonEmptyComps() {
+    const { activeSlideIndex, selectedEntity, presentation } = this.state;
+    if (presentation.slides.length < 1) return null;
+    const slide = presentation.slides[activeSlideIndex];
+    return (
+      <span>
+        <div className="left-section">
+          <EditorPanel
+            slide={slide}
+            slideIndex={activeSlideIndex}
+            activeEntity={selectedEntity}
+            onUpdate={this.handleSlideUpdate}
+            handleCancelTarget={() => this.setState({ selectedEntity: null })}
+            handleTargetChipClick={entity =>
+              this.setState({ selectedEntity: entity })}
+          />
+        </div>
+        <div className="right-section">
+          <div className="previewer">
+            <div className="slide-wrapper">
+              <div className="slide">
+                <Paper className="content" zDepth={2}>
+                  {slide.title ? <Title title={slide.title} /> : null}
+                  <Diagram
                     wpId={presentation.wpId}
-                    authorName={presentation.authorName}
-                    title={presentation.title}
-                />
-                <EmptyComps/>
-                {this.renderNonEmptyComps()}
+                    version={presentation.version}
+                    detailPanelEnabled={false}
+                    onEntityClick={this.handleEntityClick}
+                    slide={slide}
+                    showPanZoomControls={true}
+                  />
+                </Paper>
+              </div>
             </div>
-        )
-    }
+          </div>
+          <Paper className="footer">
+            <PreviewPanel
+              slides={presentation.slides}
+              wpId={presentation.wpId}
+              version={presentation.version}
+              onClick={this.handlePreviewClick}
+              handleUpdate={this.handleSlidesUpdate}
+              width={'calc(100% - 10rem)'}
+              height="100%"
+              activeSlideIndex={activeSlideIndex}
+            />
+            <FloatingActionButton
+              className="add-slide-button"
+              onTouchTap={this.onSlideAdd}
+            >
+              <ContentAdd />
+            </FloatingActionButton>
+          </Paper>
+        </div>
+      </span>
+    );
+  }
+
+  render() {
+    const { presentation, settingsDialogOpen } = this.state;
+    const { handleDelete } = this.props;
+
+    const EmptyComps = () => {
+      if (presentation.slides.length > 0) return null;
+      return <EmptyState handleClick={this.onSlideAdd} />;
+    };
+
+    return (
+      <div className="creator-wrapper">
+        <Toolbar
+          authorName={presentation.authorName}
+          title={presentation.title}
+          handleSave={this.handleSave}
+          handlePresentClick={this.handlePresentClick}
+          handleSettingsClick={this.handleSettingsClick}
+        />
+        <SettingsDialog
+          handleDelete={handleDelete}
+          isOpen={settingsDialogOpen}
+          handleClose={() => this.setState({ settingsDialogOpen: false })}
+          handleSave={this.handleSettingsSave}
+          version={presentation.version}
+          wpId={presentation.wpId}
+          authorName={presentation.authorName}
+          title={presentation.title}
+        />
+        <EmptyComps />
+        {this.renderNonEmptyComps()}
+      </div>
+    );
+  }
 }
 
 Creator.propTypes = {
-    presentation: PropTypes.object.isRequired,
-    handleSave: PropTypes.func.isRequired,
-    handleDelete: PropTypes.func.isRequired,
+  presentation: PropTypes.object.isRequired,
+  handleSave: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 export default Creator;
