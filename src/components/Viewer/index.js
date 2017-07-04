@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Title from '../Title';
-import TitleSlide from './components/TitleSlide';
 import * as screenfull from 'screenfull';
 import { cloneDeep } from 'lodash';
 
@@ -27,15 +26,7 @@ class Viewer extends Component {
         presentations.get(presId)
             .then(presentation => {
                 this.addEventListeners();
-
                 const copy = cloneDeep(presentation);
-                if (copy.title) {
-                    copy.slides = [{
-                        isTitleSlide: true,
-                        title: copy.title,
-                        authorName: copy.authorName,
-                    }].concat(copy.slides);
-                }
                 this.setState({
                     presentation: copy,
                     loading: false,
@@ -111,27 +102,18 @@ class Viewer extends Component {
         if (! presentation) return null;
 
         const activeSlide = presentation.slides[activeSlideIndex];
-        const diagramSlide = activeSlide.isTitleSlide ? presentation.slides[activeSlideIndex + 1] : activeSlide;
-
-        const isHidden = activeSlide.isTitleSlide;
 
         return (
             <MuiThemeProvider>
                 <div className="presentation-viewer">
-                    { activeSlide.isTitleSlide ? <TitleSlide
-                        title={activeSlide.title}
-                        authorName={activeSlide.authorName} />
-                        : null }
-
-                    { !activeSlide.isTitleSlide && activeSlide.title ? <Title title={activeSlide.title} /> : null }
+                    { activeSlide.title ? <Title title={activeSlide.title} /> : null }
 
                     <Diagram
                         wpId={presentation.wpId}
                         detailPanelEnabled={false}
                         version={presentation.version}
-                        slide={diagramSlide}
+                        slide={activeSlide}
                         showPanZoomControls={false}
-                        isHidden={isHidden}
                         onReady={this.onReady}  />
 
                     <Controls
