@@ -7,7 +7,7 @@ import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 
 const StaticSlide = (props) => {
-    const { slideNumber, onClick, handleRemove } = props;
+    const { slideNumber, onClick, handleRemove, isActive } = props;
 
     const handleClick = () => {
         onClick(slideNumber)
@@ -20,7 +20,10 @@ const StaticSlide = (props) => {
     };
 
     return (
-        <Paper className="static-slide" onClick={handleClick}>
+        <Paper
+          className={`static-slide ${isActive? 'active': null}`}
+          onClick={handleClick}
+        >
             <IconButton className="remove-button" tooltip="Remove slide" onClick={onRemoveClick}>
                 <RemoveCircle/>
             </IconButton>
@@ -41,6 +44,7 @@ StaticSlide.propTypes = {
     slideNumber: PropTypes.number.isRequired,
     onClick: PropTypes.func.isRequired,
     handleRemove: PropTypes.func.isRequired,
+    isActive: PropTypes.bool.isRequired,
 };
 
 export default StaticSlide;

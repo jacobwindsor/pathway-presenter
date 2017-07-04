@@ -17,6 +17,10 @@
     color: white;
 }
 
+.static-slide.active .title {
+    background-color: rgba(0, 188, 212, 0.6) !important;
+}
+
 .static-slide .remove-button {
     position: absolute !important;
     top:0;

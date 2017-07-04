@@ -168,6 +168,7 @@ class Creator extends Component {
                                 handleSlideRemove={this.handleSlideRemove}
                                 width={'calc(100% - 10rem)'}
                                 height="100%"
+                                activeSlideIndex={activeSlideIndex}
                             />
                             <FloatingActionButton
                                 className="add-slide-button"
