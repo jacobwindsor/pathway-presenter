@@ -37,10 +37,9 @@ class Creator extends Component {
         }
     };
 
-    handlePreviewClick = (slideNumber) => {
+    handlePreviewClick = (slideIndex) => {
         this.setState({
-            // slideNumber is not a 0th index
-            activeSlideIndex: slideNumber - 1,
+            activeSlideIndex: slideIndex,
             selectedEntity: null,
         });
     };

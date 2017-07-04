@@ -17,7 +17,7 @@ const PreviewPanel = (props) => {
             slideNumber={sortIndex + 1}
             isActive={activeSlideIndex === sortIndex}
             version={version}
-            onClick={onClick} />
+            onClick={() => onClick(sortIndex)} />
     );
 
     const SortableSlideList = SortableContainer(() =>
