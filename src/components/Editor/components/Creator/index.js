@@ -55,7 +55,7 @@ class Creator extends Component {
         const { activeSlideIndex } = this.state;
         this.setState(state => {
             let newSlides = state.presentation.slides.slice();
-            newSlides[activeSlideIndex] = slide;
+            newSlides[activeSlideIndex] = cloneDeep(slide);
             return {
                 presentation: Object.assign({}, state.presentation, {
                     slides: newSlides
@@ -138,6 +138,8 @@ class Creator extends Component {
                             slideIndex={activeSlideIndex}
                             activeEntity={selectedEntity}
                             onUpdate={this.handleSlideUpdate}
+                            handleCancelTarget={() => this.setState({ selectedEntity: null })}
+                            handleTargetChipClick={(entity) => this.setState({ selectedEntity: entity })}
                         />
                     </div>
                     <div className="right-section">

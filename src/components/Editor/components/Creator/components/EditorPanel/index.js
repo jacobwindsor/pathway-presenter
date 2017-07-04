@@ -5,7 +5,8 @@ import Paper from 'material-ui/Paper';
 import {List, ListItem} from 'material-ui/List';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
-import ActionDone from 'material-ui/svg-icons/action/done';
+import ContentCircleOutline from 'material-ui/svg-icons/content/add-circle-outline'
+import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
@@ -13,6 +14,7 @@ import Chip from 'material-ui/Chip';
 import Snackbar from 'material-ui/Snackbar';
 import { sortBy, isEqual } from 'lodash';
 import Subheader from 'material-ui/Subheader';
+import addAction from '../../../../../../assets/add-action.svg';
 
 class EditorPanel extends Component {
     constructor(props) {
@@ -110,7 +112,7 @@ class EditorPanel extends Component {
             return {
                 targets: newTargets.concat([{
                     entityId: props.activeEntity.id,
-                    textContent: props.activeEntity.textContent,
+                    fullEntity: props.activeEntity,
                     hidden: state.isHidden,
                     zoomed: state.isZoomed,
                     panned: state.isPanned,
@@ -159,13 +161,13 @@ class EditorPanel extends Component {
     }
 
     renderTargetControls() {
-        const { activeEntity } = this.props;
+        const { activeEntity, handleCancelTarget } = this.props;
         if (! activeEntity) return null;
 
         return (
             <div className="controls">
                 <List>
-                    <Subheader>{activeEntity.textContent}</Subheader>
+                    <Subheader>Add action to "{activeEntity.textContent}"</Subheader>
                     <ListItem primaryText="Zoom" rightToggle={<Toggle
                         onToggle={this.handleZoomToggle}
                         toggled={this.state.isZoomed} />} />
@@ -199,9 +201,16 @@ class EditorPanel extends Component {
                               ]} />
                     <Divider/>
                 </List>
-                <IconButton className="add-target-button" onClick={this.handleAdd}>
-                    <ActionDone/>
-                </IconButton>
+                <FlatButton
+                    className="cancel-target-button"
+                    label="Cancel"
+                    onClick={handleCancelTarget}
+                />
+                <FlatButton
+                    className="add-target-button"
+                    label="Done"
+                    onClick={this.handleAdd}
+                />
                 <Snackbar
                     open={this.state.isDuplicate}
                     message="No duplicate entities!"
@@ -217,19 +226,22 @@ class EditorPanel extends Component {
         if (activeEntity) return null;
         return (
             <div className="empty-state">
-                <h1>Select an entity!</h1>
-                <p>Click on an entity in the diagram to start adding manipulations.</p>
+                <img src={addAction} />
+                <h1>Select a node!</h1>
+                <p>Click on a node in the diagram to add an action.</p>
             </div>
         )
     }
 
     renderTargetChips() {
         const { targets } = this.state;
+        const { handleTargetChipClick } = this.props;
         const chips = targets.map((singleTarget,i) => <Chip
             key={i}
             className="target-chip"
+            onClick={() => handleTargetChipClick(singleTarget.fullEntity)}
             onRequestDelete={() => this.handleRequestChipDelete(singleTarget.entityId)}>
-            {singleTarget.textContent}
+            {singleTarget.fullEntity.textContent}
         </Chip>);
 
         if (chips.length < 1) return null;
@@ -242,9 +254,15 @@ class EditorPanel extends Component {
 
     render() {
         return (
-            <Paper className="editor-panel-container" key={1}>
-                <TextField key={2} id="my-unique-id" hintText="Slide title" fullWidth={true} className="title-input"
-                           onChange={this.handleTitleChange} value={this.state.title} />
+            <Paper className="editor-panel-container">
+                <TextField id="my-unique-id"
+                           hintText="The Warburg Effect"
+                           floatingLabelText="Slide title"
+                           fullWidth={true}
+                           className="title-input"
+                           onChange={this.handleTitleChange}
+                           value={this.state.title}
+                />
                 {this.renderTargetEmptyState()}
                 {this.renderTargetControls()}
                 {this.renderTargetChips()}
@@ -258,6 +276,8 @@ EditorPanel.propTypes = {
     onUpdate: PropTypes.func,
     slide: PropTypes.object.isRequired,
     slideIndex: PropTypes.number.isRequired, // Required to detect when slide has changed
+    handleCancelTarget: PropTypes.func.isRequired,
+    handleTargetChipClick: PropTypes.func.isRequired,
 };
 
 export default EditorPanel;

@@ -1,12 +1,15 @@
-.controls {
+.viewer-controls {
     margin: .6rem 1rem;
     width: calc(100% - 1.2rem);
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
-.controls .right {
+.viewer-controls .right {
     float: right;
 }
 
-.controls .left {
+.viewer-controls .left {
     float: left;
 }

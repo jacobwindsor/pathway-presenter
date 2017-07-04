@@ -9,7 +9,7 @@ import './index.css';
 
 const Controls = props => {
     return (
-        <div className="controls">
+        <div className="viewer-controls">
             <div className="left">
                 <IconButton onTouchTap={props.handleToggleFullScreen} className="fullscreen">
                     { props.isFullScreen ?

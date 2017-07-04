@@ -13,18 +13,35 @@
 
 .editor-panel-container .empty-state {
     text-align: center;
+    margin: 2rem;
+    border-radius: .2rem;
+    padding: 1.2rem;
+    background: rgb(232, 232, 232);
 }
 
-.editor-panel-container .color-options {
+.editor-panel-container .empty-state img {
+    width: 48px;
+    height: 48px;
+}
+
+.editor-panel-container .empty-state h1 {
+    margin-top: .4rem !important;
+}
+
+.editor-panel-container .controls {
+    margin: 0 1rem;
+}
+
+.editor-panel-container .controls .color-options {
     margin-top: 16px;
     margin-left: 72px;
 }
 
-.editor-panel-container .color-options .color-choice {
+.editor-panel-container .controls .color-options .color-choice {
     margin-bottom: 16px;
 }
 
-.editor-panel-container .add-target-button {
+.editor-panel-container .controls .add-target-button {
     float: right;
     margin-top: 16px;
 }
@@ -38,4 +55,5 @@
 
 .editor-panel-container .target-chip {
     margin: 8px 0 0 8px !important;
+    cursor: pointer !important;
 }
