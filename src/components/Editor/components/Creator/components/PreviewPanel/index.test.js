@@ -5,6 +5,8 @@ import PreviewPanel from './index';
 it('should render without failing', () => {
     shallow(
         <PreviewPanel
+            handleUpdate={() => null}
+            activeSlideIndex={0}
             handleSlideRemove={() => null}
             height={'100%'}
             width={'100%'}
@@ -18,6 +20,8 @@ it('should render without failing', () => {
 it('should have the preview-panel class', () => {
    const comp =    shallow(
        <PreviewPanel
+         activeSlideIndex={0}
+          handleUpdate={() => null}
            handleSlideRemove={() => null}
            height={'100%'}
            width={'100%'}

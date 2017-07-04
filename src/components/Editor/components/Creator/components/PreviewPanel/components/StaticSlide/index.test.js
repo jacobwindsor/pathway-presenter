@@ -4,6 +4,7 @@ import StaticSlide from './index';
 
 it('renders without failing', () => {
     shallow(<StaticSlide
+        isActive={true}
         slide={{targets: []}}
         wpId={'WP4'}
         version={0}
@@ -15,6 +16,7 @@ it('renders without failing', () => {
 
 it('should have the static-slide class', () => {
     const comp = shallow(<StaticSlide
+        isActive={true}
         slide={{targets: []}}
         wpId={'WP4'}
         version={0}

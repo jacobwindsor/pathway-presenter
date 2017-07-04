@@ -22,7 +22,7 @@ it('should have a wrapper component', () => {
             isFullScreen={false}
         />
     );
-    expect(comp.find('.controls')).toHaveLength(1);
+    expect(comp.find('.viewer-controls')).toHaveLength(1);
 });
 
 it('Should have back and forward buttons', () => {
