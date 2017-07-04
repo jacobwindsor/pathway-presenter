@@ -65,23 +65,6 @@ class Creator extends Component {
         })
     };
 
-    handleSlideRemove = slideIndex => {
-        this.setState(state => {
-            const copy = cloneDeep(state.presentation);
-            copy.slides.splice(slideIndex, 1);
-            let newSlideIndex = state.activeSlideIndex;
-            if (slideIndex === state.activeSlideIndex)
-                newSlideIndex = slideIndex - 1;
-            newSlideIndex = Math.max(0, newSlideIndex);
-            newSlideIndex = Math.min(newSlideIndex, copy.slides.length - 1);
-            return {
-                presentation: copy,
-                selectedEntity: null,
-                activeSlideIndex: newSlideIndex,
-            }
-        })
-    };
-
     onSlideAdd = () => {
         this.setState(state => {
             return {
@@ -96,6 +79,18 @@ class Creator extends Component {
                 selectedEntity: null,
             }
         })
+    };
+
+    handleSlidesUpdate =  ({ slides, newActiveIndex }) => {
+      this.setState(state => {
+        const copy = cloneDeep(state.presentation);
+        copy.slides = slides;
+        return {
+          presentation: copy,
+          selectedEntity: null,
+          activeSlideIndex: newActiveIndex,
+        }
+      })
     };
 
     handleSave = () => {
@@ -165,7 +160,7 @@ class Creator extends Component {
                                 wpId={presentation.wpId}
                                 version={presentation.version}
                                 onClick={this.handlePreviewClick}
-                                handleSlideRemove={this.handleSlideRemove}
+                                handleUpdate={this.handleSlidesUpdate}
                                 width={'calc(100% - 10rem)'}
                                 height="100%"
                                 activeSlideIndex={activeSlideIndex}
