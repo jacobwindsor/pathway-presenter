@@ -84,7 +84,7 @@ class SettingsDialog extends Component {
                     label="Delete"
                     fullWidth={true}
                     backgroundColor={red500}
-                    labelColor={'white'}
+                    labelColor={'#ffffff'}
                     onTouchTap={() => this.setState({deleteConfirmDialogOpen: true})}
                     />
             </Dialog>

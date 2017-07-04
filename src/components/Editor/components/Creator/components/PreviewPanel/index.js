@@ -60,7 +60,7 @@ const PreviewPanel = (props) => {
           style={{ width, height, whiteSpace: 'nowrap', overflowY: 'hidden' }}>
             <SortableSlideList
               axis="x"
-              lockAxis
+              lockAxis="x"
               onSortEnd={onSortEnd}
               distance={5}
             />

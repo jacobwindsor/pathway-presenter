@@ -53,7 +53,9 @@ class Adder extends Component {
 
     handleSubmit = () => {
       const { handleCreate } = this.props;
-      handleCreate(cloneDeep(this.state));
+      const copy = cloneDeep(this.state);
+      copy.version = parseInt(copy.version, 10);
+      handleCreate(copy);
     };
 
     handleSelect = (chosenRequest, index) => {
