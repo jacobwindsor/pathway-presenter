@@ -14,14 +14,23 @@ class Adder extends Component {
         super(props);
 
         this.state = {
-            wpId: null,
+            wpId: '',
             dataSource: [],
-        }
+            title: '',
+            authorName: '',
+            version: '',
+        };
     }
 
     componentDidMount() {
+        this._isMounted = true;
+
         presentations.list()
-            .then(res=> this.setState({
+            .then(res => {
+                if(! this._isMounted) throw new Error('Not mounted');
+                return res
+            })
+            .then(res => this.setState({
                 dataSource: res.map(single => {
                     return {
                         text: single.title,
@@ -29,6 +38,11 @@ class Adder extends Component {
                     }
                 })
             }))
+          .catch(err => console.log(err))
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false
     }
 
     handleChange = targetName => e => this.setState({ [targetName]: e.target.value });
