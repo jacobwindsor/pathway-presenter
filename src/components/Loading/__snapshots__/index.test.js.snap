@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without failing 1`] = `
+<Spinner
+  className="loading-spinner"
+  color="steelblue"
+  fadeIn="quarter"
+  name="three-bounce"
+  noFadeIn={false}
+  overrideSpinnerClassName=""
+/>
+`;
