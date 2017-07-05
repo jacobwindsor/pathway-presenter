@@ -135,11 +135,11 @@ exports[`The Adder. Shows a form to create a new presentation should render corr
       label="Create"
       labelPosition="after"
       labelStyle={Object {}}
-      onClick={[Function]}
       onKeyboardFocus={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
       onTouchStart={[Function]}
+      onTouchTap={[Function]}
       primary={true}
       secondary={false}
     />

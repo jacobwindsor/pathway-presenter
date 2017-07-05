@@ -131,7 +131,7 @@ class Adder extends Component {
           <FlatButton
             label="Create"
             primary={true}
-            onClick={this.handleSubmit}
+            onTouchTap={this.handleSubmit}
             fullWidth={true}
             className="create-button"
           />

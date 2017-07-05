@@ -10,4 +10,13 @@ describe('The Adder. Shows a form to create a new presentation', () => {
     );
     expect(toJson(comp)).toMatchSnapshot();
   });
+
+  it('should fire handleCreate', () => {
+    const firer = jest.fn();
+    const comp = shallow(
+      <Adder handleCreate={firer} handleSelect={() => null} />
+    );
+    comp.find('.create-button').simulate('touchTap');
+    expect(firer).toHaveBeenCalledTimes(1);
+  });
 });
