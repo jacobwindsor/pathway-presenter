@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing 1`] = `
+<MuiThemeProvider>
+  <div
+    className="error-wrapper"
+  >
+    <Paper
+      circle={false}
+      className="error-message"
+      rounded={true}
+      transitionEnabled={true}
+      zDepth={1}
+    >
+      <img
+        alt="Error exclamation mark"
+        src="error.svg"
+      />
+      <h1>
+        Woops
+      </h1>
+      <h3>
+        Some error
+      </h3>
+    </Paper>
+  </div>
+</MuiThemeProvider>
+`;
