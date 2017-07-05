@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render without failing 1`] = `
+<div
+  className="slide-title"
+>
+  <h1 />
+</div>
+`;

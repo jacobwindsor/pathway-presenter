@@ -1,9 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Title from './index';
+import toJson from 'enzyme-to-json';
 
 it('should render without failing', () => {
-  shallow(<Title />);
+  const comp = shallow(<Title />);
+  expect(toJson(comp)).toMatchSnapshot();
 });
 
 it('Should show the title', () => {
