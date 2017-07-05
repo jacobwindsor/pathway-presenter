@@ -32,8 +32,13 @@ class SettingsDialog extends Component {
     const { title, authorName, wpId, version } = this.state;
 
     const actions = [
-      <FlatButton label="Cancel" onTouchTap={handleClose} />,
       <FlatButton
+        label="Cancel"
+        id="settings-cancel-button"
+        onTouchTap={handleClose}
+      />,
+      <FlatButton
+        id="settings-save-button"
         label="Save"
         primary={true}
         keyboardFocused={true}

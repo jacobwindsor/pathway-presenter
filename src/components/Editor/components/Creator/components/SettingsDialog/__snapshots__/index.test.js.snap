@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The SettingsDialog. Allows to edit global settings that affect all slides should render correctly 1`] = `
+<Dialog
+  actions={
+    Array [
+      <FlatButton
+        disabled={false}
+        fullWidth={false}
+        id="settings-cancel-button"
+        label="Cancel"
+        labelPosition="after"
+        labelStyle={Object {}}
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onTouchStart={[Function]}
+        onTouchTap={[Function]}
+        primary={false}
+        secondary={false}
+    />,
+      <FlatButton
+        disabled={false}
+        fullWidth={false}
+        id="settings-save-button"
+        keyboardFocused={true}
+        label="Save"
+        labelPosition="after"
+        labelStyle={Object {}}
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onTouchStart={[Function]}
+        onTouchTap={[Function]}
+        primary={true}
+        secondary={false}
+    />,
+    ]
+  }
+  autoDetectWindowHeight={true}
+  autoScrollBodyContent={true}
+  modal={false}
+  onRequestClose={[Function]}
+  open={true}
+  repositionOnUpdate={true}
+  title="Settings"
+>
+  <DeleteConfirmDialog
+    handleClose={[Function]}
+    handleDelete={[Function]}
+    isOpen={false}
+  />
+  <TextField
+    disabled={false}
+    floatingLabelFixed={false}
+    floatingLabelText="Title"
+    fullWidth={true}
+    hintText="The TCA Cycle"
+    multiLine={false}
+    onChange={[Function]}
+    rows={1}
+    type="text"
+    underlineShow={true}
+    value=""
+  />
+  <TextField
+    disabled={false}
+    floatingLabelFixed={false}
+    floatingLabelText="Author Name(s)"
+    fullWidth={true}
+    hintText="Gregor Mendel, Frederick Sanger"
+    multiLine={false}
+    onChange={[Function]}
+    rows={1}
+    type="text"
+    underlineShow={true}
+    value="Miles Davis"
+  />
+  <TextField
+    disabled={false}
+    floatingLabelFixed={false}
+    floatingLabelText="WikiPathways ID"
+    fullWidth={true}
+    hintText="WP78"
+    multiLine={false}
+    onChange={[Function]}
+    rows={1}
+    type="text"
+    underlineShow={true}
+    value="WP4"
+  />
+  <TextField
+    disabled={false}
+    floatingLabelFixed={false}
+    floatingLabelText="WikiPathways Version"
+    fullWidth={true}
+    hintText="Type '0' for latest"
+    multiLine={false}
+    onChange={[Function]}
+    rows={1}
+    type="text"
+    underlineShow={true}
+    value={0}
+  />
+  <RaisedButton
+    backgroundColor="#f44336"
+    disabled={false}
+    fullWidth={true}
+    label="Delete"
+    labelColor="#ffffff"
+    labelPosition="after"
+    onTouchTap={[Function]}
+    primary={false}
+    secondary={false}
+  />
+</Dialog>
+`;
