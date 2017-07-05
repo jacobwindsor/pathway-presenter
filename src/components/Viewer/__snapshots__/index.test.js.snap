@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Viewer. This is shows presentations in "presentation mode" renders without crashing 1`] = `<Component />`;
+
+exports[`The Viewer. This is shows presentations in "presentation mode" should show a presentation 1`] = `
+<MuiThemeProvider>
+  <div
+    className="presentation-viewer"
+  >
+    <Component
+      title="First slide"
+    />
+    <Diagram
+      detailPanelEnabled={false}
+      hidden={false}
+      onReady={[Function]}
+      showPanZoomControls={false}
+      slide={
+        Object {
+          "targets": Array [],
+          "title": "First slide",
+        }
+      }
+      version={0}
+      wpId="WP4"
+    />
+    <Controls
+      handleToggleFullScreen={[Function]}
+      isFullScreen={false}
+      onBackward={[Function]}
+      onForward={[Function]}
+    />
+  </div>
+</MuiThemeProvider>
+`;
