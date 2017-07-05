@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Creator. Interface for actually creating the presentations with all controls should render correctly 1`] = `
+<div
+  className="creator-wrapper"
+>
+  <EditorToolbar
+    authorName="Ronald McDonald"
+    handlePresentClick={[Function]}
+    handleSave={[Function]}
+    handleSettingsClick={[Function]}
+    title="My title"
+  />
+  <SettingsDialog
+    authorName="Ronald McDonald"
+    handleClose={[Function]}
+    handleDelete={[Function]}
+    handleSave={[Function]}
+    isOpen={false}
+    title="My title"
+    version={0}
+    wpId="WP4"
+  />
+  <EmptyComps />
+  <span>
+    <div
+      className="left-section"
+    >
+      <EditorPanel
+        activeEntity={null}
+        handleCancelTarget={[Function]}
+        handleTargetChipClick={[Function]}
+        onUpdate={[Function]}
+        slide={
+          Object {
+            "targets": Array [],
+            "title": "My slide",
+          }
+        }
+        slideIndex={0}
+      />
+    </div>
+    <div
+      className="right-section"
+    >
+      <div
+        className="previewer"
+      >
+        <div
+          className="slide-wrapper"
+        >
+          <div
+            className="slide"
+          >
+            <Paper
+              circle={false}
+              className="content"
+              rounded={true}
+              transitionEnabled={true}
+              zDepth={2}
+            >
+              <Component
+                title="My slide"
+              />
+              <Diagram
+                detailPanelEnabled={false}
+                hidden={false}
+                onEntityClick={[Function]}
+                showPanZoomControls={true}
+                slide={
+                  Object {
+                    "targets": Array [],
+                    "title": "My slide",
+                  }
+                }
+                version={0}
+                wpId="WP4"
+              />
+            </Paper>
+          </div>
+        </div>
+      </div>
+      <Paper
+        circle={false}
+        className="footer"
+        rounded={true}
+        transitionEnabled={true}
+        zDepth={1}
+      >
+        <PreviewPanel
+          activeSlideIndex={0}
+          handleUpdate={[Function]}
+          height="100%"
+          onClick={[Function]}
+          slides={
+            Array [
+              Object {
+                "targets": Array [],
+                "title": "My slide",
+              },
+            ]
+          }
+          version={0}
+          width="calc(100% - 10rem)"
+          wpId="WP4"
+        />
+        <FloatingActionButton
+          className="add-slide-button"
+          disabled={false}
+          mini={false}
+          onTouchTap={[Function]}
+          secondary={false}
+          zDepth={2}
+        >
+          <ContentAdd />
+        </FloatingActionButton>
+      </Paper>
+    </div>
+  </span>
+</div>
+`;
