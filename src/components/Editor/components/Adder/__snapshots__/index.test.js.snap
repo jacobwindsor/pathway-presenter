@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Adder. Shows a form to create a new presentation should render correctly 1`] = `
+<Paper
+  circle={false}
+  className="adder-wrapper"
+  rounded={true}
+  transitionEnabled={true}
+  zDepth={1}
+>
+  <div
+    className="header"
+  >
+    <h1>
+      Pathway Presenter
+    </h1>
+    <p>
+      Create interactive presentations from pathways on
+       
+      <a
+        href="http://wikipathways.org"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        WikiPathways
+      </a>
+      .
+    </p>
+    <div
+      className="logo-wrapper"
+    >
+      <img
+        alt="Logo"
+        src="logo-white.svg"
+      />
+    </div>
+  </div>
+  <div
+    className="content"
+  >
+    <h3>
+      Select a Pathway Presentation
+    </h3>
+    <AutoComplete
+      anchorOrigin={
+        Object {
+          "horizontal": "left",
+          "vertical": "bottom",
+        }
+      }
+      animated={true}
+      dataSource={Array []}
+      dataSourceConfig={
+        Object {
+          "text": "text",
+          "value": "value",
+        }
+      }
+      disableFocusRipple={true}
+      filter={[Function]}
+      fullWidth={true}
+      hintText="Search by title"
+      maxSearchResults={5}
+      menuCloseDelay={300}
+      onNewRequest={[Function]}
+      onUpdateInput={[Function]}
+      open={false}
+      openOnFocus={true}
+      targetOrigin={
+        Object {
+          "horizontal": "left",
+          "vertical": "top",
+        }
+      }
+    />
+    <h3>
+      Create a Pathway Presentation
+    </h3>
+    <TextField
+      disabled={false}
+      floatingLabelFixed={false}
+      floatingLabelText="Title"
+      fullWidth={true}
+      hintText="The TCA Cycle"
+      multiLine={false}
+      onChange={[Function]}
+      rows={1}
+      type="text"
+      underlineShow={true}
+      value=""
+    />
+    <TextField
+      disabled={false}
+      floatingLabelFixed={false}
+      floatingLabelText="Author Name(s)"
+      fullWidth={true}
+      hintText="Gregor Mendel, Frederick Sanger"
+      multiLine={false}
+      onChange={[Function]}
+      rows={1}
+      type="text"
+      underlineShow={true}
+      value=""
+    />
+    <TextField
+      disabled={false}
+      floatingLabelFixed={false}
+      floatingLabelText="WikiPathways ID"
+      fullWidth={true}
+      hintText="WP78"
+      multiLine={false}
+      onChange={[Function]}
+      rows={1}
+      type="text"
+      underlineShow={true}
+      value=""
+    />
+    <TextField
+      disabled={false}
+      floatingLabelFixed={false}
+      floatingLabelText="WikiPathways Version"
+      fullWidth={true}
+      hintText="Type '0' for latest"
+      multiLine={false}
+      onChange={[Function]}
+      rows={1}
+      type="text"
+      underlineShow={true}
+      value=""
+    />
+    <FlatButton
+      className="create-button"
+      disabled={false}
+      fullWidth={true}
+      label="Create"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onClick={[Function]}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      primary={true}
+      secondary={false}
+    />
+  </div>
+</Paper>
+`;

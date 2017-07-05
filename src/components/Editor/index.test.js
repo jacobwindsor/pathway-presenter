@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import Editor from './index';
 import toJson from 'enzyme-to-json';
 import injectTapEventPlugin from 'react-tap-event-plugin';
