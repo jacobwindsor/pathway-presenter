@@ -8,7 +8,7 @@ const EmptyState = props => {
   const { handleClick } = props;
   return (
     <Paper className="empty-creator-state">
-      <div className="clickable" onClick={handleClick}>
+      <div className="clickable" onTouchTap={handleClick}>
         <div className="content">
           <img src={StartFlag} alt="Start flag" />
           <h1>Get started</h1>

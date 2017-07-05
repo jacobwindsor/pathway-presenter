@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmptyState. Shows an empty state dialog when there are no slides should render correctly 1`] = `
+<Paper
+  circle={false}
+  className="empty-creator-state"
+  rounded={true}
+  transitionEnabled={true}
+  zDepth={1}
+>
+  <div
+    className="clickable"
+    onTouchTap={[Function]}
+  >
+    <div
+      className="content"
+    >
+      <img
+        alt="Start flag"
+        src="start-flag.svg"
+      />
+      <h1>
+        Get started
+      </h1>
+      <h3>
+        <i>
+          Click here to add a slide
+        </i>
+      </h3>
+    </div>
+  </div>
+</Paper>
+`;
