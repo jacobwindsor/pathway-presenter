@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Editor. This allows creation and updating of presentations Should render without failing 1`] = `<Component />`;
+
+exports[`The Editor. This allows creation and updating of presentations should show an error 1`] = `<ErrorContent />`;
+
+exports[`The Editor. This allows creation and updating of presentations should show the adder form 1`] = `
+<Adder
+  handleCreate={[Function]}
+  handleSelect={[Function]}
+/>
+`;
+
+exports[`The Editor. This allows creation and updating of presentations should show the creator interface 1`] = `
+<Creator
+  handleDelete={[Function]}
+  handleSave={[Function]}
+  presentation={
+    Object {
+      "authorName": "Donald Duck",
+      "slides": Array [],
+      "title": "My pres",
+      "version": 0,
+      "wpId": "WP4",
+    }
+  }
+/>
+`;

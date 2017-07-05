@@ -6,6 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Adder from './components/Adder';
 import Creator from './components/Creator';
 import ErrorMessage from '../ErrorMessage';
+import Loading from '../Loading';
 
 class Editor extends Component {
   constructor(props) {
@@ -36,7 +37,10 @@ class Editor extends Component {
 
   componentDidMount() {
     const { presId } = this.props;
-    if (!presId) return;
+    if (!presId) {
+      this.setState({ loading: false });
+      return;
+    }
     this.getPresentation(presId);
   }
 
@@ -90,7 +94,9 @@ class Editor extends Component {
   };
 
   render() {
-    const { error, presentation } = this.state;
+    const { error, presentation, loading } = this.state;
+
+    if (loading) return <Loading />;
 
     const SuccessContent = () => {
       if (error) return null;
