@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The diagram component. Renders just the Pvjs diagram renders without crashing 1`] = `
+<div
+  className="diagram-wrapper "
+>
+  <Pvjs
+    detailPanelEnabled={true}
+    hiddenEntities={Array []}
+    highlightedEntities={Array []}
+    onReady={[Function]}
+    pannedEntities={Array []}
+    showPanZoomControls={true}
+    version={0}
+    wpId="WP4"
+    zoomedEntities={Array []}
+  />
+</div>
+`;

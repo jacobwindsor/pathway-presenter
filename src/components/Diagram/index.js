@@ -69,9 +69,9 @@ Diagram.propTypes = {
   onReady: PropTypes.func,
   slide: PropTypes.shape({
     targets: PropTypes.array.isRequired
-  }),
+  }).isRequired,
   isHidden: PropTypes.bool,
-  detailPanelEnabled: PropTypes.bool.isRequired,
+  detailPanelEnabled: PropTypes.bool,
   onEntityClick: PropTypes.func
 };
 
