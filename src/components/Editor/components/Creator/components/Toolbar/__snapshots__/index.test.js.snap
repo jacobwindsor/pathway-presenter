@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The Toolbar. This shows the main controls should render correctly 1`] = `
+<Toolbar
+  className="editor-toolbar"
+  noGutter={false}
+>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={false}
+  >
+    <div
+      className="logo-wrapper"
+    >
+      <img
+        alt="Logo"
+        className="logo"
+        src="logo-white.svg"
+      />
+    </div>
+    <ToolbarTitle
+      className="title"
+      text={
+        <span>
+          <strong>
+            Make America Great Again
+          </strong>
+          ,
+           
+          Donald Trump
+        </span>
+      }
+    />
+  </ToolbarGroup>
+  <ToolbarGroup
+    firstChild={false}
+    lastChild={false}
+  >
+    <FlatButton
+      className="action-button"
+      disabled={false}
+      fullWidth={false}
+      icon={<ActionSettings />}
+      id="settings-button"
+      labelPosition="after"
+      labelStyle={Object {}}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onTouchStart={[Function]}
+      onTouchTap={[Function]}
+      primary={false}
+      secondary={false}
+      style={
+        Object {
+          "color": "white",
+        }
+      }
+    />
+    <RaisedButton
+      className="action-button"
+      disabled={false}
+      fullWidth={false}
+      icon={<AvPlayCircleFilled />}
+      id="present-button"
+      label="Present"
+      labelPosition="before"
+      onTouchTap={[Function]}
+      primary={false}
+      secondary={false}
+    />
+    <RaisedButton
+      className="action-button"
+      disabled={false}
+      fullWidth={false}
+      id="save-button"
+      label="Save"
+      labelPosition="after"
+      onTouchTap={[Function]}
+      primary={false}
+      secondary={false}
+    />
+  </ToolbarGroup>
+</Toolbar>
+`;
