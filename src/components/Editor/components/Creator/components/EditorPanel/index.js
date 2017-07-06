@@ -24,10 +24,7 @@ class EditorPanel extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.slideIndex !== nextProps.slideIndex) {
-      this.setState(this.getInitialState(nextProps));
-      return;
-    }
+    this.setState(this.getInitialState(nextProps));
 
     const { activeEntity, slide } = nextProps;
     if (!isEqual(this.props.activeEntity, activeEntity) && activeEntity) {
@@ -63,9 +60,9 @@ class EditorPanel extends Component {
       highlightedColor: null,
       targets: props.slide.targets || [],
       title: props.slide.title || '',
-      tempId: props.slide.tempId,
       id: props.slide.id,
-      isDuplicate: false
+      isDuplicate: false,
+      canSlideUpdate: !props.hasSlideChanged
     };
   }
 
@@ -125,7 +122,8 @@ class EditorPanel extends Component {
             highlighted: state.isHighlighted,
             highlightedColor: state.highlightedColor
           }
-        ])
+        ]),
+        canSlideUpdate: true
       };
     });
   };
@@ -135,7 +133,8 @@ class EditorPanel extends Component {
       return {
         targets: state.targets.filter(
           singleTarget => singleTarget.entityId !== entityId
-        )
+        ),
+        canSlideUpdate: true
       };
     });
   };
@@ -149,28 +148,19 @@ class EditorPanel extends Component {
   handleTitleChange = e => {
     const val = e.target.value;
     this.setState({
-      title: val || ''
+      title: val || '',
+      canSlideUpdate: true
     });
   };
 
   componentDidUpdate(prevProps, prevState) {
-    const sort = arr => sortBy(arr, 'entityId');
-    const prevTargets = prevState.targets;
-    const curTargets = this.state.targets;
-    const prevTempId = prevState.tempId;
-    const curTempId = this.state.tempId;
-    const prevTitle = prevState.title;
-    const curTitle = this.state.title;
+    const { title, targets, canSlideUpdate } = this.state;
     const { onUpdate } = this.props;
     if (!onUpdate) return;
-    if (
-      (!isEqual(sort(prevTargets), sort(curTargets)) ||
-        prevTitle !== curTitle) &&
-      prevTempId === curTempId
-    ) {
+    if (canSlideUpdate) {
       onUpdate({
-        title: curTitle,
-        targets: curTargets
+        title,
+        targets
       });
     }
   }
@@ -342,9 +332,9 @@ EditorPanel.propTypes = {
   activeEntity: PropTypes.object,
   onUpdate: PropTypes.func,
   slide: PropTypes.object.isRequired,
-  slideIndex: PropTypes.number.isRequired, // Required to detect when slide has changed
   handleCancelTarget: PropTypes.func.isRequired,
-  handleTargetChipClick: PropTypes.func.isRequired
+  handleTargetChipClick: PropTypes.func.isRequired,
+  hasSlideChanged: PropTypes.bool.isRequired // Used to determine whether to call onUpdate
 };
 
 export default EditorPanel;

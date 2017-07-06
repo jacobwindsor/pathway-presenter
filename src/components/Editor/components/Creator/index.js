@@ -12,42 +12,24 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import './index.css';
-const uuidv4 = require('uuid/v4');
-
-const removeTempId = presentation => {
-  const copy = cloneDeep(presentation);
-  copy.slides = copy.slides.map(singleSlide => {
-    delete singleSlide.tempId;
-    return singleSlide;
-  });
-  return copy;
-};
 
 class Creator extends Component {
   constructor(props) {
     super(props);
 
-    const tempPresentation = cloneDeep(props.presentation);
-    tempPresentation.slides = tempPresentation.slides.map(singleSlide => {
-      // tempId is used by the UI to determine things such as slide changes
-      singleSlide.tempId = uuidv4();
-      return singleSlide;
-    });
-
     this.state = {
       activeSlideIndex: 0,
       selectedEntity: null,
-      presentation: tempPresentation,
-      settingsDialogOpen: false
+      presentation: cloneDeep(props.presentation),
+      settingsDialogOpen: false,
+      hasSlideChanged: true
     };
 
     window.onbeforeunload = this.beforeUnload;
   }
 
   beforeUnload = e => {
-    if (
-      !isEqual(this.props.presentation, removeTempId(this.state.presentation))
-    ) {
+    if (!isEqual(this.props.presentation, this.state.presentation)) {
       const confirmationMessage =
         'Your presentation has unsaved changed! Are you sure you want to leave?';
 
@@ -59,9 +41,12 @@ class Creator extends Component {
   };
 
   handlePreviewClick = slideIndex => {
-    this.setState({
-      activeSlideIndex: slideIndex,
-      selectedEntity: null
+    this.setState(state => {
+      return {
+        activeSlideIndex: slideIndex,
+        selectedEntity: null,
+        hasSlideChanged: state.activeSlideIndex !== slideIndex
+      };
     });
   };
 
@@ -80,7 +65,10 @@ class Creator extends Component {
         presentation: Object.assign({}, state.presentation, {
           slides: newSlides
         }),
-        selectedEntity: null
+        selectedEntity: null,
+        // This may seem counter-intuitive. The slide has changed because the in-state slide differs
+        // from the in-props slide
+        hasSlideChanged: true
       };
     });
   };
@@ -96,6 +84,7 @@ class Creator extends Component {
         }),
         // Since added one slide, new index is the length
         activeSlideIndex: state.presentation.slides.length,
+        hasSlideChanged: true,
         selectedEntity: null
       };
     });
@@ -108,7 +97,8 @@ class Creator extends Component {
       return {
         presentation: copy,
         selectedEntity: null,
-        activeSlideIndex: newActiveIndex
+        activeSlideIndex: newActiveIndex,
+        hasSlideChanged: state.activeSlideIndex !== newActiveIndex
       };
     });
   };
@@ -116,7 +106,7 @@ class Creator extends Component {
   handleSave = () => {
     const { presentation } = this.state;
     const { handleSave } = this.props;
-    handleSave(removeTempId(presentation));
+    handleSave(presentation);
   };
 
   handleSettingsClick = () => {
@@ -140,9 +130,7 @@ class Creator extends Component {
   };
 
   handlePresentClick = () => {
-    if (
-      !isEqual(this.props.presentation, removeTempId(this.state.presentation))
-    ) {
+    if (!isEqual(this.props.presentation, this.state.presentation)) {
       alert(
         'Unsaved changes! Save before presenting to present your latest changes.'
       );
@@ -155,7 +143,12 @@ class Creator extends Component {
   };
 
   renderNonEmptyComps() {
-    const { activeSlideIndex, selectedEntity, presentation } = this.state;
+    const {
+      activeSlideIndex,
+      selectedEntity,
+      presentation,
+      hasSlideChanged
+    } = this.state;
     if (presentation.slides.length < 1) return null;
     const slide = presentation.slides[activeSlideIndex];
     return (
@@ -166,6 +159,7 @@ class Creator extends Component {
             slideIndex={activeSlideIndex}
             activeEntity={selectedEntity}
             onUpdate={this.handleSingleSlideUpdate}
+            hasSlideChanged={hasSlideChanged}
             handleCancelTarget={() => this.setState({ selectedEntity: null })}
             handleTargetChipClick={entity =>
               this.setState({ selectedEntity: entity })}
