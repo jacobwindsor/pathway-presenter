@@ -73,76 +73,89 @@ exports[`The Adder. Shows a form to create a new presentation should render corr
         }
       }
     />
-    <h3>
-      Create a Pathway Presentation
-    </h3>
-    <TextField
-      disabled={false}
-      floatingLabelFixed={false}
-      floatingLabelText="Title"
-      fullWidth={true}
-      hintText="The TCA Cycle"
-      multiLine={false}
+    <Formsy
       onChange={[Function]}
-      rows={1}
-      type="text"
-      underlineShow={true}
-      value=""
-    />
-    <TextField
-      disabled={false}
-      floatingLabelFixed={false}
-      floatingLabelText="Author Name(s)"
-      fullWidth={true}
-      hintText="Gregor Mendel, Frederick Sanger"
-      multiLine={false}
-      onChange={[Function]}
-      rows={1}
-      type="text"
-      underlineShow={true}
-      value=""
-    />
-    <TextField
-      disabled={false}
-      floatingLabelFixed={false}
-      floatingLabelText="WikiPathways ID"
-      fullWidth={true}
-      hintText="WP78"
-      multiLine={false}
-      onChange={[Function]}
-      rows={1}
-      type="text"
-      underlineShow={true}
-      value=""
-    />
-    <TextField
-      disabled={false}
-      floatingLabelFixed={false}
-      floatingLabelText="WikiPathways Version"
-      fullWidth={true}
-      hintText="Type '0' for latest"
-      multiLine={false}
-      onChange={[Function]}
-      rows={1}
-      type="text"
-      underlineShow={true}
-      value=""
-    />
-    <FlatButton
-      className="create-button"
-      disabled={false}
-      fullWidth={true}
-      label="Create"
-      labelPosition="after"
-      labelStyle={Object {}}
-      onKeyboardFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onTouchStart={[Function]}
-      onTouchTap={[Function]}
-      primary={true}
-      secondary={false}
-    />
+      onError={[Function]}
+      onInvalid={[Function]}
+      onInvalidSubmit={[Function]}
+      onSubmit={[Function]}
+      onSuccess={[Function]}
+      onValid={[Function]}
+      onValidSubmit={[Function]}
+      preventExternalInvalidation={false}
+      validationErrors={null}
+    >
+      <h3>
+        Create a Pathway Presentation
+      </h3>
+      <FormsyText
+        floatingLabelText="Title"
+        fullWidth={true}
+        hintText="The TCA Cycle"
+        name="title"
+        required={true}
+        requiredError="You must enter a valid title"
+        updateImmediately={true}
+        validationError=""
+        validationErrors={Object {}}
+      />
+      <FormsyText
+        floatingLabelText="Author Name(s)"
+        fullWidth={true}
+        hintText="Gregor Mendel, Frederick Sanger"
+        name="authorName"
+        required={true}
+        requiredError="You must fill this in"
+        updateImmediately={true}
+        validationError="You must enter your name(s)"
+        validationErrors={Object {}}
+      />
+      <FormsyText
+        floatingLabelText="WikiPathways ID"
+        fullWidth={true}
+        hintText="WP78"
+        name="wpId"
+        required={true}
+        updateImmediately={true}
+        validationError="You must provide the WikiPathways ID"
+        validationErrors={
+          Object {
+            "beginsWithWP": "The WikiPathways ID must begin with WP followed by a number",
+          }
+        }
+        validations={
+          Object {
+            "beginsWithWP": [Function],
+          }
+        }
+        value=""
+      />
+      <FormsyText
+        floatingLabelText="WikiPathways Version (optional)"
+        fullWidth={true}
+        hintText="Type '0' for latest"
+        name="version"
+        updateImmediately={true}
+        validationError="You can only enter numeric values"
+        validationErrors={Object {}}
+        validations="isNumeric"
+      />
+      <FlatButton
+        className="create-button"
+        disabled={true}
+        fullWidth={true}
+        label="Create"
+        labelPosition="after"
+        labelStyle={Object {}}
+        onKeyboardFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        onTouchStart={[Function]}
+        primary={true}
+        secondary={false}
+        type="submit"
+      />
+    </Formsy>
   </div>
 </Paper>
 `;

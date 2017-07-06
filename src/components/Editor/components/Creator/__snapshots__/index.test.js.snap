@@ -30,6 +30,7 @@ exports[`The Creator. Interface for actually creating the presentations with all
         activeEntity={null}
         handleCancelTarget={[Function]}
         handleTargetChipClick={[Function]}
+        hasSlideChanged={true}
         onUpdate={[Function]}
         slide={
           Object {
