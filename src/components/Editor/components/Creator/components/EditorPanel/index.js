@@ -63,6 +63,7 @@ class EditorPanel extends Component {
       highlightedColor: null,
       targets: props.slide.targets || [],
       title: props.slide.title || '',
+      tempId: props.slide.tempId,
       id: props.slide.id,
       isDuplicate: false
     };
@@ -156,13 +157,16 @@ class EditorPanel extends Component {
     const sort = arr => sortBy(arr, 'entityId');
     const prevTargets = prevState.targets;
     const curTargets = this.state.targets;
+    const prevTempId = prevState.tempId;
+    const curTempId = this.state.tempId;
     const prevTitle = prevState.title;
     const curTitle = this.state.title;
     const { onUpdate } = this.props;
     if (!onUpdate) return;
     if (
-      !isEqual(sort(prevTargets), sort(curTargets)) ||
-      prevTitle !== curTitle
+      (!isEqual(sort(prevTargets), sort(curTargets)) ||
+        prevTitle !== curTitle) &&
+      prevTempId === curTempId
     ) {
       onUpdate({
         title: curTitle,
@@ -318,7 +322,6 @@ class EditorPanel extends Component {
       <Paper className="editor-panel-container">
         <Scrollbars>
           <TextField
-            id="my-unique-id"
             hintText="The Warburg Effect"
             floatingLabelText="Slide title"
             fullWidth={true}

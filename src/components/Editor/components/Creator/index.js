@@ -12,14 +12,32 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import './index.css';
+const uuidv4 = require('uuid/v4');
+
+const removeTempId = presentation => {
+  const copy = cloneDeep(presentation);
+  copy.slides = copy.slides.map(singleSlide => {
+    delete singleSlide.tempId;
+    return singleSlide;
+  });
+  return copy;
+};
 
 class Creator extends Component {
   constructor(props) {
     super(props);
+
+    const tempPresentation = cloneDeep(props.presentation);
+    tempPresentation.slides = tempPresentation.slides.map(singleSlide => {
+      // tempId is used by the UI to determine things such as slide changes
+      singleSlide.tempId = uuidv4();
+      return singleSlide;
+    });
+
     this.state = {
       activeSlideIndex: 0,
       selectedEntity: null,
-      presentation: cloneDeep(props.presentation),
+      presentation: tempPresentation,
       settingsDialogOpen: false
     };
 
@@ -27,7 +45,9 @@ class Creator extends Component {
   }
 
   beforeUnload = e => {
-    if (!isEqual(this.props.presentation, this.state.presentation)) {
+    if (
+      !isEqual(this.props.presentation, removeTempId(this.state.presentation))
+    ) {
       const confirmationMessage =
         'Your presentation has unsaved changed! Are you sure you want to leave?';
 
@@ -51,7 +71,7 @@ class Creator extends Component {
     this.setState({ selectedEntity: entity });
   };
 
-  handleSlideUpdate = slide => {
+  handleSingleSlideUpdate = slide => {
     const { activeSlideIndex } = this.state;
     this.setState(state => {
       let newSlides = state.presentation.slides.slice();
@@ -96,7 +116,7 @@ class Creator extends Component {
   handleSave = () => {
     const { presentation } = this.state;
     const { handleSave } = this.props;
-    handleSave(presentation);
+    handleSave(removeTempId(presentation));
   };
 
   handleSettingsClick = () => {
@@ -120,7 +140,9 @@ class Creator extends Component {
   };
 
   handlePresentClick = () => {
-    if (!isEqual(this.props.presentation, this.state.presentation)) {
+    if (
+      !isEqual(this.props.presentation, removeTempId(this.state.presentation))
+    ) {
       alert(
         'Unsaved changes! Save before presenting to present your latest changes.'
       );
@@ -143,7 +165,7 @@ class Creator extends Component {
             slide={slide}
             slideIndex={activeSlideIndex}
             activeEntity={selectedEntity}
-            onUpdate={this.handleSlideUpdate}
+            onUpdate={this.handleSingleSlideUpdate}
             handleCancelTarget={() => this.setState({ selectedEntity: null })}
             handleTargetChipClick={entity =>
               this.setState({ selectedEntity: entity })}
