@@ -25,44 +25,27 @@ class EditorPanel extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState(this.getInitialState(nextProps));
-
-    const { activeEntity, slide } = nextProps;
-    if (!isEqual(this.props.activeEntity, activeEntity) && activeEntity) {
-      const activeTarget = slide.targets.find(
-        singleTarget => singleTarget.entityId === activeEntity.id
-      );
-      if (!activeTarget) {
-        this.setState({
-          isHighlighted: false,
-          isPanned: false,
-          isHidden: false,
-          isZoomed: false,
-          highlightedColor: null
-        });
-      } else {
-        this.setState({
-          isHighlighted: activeTarget.highlighted,
-          isPanned: activeTarget.panned,
-          isHidden: activeTarget.hidden,
-          isZoomed: activeTarget.zoomed,
-          highlightedColor: activeTarget.highlightedColor
-        });
-      }
-    }
   }
 
   getInitialState(props) {
+    const { activeEntity, slide, hasSlideChanged } = props;
+    const activeTarget =
+      slide.targets && activeEntity
+        ? slide.targets.find(
+            singleTarget => singleTarget.entityId === activeEntity.id
+          )
+        : null;
     return {
-      isHighlighted: false,
-      isPanned: false,
-      isHidden: false,
-      isZoomed: false,
-      highlightedColor: null,
-      targets: props.slide.targets || [],
-      title: props.slide.title || '',
-      id: props.slide.id,
+      isHighlighted: activeTarget ? activeTarget.highlighted : false,
+      isPanned: activeTarget ? activeTarget.panned : false,
+      isHidden: activeTarget ? activeTarget.hidden : false,
+      isZoomed: activeTarget ? activeTarget.zoomed : false,
+      highlightedColor: activeTarget ? activeTarget.highlightedColor : null,
+      targets: slide.targets || [],
+      title: slide.title || '',
+      id: slide.id,
       isDuplicate: false,
-      canSlideUpdate: !props.hasSlideChanged
+      canSlideUpdate: !hasSlideChanged
     };
   }
 
