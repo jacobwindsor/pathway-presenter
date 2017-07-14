@@ -37,9 +37,7 @@ class EditorPanel extends Component {
         : null;
     return {
       isHighlighted: activeTarget ? activeTarget.highlighted : false,
-      isPanned: activeTarget ? activeTarget.panned : false,
       isHidden: activeTarget ? activeTarget.hidden : false,
-      isZoomed: activeTarget ? activeTarget.zoomed : false,
       highlightedColor: activeTarget ? activeTarget.highlightedColor : null,
       targets: slide.targets || [],
       title: slide.title || '',
@@ -53,22 +51,6 @@ class EditorPanel extends Component {
     this.setState(state => {
       return {
         isHighlighted: !state.isHighlighted
-      };
-    });
-  };
-
-  handleZoomToggle = () => {
-    this.setState(state => {
-      return {
-        isZoomed: !state.isZoomed
-      };
-    });
-  };
-
-  handlePanToggle = () => {
-    this.setState(state => {
-      return {
-        isPanned: !state.isPanned
       };
     });
   };
@@ -100,8 +82,6 @@ class EditorPanel extends Component {
             entityId: props.activeEntity.id,
             fullEntity: props.activeEntity,
             hidden: state.isHidden,
-            zoomed: state.isZoomed,
-            panned: state.isPanned,
             highlighted: state.isHighlighted,
             highlightedColor: state.highlightedColor
           }
@@ -158,26 +138,6 @@ class EditorPanel extends Component {
           <Subheader>
             Add action to "{activeEntity.textContent}"
           </Subheader>
-          <ListItem
-            primaryText="Zoom"
-            rightToggle={
-              <Toggle
-                onToggle={this.handleZoomToggle}
-                toggled={this.state.isZoomed}
-              />
-            }
-          />
-          <Divider />
-          <ListItem
-            primaryText="Pan"
-            rightToggle={
-              <Toggle
-                onToggle={this.handlePanToggle}
-                toggled={this.state.isPanned}
-              />
-            }
-          />
-          <Divider />
           <ListItem
             primaryText="Hide"
             rightToggle={
