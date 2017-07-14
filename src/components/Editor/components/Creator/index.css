@@ -1,66 +1,75 @@
 .creator-wrapper {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    background-color: white;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: white;
 }
 
-.creator-wrapper .left-section, .right-section {
-    /* 100% - toolbar height */
-    height: calc(100% - 56px);
+.creator-wrapper .left-section,
+.right-section {
+  /* 100% - toolbar height */
+  height: calc(100% - 56px);
 }
 
 .creator-wrapper .left-section {
-    width: 30%;
-    float: left;
-    position: relative;
+  width: 30%;
+  float: left;
+  position: relative;
 }
 
 .creator-wrapper .right-section {
-    width: 70%;
-    margin-left: 30%;
-    height: calc(100% - 56px);
-    position: relative;
-    overflow: hidden;
+  width: 70%;
+  margin-left: 30%;
+  height: calc(100% - 56px);
+  position: relative;
+  overflow: hidden;
+}
+
+.creator-wrapper .right-section .lock-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .creator-wrapper .right-section .previewer {
-    padding: 2rem;
-    height: calc(100% - (113px + 2rem) - 4rem); /* Minus footer height and padding */
-    position: relative;
+  padding: 2rem;
+  height: calc(
+    100% - (113px + 2rem) - 4rem
+  ); /* Minus footer height and padding */
+  position: relative;
 }
 
 .creator-wrapper .right-section .previewer .slide-wrapper {
-    max-height: 100%;
-    position: relative;
+  max-height: 100%;
+  position: relative;
 }
 
 .creator-wrapper .right-section .slide {
-    max-height:100%;
-    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  max-height: 100%;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
 }
 
 .creator-wrapper .right-section .slide .content {
-    max-height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .creator-wrapper .right-section .footer {
-    position: absolute;
-    bottom: 0;
-    width:100%;
-    height: calc(113px + 2rem); /* Static slide height + margins */
-    overflow: hidden;
-    background-color: rgb(232, 232, 232) !important;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: calc(113px + 2rem); /* Static slide height + margins */
+  overflow: hidden;
+  background-color: rgb(232, 232, 232) !important;
 }
 
 .creator-wrapper .right-section .footer .add-slide-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 3rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 3rem;
 }

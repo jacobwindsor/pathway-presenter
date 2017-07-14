@@ -7,6 +7,8 @@ import Paper from 'material-ui/Paper';
 import Title from '../../../Title';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import SettingsDialog from './components/SettingsDialog';
+import Lock from 'material-ui/svg-icons/action/lock';
+import LockOpen from 'material-ui/svg-icons/action/lock-open';
 import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { cloneDeep, isEqual } from 'lodash';
@@ -202,6 +204,17 @@ class Creator extends Component {
                     slide={slide}
                     showPanZoomControls={true}
                   />
+                  <div className="lock-wrapper">
+                    {diagramLocked
+                      ? <Lock
+                          onTouchTap={() =>
+                            this.setState({ diagramLocked: false })}
+                        />
+                      : <LockOpen
+                          onTouchTap={() =>
+                            this.setState({ diagramLocked: true })}
+                        />}
+                  </div>
                 </Paper>
               </div>
             </div>
