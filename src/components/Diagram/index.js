@@ -16,9 +16,10 @@ const Diagram = props => {
     isHidden,
     slide,
     detailPanelEnabled,
-    onEntityClick
+    onEntityClick,
+    panZoomLocked,
+    onPanZoomChanged
   } = props;
-  const targets = slide.targets;
 
   const getEntityIds = entities =>
     entities.map(singleEntity => singleEntity.entityId);
@@ -34,12 +35,8 @@ const Diagram = props => {
         }
       )
     );
-  const pannedEntities = getEntityIds(
-    targets.filter(singleTarget => singleTarget.panned)
-  );
-  const zoomedEntities = getEntityIds(
-    targets.filter(singleTarget => singleTarget.zoomed)
-  );
+
+  const { panCoordinates, zoomLevel, targets } = slide;
   const hiddenEntities = getEntityIds(
     targets.filter(singleTarget => singleTarget.hidden)
   );
@@ -50,11 +47,13 @@ const Diagram = props => {
         wpId={wpId}
         version={version}
         showPanZoomControls={showPanZoomControls}
+        panZoomLockd={panZoomLocked}
         detailPanelEnabled={detailPanelEnabled}
         onEntityClick={onEntityClick}
         highlightedEntities={highlightedEntities}
-        pannedEntities={pannedEntities}
-        zoomedEntities={zoomedEntities}
+        panCoordinates={panCoordinates}
+        onPanZoomChanged={onPanZoomChanged}
+        zoomLevel={zoomLevel}
         hiddenEntities={hiddenEntities}
         onReady={onPvjsReady}
       />
