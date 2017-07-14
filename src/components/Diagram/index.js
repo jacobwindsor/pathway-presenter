@@ -71,12 +71,15 @@ Diagram.propTypes = {
   }).isRequired,
   isHidden: PropTypes.bool,
   detailPanelEnabled: PropTypes.bool,
-  onEntityClick: PropTypes.func
+  onEntityClick: PropTypes.func,
+  panZoomLocked: PropTypes.bool,
+  onPanZoomChanged: PropTypes.func
 };
 
 Diagram.defaultProps = {
   hidden: false,
-  detailPanelEnabled: true
+  detailPanelEnabled: true,
+  panZoomLocked: false
 };
 
 export default Diagram;
