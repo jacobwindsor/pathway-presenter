@@ -22,7 +22,8 @@ class Creator extends Component {
       selectedEntity: null,
       presentation: cloneDeep(props.presentation),
       settingsDialogOpen: false,
-      hasSlideChanged: true
+      hasSlideChanged: true,
+      diagramLocked: false
     };
 
     window.onbeforeunload = this.beforeUnload;
@@ -60,7 +61,11 @@ class Creator extends Component {
     const { activeSlideIndex } = this.state;
     this.setState(state => {
       let newSlides = state.presentation.slides.slice();
-      newSlides[activeSlideIndex] = cloneDeep(slide);
+      newSlides[activeSlideIndex] = Object.assign(
+        {},
+        newSlides[activeSlideIndex],
+        slide
+      );
       return {
         presentation: Object.assign({}, state.presentation, {
           slides: newSlides
@@ -69,6 +74,21 @@ class Creator extends Component {
         // This may seem counter-intuitive. The slide has changed because the in-state slide differs
         // from the in-props slide
         hasSlideChanged: true
+      };
+    });
+  };
+
+  handlePanZoomChanged = ({ x, y, zoomLevel }) => {
+    this.setState(state => {
+      const copy = cloneDeep(state.presentation);
+      copy.slides[state.activeSlideIndex].panCoordinates = {
+        x,
+        y
+      };
+      copy.zoomLevel = zoomLevel;
+
+      return {
+        presentation: copy
       };
     });
   };
@@ -147,7 +167,8 @@ class Creator extends Component {
       activeSlideIndex,
       selectedEntity,
       presentation,
-      hasSlideChanged
+      hasSlideChanged,
+      diagramLocked
     } = this.state;
     if (presentation.slides.length < 1) return null;
     const slide = presentation.slides[activeSlideIndex];
@@ -176,6 +197,8 @@ class Creator extends Component {
                     version={presentation.version}
                     detailPanelEnabled={false}
                     onEntityClick={this.handleEntityClick}
+                    onPanZoomChanged={this.handlePanZoomChanged}
+                    panZoomLocked={diagramLocked}
                     slide={slide}
                     showPanZoomControls={true}
                   />
