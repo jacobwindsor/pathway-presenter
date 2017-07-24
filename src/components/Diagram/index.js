@@ -48,7 +48,7 @@ const Diagram = props => {
         wpId={wpId}
         version={version}
         showPanZoomControls={showPanZoomControls}
-        panZoomLockd={panZoomLocked}
+        panZoomLocked={panZoomLocked}
         detailPanelEnabled={detailPanelEnabled}
         onEntityClick={onEntityClick}
         highlightedEntities={highlightedEntities}
