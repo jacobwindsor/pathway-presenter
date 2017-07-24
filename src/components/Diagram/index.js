@@ -24,6 +24,8 @@ const Diagram = props => {
   const getEntityIds = entities =>
     entities.map(singleEntity => singleEntity.entityId);
 
+  const { panCoordinates, zoomLevel, targets } = slide;
+
   const highlightedEntities = targets
     .filter(singleTarget => singleTarget.highlighted)
     .map(singleTarget =>
@@ -36,7 +38,6 @@ const Diagram = props => {
       )
     );
 
-  const { panCoordinates, zoomLevel, targets } = slide;
   const hiddenEntities = getEntityIds(
     targets.filter(singleTarget => singleTarget.hidden)
   );
