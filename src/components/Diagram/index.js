@@ -9,8 +9,6 @@ const Diagram = props => {
     if (onReady) onReady({ entities, manipulator });
   };
 
-  console.log(props.slide.panCoordinates);
-
   const {
     wpId,
     version,

@@ -18,14 +18,14 @@ import './index.css';
 class Creator extends Component {
   constructor(props) {
     super(props);
-
+    const copy = cloneDeep(props.presentation);
     this.state = {
       activeSlideIndex: 0,
       selectedEntity: null,
-      presentation: cloneDeep(props.presentation),
+      presentation: copy,
       settingsDialogOpen: false,
       hasSlideChanged: true,
-      diagramLocked: false
+      diagramLocked: copy.slides[0].panCoordinates && copy.slides[0].zoomLevel
     };
 
     window.onbeforeunload = this.beforeUnload;
@@ -48,7 +48,10 @@ class Creator extends Component {
       return {
         activeSlideIndex: slideIndex,
         selectedEntity: null,
-        hasSlideChanged: state.activeSlideIndex !== slideIndex
+        hasSlideChanged: state.activeSlideIndex !== slideIndex,
+        diagramLocked:
+          state.presentation.slides[slideIndex].panCoordinates &&
+          state.presentation.slides[slideIndex].zoomLevel
       };
     });
   };
