@@ -9,6 +9,8 @@ const Diagram = props => {
     if (onReady) onReady({ entities, manipulator });
   };
 
+  console.log(props.slide.panCoordinates);
+
   const {
     wpId,
     version,
@@ -82,7 +84,9 @@ Diagram.propTypes = {
 Diagram.defaultProps = {
   hidden: false,
   detailPanelEnabled: true,
-  panZoomLocked: false
+  panZoomLocked: false,
+  zoomLevel: 1,
+  panCoordinates: { x: 0, y: 0 }
 };
 
 export default Diagram;

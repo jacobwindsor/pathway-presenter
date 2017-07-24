@@ -31,9 +31,9 @@
   version "6.0.78"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.78.tgz#5d4a3f579c1524e01ee21bf474e6fba09198f470"
 
-"@wikipathways/pvjs@^3.6.3-beta":
-  version "3.6.3-beta"
-  resolved "https://registry.yarnpkg.com/@wikipathways/pvjs/-/pvjs-3.6.3-beta.tgz#05e25f7549d137e160c89b2769a90f3296a9ea04"
+"@wikipathways/pvjs@^3.6.5-beta":
+  version "3.6.5-beta"
+  resolved "https://registry.yarnpkg.com/@wikipathways/pvjs/-/pvjs-3.6.5-beta.tgz#cf9afa4e9076ed8e16a4c66bceb09bdd45fb3911"
   dependencies:
     bridgedb "^6.0.0-14"
     csstips "^0.2.0"
