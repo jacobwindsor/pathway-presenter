@@ -18,7 +18,7 @@ const Diagram = props => {
     detailPanelEnabled,
     onEntityClick,
     panZoomLocked,
-    onPanZoomChanged
+    onPanZoomChange
   } = props;
 
   const getEntityIds = entities =>
@@ -53,7 +53,7 @@ const Diagram = props => {
         onEntityClick={onEntityClick}
         highlightedEntities={highlightedEntities}
         panCoordinates={panCoordinates}
-        onPanZoomChanged={onPanZoomChanged}
+        onPanZoomChange={onPanZoomChange}
         zoomLevel={zoomLevel}
         hiddenEntities={hiddenEntities}
         onReady={onPvjsReady}
@@ -74,7 +74,9 @@ Diagram.propTypes = {
   detailPanelEnabled: PropTypes.bool,
   onEntityClick: PropTypes.func,
   panZoomLocked: PropTypes.bool,
-  onPanZoomChanged: PropTypes.func
+  onPanZoomChange: PropTypes.func,
+  zoomLevel: PropTypes.number,
+  panCoordinates: PropTypes.object
 };
 
 Diagram.defaultProps = {

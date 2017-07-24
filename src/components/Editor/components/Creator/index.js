@@ -81,16 +81,31 @@ class Creator extends Component {
   };
 
   handlePanZoomChanged = ({ x, y, zoomLevel }) => {
+    // Use properties not state since there is no need for the component to re-render
+    this.panCoordinates = { x, y };
+    this.zoomLevel = zoomLevel;
+  };
+
+  handleLock = () => {
     this.setState(state => {
       const copy = cloneDeep(state.presentation);
-      copy.slides[state.activeSlideIndex].panCoordinates = {
-        x,
-        y
-      };
-      copy.zoomLevel = zoomLevel;
-
+      copy.slides[state.activeSlideIndex].panCoordinates = this.panCoordinates;
+      copy.slides[state.activeSlideIndex].zoomLevel = this.zoomLevel;
       return {
+        diagramLocked: true,
         presentation: copy
+      };
+    });
+  };
+
+  handleUnlock = () => {
+    this.setState(state => {
+      const copy = cloneDeep(state.presentation);
+      copy.slides[state.activeSlideIndex].panCoordinates = null;
+      copy.slides[state.activeSlideIndex].zoomLevel = null;
+      return {
+        presentation: copy,
+        diagramLocked: false
       };
     });
   };
@@ -199,21 +214,17 @@ class Creator extends Component {
                     version={presentation.version}
                     detailPanelEnabled={false}
                     onEntityClick={this.handleEntityClick}
-                    onPanZoomChanged={this.handlePanZoomChanged}
+                    onPanZoomChange={this.handlePanZoomChanged}
                     panZoomLocked={diagramLocked}
+                    zoomLevel={slide.zoomLevel}
+                    panCoordinates={slide.panCoordinates}
                     slide={slide}
                     showPanZoomControls={true}
                   />
                   <div className="lock-wrapper">
                     {diagramLocked
-                      ? <Lock
-                          onTouchTap={() =>
-                            this.setState({ diagramLocked: false })}
-                        />
-                      : <LockOpen
-                          onTouchTap={() =>
-                            this.setState({ diagramLocked: true })}
-                        />}
+                      ? <Lock onTouchTap={this.handleUnlock} />
+                      : <LockOpen onTouchTap={this.handleLock} />}
                   </div>
                 </Paper>
               </div>
