@@ -125,6 +125,7 @@ class Viewer extends Component {
             version={presentation.version}
             slide={activeSlide}
             showPanZoomControls={false}
+            panZoomLocked
             onReady={this.onReady}
           />
 
