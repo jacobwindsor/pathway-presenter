@@ -2,7 +2,7 @@ import { Pvjs } from '@wikipathways/pvjs';
 import React from 'react';
 import './index.css';
 import PropTypes from 'prop-types';
-import AspectRatio from '../AspectRatio';
+import Aspectral from 'react-aspectral';
 
 const Diagram = props => {
   const onPvjsReady = ({ entities, manipulator }) => {
@@ -88,4 +88,4 @@ Diagram.defaultProps = {
   panCoordinates: { x: 0, y: 0 }
 };
 
-export default AspectRatio(16, 9)(Diagram);
+export default Aspectral(16, 9)(Diagram);

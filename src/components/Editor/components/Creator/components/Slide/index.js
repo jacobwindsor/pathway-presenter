@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import Diagram from '../../../../../Diagram';
 import Lock from 'material-ui/svg-icons/action/lock';
 import LockOpen from 'material-ui/svg-icons/action/lock-open';
-import AspectRatio from '../../../../../AspectRatio';
+import Aspectral from 'react-aspectral';
 import Title from '../../../../../Title';
 import './index.css';
 
@@ -58,4 +58,4 @@ Slide.defaultProps = {
   version: 0
 };
 
-export default AspectRatio(16, 9)(Slide);
+export default Aspectral(16, 9)(Slide);

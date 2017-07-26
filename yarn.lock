@@ -1127,7 +1127,7 @@ babel-preset-react-app@^3.0.1:
     babel-preset-env "1.5.2"
     babel-preset-react "6.24.1"
 
-babel-preset-react@6.24.1, babel-preset-react@^6.0.0:
+babel-preset-react@6.24.1, babel-preset-react@^6.0.0, babel-preset-react@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-preset-react/-/babel-preset-react-6.24.1.tgz#ba69dfaea45fc3ec639b6a4ecea6e17702c91380"
   dependencies:
@@ -6255,6 +6255,15 @@ react-aspect-ratio@^1.0.11:
   dependencies:
     prop-types "^15.5.0"
 
+react-aspectral@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-aspectral/-/react-aspectral-1.0.1.tgz#96d669b24007ceb9cbfbf74171701787bec35fea"
+  dependencies:
+    babel-plugin-transform-class-properties "^6.24.1"
+    babel-preset-react "^6.24.1"
+    react "^15.6.1"
+    react-resize-detector "^0.5.0"
+
 react-codemirror@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-codemirror/-/react-codemirror-1.0.0.tgz#91467b53b1f5d80d916a2fd0b4c7adb85a9001ba"
@@ -6458,7 +6467,7 @@ react-typography@^0.15.10:
   version "0.15.10"
   resolved "https://registry.yarnpkg.com/react-typography/-/react-typography-0.15.10.tgz#1ece7bbd856735bd2ada4f6c40be508e994655a8"
 
-react@^15.4.2, react@^15.5.4, react@^15.6.0:
+react@^15.4.2, react@^15.5.4, react@^15.6.0, react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:

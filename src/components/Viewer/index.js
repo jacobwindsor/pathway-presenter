@@ -11,7 +11,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Title from '../Title';
 import * as screenfull from 'screenfull';
 import { cloneDeep } from 'lodash';
-import AspectRatio from '../AspectRatio';
+import Aspectral from 'react-aspectral';
 
 class Viewer extends Component {
   constructor(props) {
@@ -20,6 +20,14 @@ class Viewer extends Component {
       loading: true,
       isFullScreen: false
     };
+
+    if (screenfull.enabled) {
+      screenfull.onchange(() => {
+        this.setState({
+          isFullScreen: screenfull.isFullscreen
+        });
+      });
+    }
   }
 
   componentDidMount() {
@@ -85,11 +93,6 @@ class Viewer extends Component {
   handleToggleFullScreen = () => {
     if (screenfull.enabled) {
       screenfull.toggle();
-      screenfull.onchange(() => {
-        this.setState({
-          isFullScreen: screenfull.isFullscreen
-        });
-      });
     }
   };
 
@@ -141,4 +144,4 @@ Viewer.propTypes = {
   presId: PropTypes.string.isRequired
 };
 
-export default AspectRatio(16, 9)(Viewer);
+export default Aspectral(16, 9)(Viewer);
