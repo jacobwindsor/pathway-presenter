@@ -28,6 +28,8 @@
 .creator-wrapper .right-section .previewer .slide-wrapper {
   max-height: 100%;
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .creator-wrapper .right-section .previewer {
