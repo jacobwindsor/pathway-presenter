@@ -20,16 +20,20 @@ export default (relWidth, relHeight) => {
         );
       }
 
-      computeDimensions = (width, height) => {
+      computeDimensions = () => {
         const containerWidth = this.container.offsetWidth;
         const containerHeight = this.container.offsetHeight;
         let computedWidth;
         let computedHeight;
 
-        if (width <= containerWidth) {
-          computedWidth = containerWidth;
-          computedHeight = containerWidth / relWidth * relHeight;
-        } else if (height <= containerHeight) {
+        // Width !> containerWidth
+        // height !> containerHeight
+        // Width used primarily for aspect ratio
+        // Unless computedHeight exceeds container height
+
+        computedWidth = containerWidth;
+        computedHeight = containerWidth / relWidth * relHeight;
+        if (computedHeight > containerHeight) {
           computedHeight = containerHeight;
           computedWidth = containerHeight / relHeight * relWidth;
         }
