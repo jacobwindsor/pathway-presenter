@@ -1,29 +1,43 @@
 .static-slide {
-    width: 200px;
-    height: 113px; /* 16:9 */
-    position: relative;
-    margin: 1rem 0  0 1rem;
-    cursor: pointer;
-    display: inline-block;
+  width: 200px;
+  height: 113px; /* 16:9 */
+  position: relative;
+  margin: 1rem 0 0 1rem;
+  cursor: pointer;
+  display: inline-block;
 }
 
-.static-slide .title {
-    background-color: rgba(0, 0, 0, 0.4);
-    position: absolute;
-    bottom:0;
-    width: calc(100% - 2rem);
-    padding: 1rem;
-    font-size: 1.3rem;
-    color: white;
+.static-slide .indicator {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 1.6rem);
+  padding: .8rem;
+  color: white;
 }
 
-.static-slide.active .title {
-    background-color: rgba(0, 188, 212, 0.6) !important;
+.static-slide.active .indicator {
+  background-color: rgba(0, 188, 212, 0.6) !important;
+}
+
+.static-slide .indicator h1.number {
+  font-size: 1.3rem;
+  padding: 0;
+  margin: 0;
+  float: left;
+  font-weight: 400;
+}
+
+.static-slide .indicator h2.title {
+  font-size: .9rem;
+  font-weight: normal;
+  float: right;
+  margin: .4rem 0 0 0;
 }
 
 .static-slide .remove-button {
-    position: absolute !important;
-    top:0;
-    right:0;
-    transform: translate(50%, -50%);
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
 }

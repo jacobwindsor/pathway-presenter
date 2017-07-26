@@ -7,7 +7,7 @@ import Paper from 'material-ui/Paper';
 import PropTypes from 'prop-types';
 
 const StaticSlide = props => {
-  const { slideNumber, handleRemove, isActive, onClick } = props;
+  const { slideNumber, handleRemove, isActive, onClick, slide } = props;
 
   const onRemoveClick = e => {
     // Stop event bubbling to handleClick
@@ -37,8 +37,15 @@ const StaticSlide = props => {
           top: '50%'
         }}
       />
-      <div className="title">
-        {slideNumber}
+      <div className="indicator">
+        <h1 className="number">
+          {slideNumber}
+        </h1>
+        {slide.title
+          ? <h2 className="title">
+              ({slide.title})
+            </h2>
+          : null}
       </div>
     </Paper>
   );
