@@ -50,35 +50,21 @@ exports[`The Creator. Interface for actually creating the presentations with all
         <div
           className="slide-wrapper"
         >
-          <div
-            className="slide"
-          >
-            <Paper
-              circle={false}
-              className="content"
-              rounded={true}
-              transitionEnabled={true}
-              zDepth={2}
-            >
-              <Component
-                title="My slide"
-              />
-              <Diagram
-                detailPanelEnabled={false}
-                hidden={false}
-                onEntityClick={[Function]}
-                showPanZoomControls={true}
-                slide={
-                  Object {
-                    "targets": Array [],
-                    "title": "My slide",
-                  }
-                }
-                version={0}
-                wpId="WP4"
-              />
-            </Paper>
-          </div>
+          <_class2
+            diagramLocked={false}
+            handleEntityClick={[Function]}
+            handleLock={[Function]}
+            handlePanZoomChanged={[Function]}
+            handleUnlock={[Function]}
+            slide={
+              Object {
+                "targets": Array [],
+                "title": "My slide",
+              }
+            }
+            version={0}
+            wpId="WP4"
+          />
         </div>
       </div>
       <Paper

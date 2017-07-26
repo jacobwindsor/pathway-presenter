@@ -25,7 +25,9 @@ describe('The diagram component. Renders just the Pvjs diagram', () => {
         showPanZoomControls
         slide={{ targets: [] }}
       />
-    );
+    )
+      .find('Diagram')
+      .shallow();
     expect(comp.find('.diagram-wrapper')).toHaveLength(1);
   });
 
@@ -37,7 +39,9 @@ describe('The diagram component. Renders just the Pvjs diagram', () => {
         showPanZoomControls
         slide={{ targets: [] }}
       />
-    );
+    )
+      .find('Diagram')
+      .shallow();
     expect(comp.children()).toHaveLength(1);
   });
 
@@ -73,7 +77,9 @@ describe('The diagram component. Renders just the Pvjs diagram', () => {
 
     const comp = shallow(
       <Diagram wpId="WP4" version={0} showPanZoomControls slide={slide} />
-    );
+    )
+      .find('Diagram')
+      .shallow();
 
     const shouldBeHighlighted = [
       {
@@ -86,14 +92,10 @@ describe('The diagram component. Renders just the Pvjs diagram', () => {
       }
     ];
 
-    const shouldBeZoomed = ['9123', '9234'];
-    const shouldBePanned = ['1234', '9123', '9234'];
     const shouldBeHidden = ['5678'];
 
     const pvjs = comp.children().first();
     expect(pvjs.prop('highlightedEntities')).toEqual(shouldBeHighlighted);
-    expect(pvjs.prop('zoomedEntities')).toEqual(shouldBeZoomed);
-    expect(pvjs.prop('pannedEntities')).toEqual(shouldBePanned);
     expect(pvjs.prop('hiddenEntities')).toEqual(shouldBeHidden);
   });
 });

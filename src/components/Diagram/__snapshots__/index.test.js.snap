@@ -2,18 +2,51 @@
 
 exports[`The diagram component. Renders just the Pvjs diagram renders without crashing 1`] = `
 <div
-  className="diagram-wrapper "
+  style={
+    Object {
+      "height": "100%",
+      "opacity": 0,
+      "width": "100%",
+    }
+  }
 >
-  <Pvjs
-    detailPanelEnabled={true}
-    hiddenEntities={Array []}
-    highlightedEntities={Array []}
-    onReady={[Function]}
-    pannedEntities={Array []}
-    showPanZoomControls={true}
-    version={0}
-    wpId="WP4"
-    zoomedEntities={Array []}
+  <ResizeDetector
+    handleHeight={true}
+    handleWidth={true}
+    onResize={[Function]}
   />
+  <div
+    style={
+      Object {
+        "height": "100%",
+        "left": "50%",
+        "position": "absolute",
+        "top": "50%",
+        "transform": "translate(-50%, -50%)",
+        "width": "100%",
+      }
+    }
+  >
+    <Diagram
+      detailPanelEnabled={true}
+      hidden={false}
+      panCoordinates={
+        Object {
+          "x": 0,
+          "y": 0,
+        }
+      }
+      panZoomLocked={false}
+      showPanZoomControls={true}
+      slide={
+        Object {
+          "targets": Array [],
+        }
+      }
+      version={0}
+      wpId="WP4"
+      zoomLevel={1}
+    />
+  </div>
 </div>
 `;

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`The Viewer. This is shows presentations in "presentation mode" renders without crashing 1`] = `<Component />`;
+exports[`The Viewer. This shows presentations in "presentation mode" renders without crashing 1`] = `<Component />`;
 
-exports[`The Viewer. This is shows presentations in "presentation mode" should show a presentation 1`] = `
+exports[`The Viewer. This shows presentations in "presentation mode" should show a presentation 1`] = `
 <MuiThemeProvider>
   <div
     className="presentation-viewer"
@@ -10,9 +10,8 @@ exports[`The Viewer. This is shows presentations in "presentation mode" should s
     <Component
       title="First slide"
     />
-    <Diagram
+    <_class2
       detailPanelEnabled={false}
-      hidden={false}
       onReady={[Function]}
       showPanZoomControls={false}
       slide={
