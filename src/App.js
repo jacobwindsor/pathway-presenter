@@ -30,7 +30,17 @@ class App extends Component {
     const { isViewerOpen, presId } = this.state;
     return (
       <div className="wrapper">
-        {isViewerOpen ? <Viewer presId={presId} /> : <Editor />}
+        {isViewerOpen
+          ? <div
+              style={{
+                backgroundColor: 'black',
+                width: '100%',
+                height: '100%'
+              }}
+            >
+              {' '}<Viewer presId={presId} />{' '}
+            </div>
+          : <Editor />}
       </div>
     );
   }
