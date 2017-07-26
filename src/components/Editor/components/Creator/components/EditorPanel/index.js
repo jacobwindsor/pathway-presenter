@@ -5,14 +5,11 @@ import Paper from 'material-ui/Paper';
 import { List, ListItem } from 'material-ui/List';
 import { RadioButton, RadioButtonGroup } from 'material-ui/RadioButton';
 import TextField from 'material-ui/TextField';
-import ContentCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import FlatButton from 'material-ui/FlatButton';
-import IconButton from 'material-ui/IconButton';
 import Toggle from 'material-ui/Toggle';
 import Divider from 'material-ui/Divider';
 import Chip from 'material-ui/Chip';
 import Snackbar from 'material-ui/Snackbar';
-import { sortBy, isEqual } from 'lodash';
 import Subheader from 'material-ui/Subheader';
 import addAction from '../../../../../../assets/add-action.svg';
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -136,7 +133,7 @@ class EditorPanel extends Component {
       <div className="controls">
         <List>
           <Subheader>
-            Add action to "{activeEntity.textContent}"
+            Hide or highlight "{activeEntity.textContent}"
           </Subheader>
           <ListItem
             primaryText="Hide"
@@ -222,7 +219,7 @@ class EditorPanel extends Component {
       <div className="empty-state">
         <img src={addAction} />
         <h1>Select a node!</h1>
-        <p>Click on a node in the diagram to add an action.</p>
+        <p>Click on a node in the diagram to hide or highlight.</p>
       </div>
     );
   }
