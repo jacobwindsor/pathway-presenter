@@ -4,16 +4,13 @@ import EmptyState from './components/EmptyState';
 import PreviewPanel from './components/PreviewPanel';
 import EditorPanel from './components/EditorPanel';
 import Paper from 'material-ui/Paper';
-import Title from '../../../Title';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import SettingsDialog from './components/SettingsDialog';
-import Lock from 'material-ui/svg-icons/action/lock';
-import LockOpen from 'material-ui/svg-icons/action/lock-open';
-import Diagram from '../../../Diagram';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import './index.css';
+import Slide from './components/Slide';
 
 class Creator extends Component {
   constructor(props) {
@@ -25,7 +22,9 @@ class Creator extends Component {
       presentation: copy,
       settingsDialogOpen: false,
       hasSlideChanged: true,
-      diagramLocked: copy.slides[0].panCoordinates && copy.slides[0].zoomLevel
+      diagramLocked: !!(
+        copy.slides[0].panCoordinates && copy.slides[0].zoomLevel
+      )
     };
 
     window.onbeforeunload = this.beforeUnload;
@@ -49,9 +48,10 @@ class Creator extends Component {
         activeSlideIndex: slideIndex,
         selectedEntity: null,
         hasSlideChanged: state.activeSlideIndex !== slideIndex,
-        diagramLocked:
+        diagramLocked: !!(
           state.presentation.slides[slideIndex].panCoordinates &&
           state.presentation.slides[slideIndex].zoomLevel
+        )
       };
     });
   };
@@ -192,6 +192,7 @@ class Creator extends Component {
     } = this.state;
     if (presentation.slides.length < 1) return null;
     const slide = presentation.slides[activeSlideIndex];
+
     return (
       <span>
         <div className="left-section">
@@ -209,28 +210,16 @@ class Creator extends Component {
         <div className="right-section">
           <div className="previewer">
             <div className="slide-wrapper">
-              <div className="slide">
-                <Paper className="content" zDepth={2}>
-                  {slide.title ? <Title title={slide.title} /> : null}
-                  <Diagram
-                    wpId={presentation.wpId}
-                    version={presentation.version}
-                    detailPanelEnabled={false}
-                    onEntityClick={this.handleEntityClick}
-                    onPanZoomChange={this.handlePanZoomChanged}
-                    panZoomLocked={diagramLocked}
-                    zoomLevel={slide.zoomLevel}
-                    panCoordinates={slide.panCoordinates}
-                    slide={slide}
-                    showPanZoomControls={true}
-                  />
-                  <div className="lock-wrapper">
-                    {diagramLocked
-                      ? <Lock onTouchTap={this.handleUnlock} />
-                      : <LockOpen onTouchTap={this.handleLock} />}
-                  </div>
-                </Paper>
-              </div>
+              <Slide
+                slide={slide}
+                wpId={presentation.wpId}
+                version={presentation.version}
+                handleEntityClick={this.handleEntityClick}
+                diagramLocked={diagramLocked}
+                handlePanZoomChanged={this.handlePanZoomChanged}
+                handleLock={this.handleLock}
+                handleUnlock={this.handleUnlock}
+              />
             </div>
           </div>
           <Paper className="footer">

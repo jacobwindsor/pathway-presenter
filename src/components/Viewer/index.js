@@ -11,6 +11,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Title from '../Title';
 import * as screenfull from 'screenfull';
 import { cloneDeep } from 'lodash';
+import AspectRatio from '../AspectRatio';
 
 class Viewer extends Component {
   constructor(props) {
@@ -140,4 +141,4 @@ Viewer.propTypes = {
   presId: PropTypes.string.isRequired
 };
 
-export default Viewer;
+export default AspectRatio(16, 9)(Viewer);
