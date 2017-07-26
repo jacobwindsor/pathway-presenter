@@ -48,6 +48,15 @@ export default (relWidth, relHeight) => {
       render() {
         const { width, height, canShow } = this.state;
 
+        const wrapperStyles = {
+          width,
+          height,
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)'
+        };
+
         return (
           <div
             ref={container => (this.container = container)}
@@ -58,7 +67,7 @@ export default (relWidth, relHeight) => {
               handleHeight
               onResize={this.computeDimensions}
             />
-            <div style={{ width, height }}>
+            <div style={wrapperStyles}>
               <WrappedComponent {...this.props} />
             </div>
           </div>
