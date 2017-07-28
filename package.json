@@ -28,6 +28,8 @@
     "uuid": "^3.0.1"
   },
   "devDependencies": {
+    "browserstack-local": "^1.3.0",
+    "dotenv": "^4.0.0",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
     "flow-bin": "^0.47.0",
@@ -35,8 +37,10 @@
     "jest-localstorage-mock": "^1.2.0",
     "lint-staged": "^4.0.0",
     "prettier": "^1.5.2",
+    "protractor": "^5.1.2",
     "react-scripts": "^1.0.9",
-    "react-test-renderer": "^15.5.4"
+    "react-test-renderer": "^15.5.4",
+    "selenium-webdriver": "^3.5.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
@@ -45,8 +49,11 @@
     ]
   },
   "scripts": {
+    "protractor": "protractor",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "pretest:e2e": "npm run start",
+    "test:e2e": "protractor ./protractor.conf.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
