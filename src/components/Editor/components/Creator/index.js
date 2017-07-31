@@ -307,14 +307,26 @@ class Creator extends Component {
       }
     ];
 
+    const onboardingCookieName = 'pathwayPresenterShownOnboarding';
+
+    const joyrideCallback = ({ type }) => {
+      if (type === 'finished') {
+        document.cookie = onboardingCookieName;
+      }
+    };
+
+    const shouldShowJoyride = document.cookie.indexOf(onboardingCookieName) < 0;
+
     return (
       <div className="creator-wrapper">
         <Joyride
           ref="joyride"
           steps={joyrideSteps}
-          run={true}
+          run={shouldShowJoyride}
+          showSkipButton={true}
           autoStart={true}
           type="continuous"
+          callback={joyrideCallback}
         />
         <Toolbar
           authorName={presentation.authorName}
