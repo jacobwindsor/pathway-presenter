@@ -108,7 +108,7 @@ class Adder extends Component {
             onValidSubmit={this.handleSubmit}
             onInvalidSubmit={() => null}
           >
-            <h3>Create a Pathway Presentation</h3>
+            <h3 id="creator-form-title">Create a Pathway Presentation</h3>
             <FormsyText
               name="title"
               required

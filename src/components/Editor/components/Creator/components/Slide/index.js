@@ -20,7 +20,7 @@ const Slide = props => {
     handleUnlock
   } = props;
   return (
-    <Paper className="slide" zDepth={2}>
+    <Paper className="slide" id="slide" zDepth={2}>
       {slide.title ? <Title title={slide.title} /> : null}
       <Diagram
         wpId={wpId}
@@ -34,7 +34,7 @@ const Slide = props => {
         slide={slide}
         showPanZoomControls={true}
       />
-      <div className="lock-wrapper">
+      <div className="lock-wrapper" id="slide-lock">
         {diagramLocked
           ? <Lock onTouchTap={handleUnlock} />
           : <LockOpen onTouchTap={handleLock} />}

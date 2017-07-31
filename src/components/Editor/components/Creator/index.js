@@ -11,6 +11,8 @@ import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import './index.css';
 import Slide from './components/Slide';
+import Joyride from 'react-joyride';
+import 'react-joyride/lib/react-joyride-compiled.css';
 
 class Creator extends Component {
   constructor(props) {
@@ -234,6 +236,7 @@ class Creator extends Component {
               activeSlideIndex={activeSlideIndex}
             />
             <FloatingActionButton
+              id="add-slide-button"
               className="add-slide-button"
               onTouchTap={this.onSlideAdd}
             >
@@ -254,8 +257,65 @@ class Creator extends Component {
       return <EmptyState handleClick={this.onSlideAdd} />;
     };
 
+    const joyrideSteps = [
+      {
+        title: 'Your slide',
+        text:
+          'This is a preview of how your slide will look when you present it.',
+        selector: '#slide',
+        trigger: '#slide'
+      },
+      {
+        title: 'Position the diagram',
+        text:
+          "Drag the diagram and use the controls to position the diagram the way you'd like to present it.",
+        selector: '#svg-pan-zoom-controls'
+      },
+      {
+        title: 'Lock it',
+        text: 'Lock the diagram in place to save the positioning.',
+        selector: '#slide-lock'
+      },
+      {
+        title: 'Highlight and hide',
+        text:
+          'Click on a node in the diagram to show the controls for highlighting and hiding.',
+        name: 'diagram-click',
+        selector: '.diagram-wrapper'
+      },
+      {
+        title: 'Add a title',
+        selector: '#editor-title-field'
+      },
+      {
+        title: 'Add a new slide',
+        selector: '#add-slide-button'
+      },
+      {
+        title: 'Reorder slides',
+        text: 'You can reorder the slides simply by dragging them.',
+        selector: '.preview-panel'
+      },
+      {
+        title: 'Save your work!',
+        selector: '#save-button'
+      },
+      {
+        title: 'Show the audience',
+        text: "Once you're happy, hit present to show an audience",
+        selector: '#present-button'
+      }
+    ];
+
     return (
       <div className="creator-wrapper">
+        <Joyride
+          ref="joyride"
+          steps={joyrideSteps}
+          run={true}
+          autoStart={true}
+          type="continuous"
+        />
         <Toolbar
           authorName={presentation.authorName}
           title={presentation.title}

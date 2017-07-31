@@ -130,7 +130,7 @@ class EditorPanel extends Component {
     if (!activeEntity) return null;
 
     return (
-      <div className="controls">
+      <div className="controls" id="editor-panel-controls">
         <List>
           <Subheader>
             Hide or highlight "{activeEntity.textContent}"
@@ -252,6 +252,7 @@ class EditorPanel extends Component {
       <Paper className="editor-panel-container">
         <Scrollbars>
           <TextField
+            id="editor-title-field"
             hintText="The Warburg Effect"
             floatingLabelText="Slide title"
             fullWidth={true}
