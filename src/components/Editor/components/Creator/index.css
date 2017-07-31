@@ -55,3 +55,21 @@
   transform: translateY(-50%);
   right: 3rem;
 }
+
+/* Override joyride styles with those from theme */
+
+.joyride-tooltip__header {
+  border-bottom: 1px solid #00bcd4 !important;
+}
+
+.joyride-tooltip__button--primary {
+  background-color: #00bcd4 !important;
+}
+
+.joyride-tooltip__button--primary:hover {
+  background-color: #4dd0e1 !important;
+}
+
+.joyride-tooltip__button--secondary {
+  color: #0097a7 !important;
+}

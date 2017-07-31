@@ -9,10 +9,10 @@ import SettingsDialog from './components/SettingsDialog';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
-import './index.css';
 import Slide from './components/Slide';
 import Joyride from 'react-joyride';
 import 'react-joyride/lib/react-joyride-compiled.css';
+import './index.css';
 
 class Creator extends Component {
   constructor(props) {
@@ -314,9 +314,7 @@ class Creator extends Component {
         document.cookie = onboardingCookieName;
       }
     };
-
     const shouldShowJoyride = document.cookie.indexOf(onboardingCookieName) < 0;
-
     return (
       <div className="creator-wrapper">
         <Joyride
