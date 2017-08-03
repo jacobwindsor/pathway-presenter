@@ -39,9 +39,9 @@
   version "2.53.42"
   resolved "https://registry.yarnpkg.com/@types/selenium-webdriver/-/selenium-webdriver-2.53.42.tgz#74cb77fb6052edaff2a8984ddafd88d419f25cac"
 
-"@wikipathways/pvjs@^3.6.5-beta":
-  version "3.6.5-beta"
-  resolved "https://registry.yarnpkg.com/@wikipathways/pvjs/-/pvjs-3.6.5-beta.tgz#cf9afa4e9076ed8e16a4c66bceb09bdd45fb3911"
+"@wikipathways/pvjs@^3.7.3-beta":
+  version "3.7.3-beta"
+  resolved "https://registry.yarnpkg.com/@wikipathways/pvjs/-/pvjs-3.7.3-beta.tgz#a548b882fb8a4c2dd90458510ac40a75c34cccfb"
   dependencies:
     bridgedb "^6.0.0-14"
     csstips "^0.2.0"

@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "http://pathwaypresenter.jcbwndsr.com",
   "dependencies": {
-    "@wikipathways/pvjs": "^3.6.5-beta",
+    "@wikipathways/pvjs": "^3.7.3-beta",
     "create-react-app": "^1.3.2",
     "formsy-material-ui": "^0.6.0",
     "formsy-react": "^0.19.5",

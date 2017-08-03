@@ -1,42 +1,53 @@
 .adder-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 1.6rem;
+  position: absolute;
+  left: 50%;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  transform: translate(-50%, 0);
+  padding: 1.6rem;
 }
 
 .adder-wrapper .header {
-    text-align: center;
-    color: white;
-    /* cyan500 -> cyan200 light */
-    background: radial-gradient(circle farthest-side, #00bcd4, #80deea);
-    margin: -1.6rem;
-    margin-bottom: 1.6rem;
-    padding: 1.6rem;
-    padding-bottom: calc(1.6rem + 32px);
-    position: relative;
+  text-align: center;
+  color: white;
+  /* cyan500 -> cyan200 light */
+  background: radial-gradient(circle farthest-side, #00bcd4, #80deea);
+  margin: -1.6rem;
+  margin-bottom: 1.6rem;
+  padding: 1.6rem;
+  padding-bottom: calc(1.6rem + 32px);
+  position: relative;
 }
 
 .adder-wrapper .header a {
-    color: white !important;
+  color: white !important;
 }
 
 .adder-wrapper .header .logo-wrapper {
-    background-color: #ff4081;
-    border-radius: 50%;
-    width: 64px;
-    height:64px;
-    padding: 1rem;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 8px);
+  background-color: #ff4081;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  padding: 1rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 8px);
 }
 
 .adder-wrapper .content {
-    margin-top: calc(1.6rem + 32px);
+  margin-top: calc(1.6rem + 32px);
 }
 
 .adder-wrapper .content .create-button {
-    margin-top: .8rem !important;
+  margin-top: .8rem !important;
+}
+
+#alpha-notice {
+  background-color: #f44336 !important;
+  color: white !important;
+  padding: 1rem;
+}
+
+#alpha-notice h3 {
+  text-align: center;
 }
