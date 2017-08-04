@@ -103,7 +103,10 @@ class Adder extends Component {
                 version.
               </p>
             </Paper>
-            <h3>Select a Pathway Presentation</h3>
+            <h3>Select an existing Pathway Presentation</h3>
+            <p>
+              <em>Find presentations that you already created</em>
+            </p>
             <AutoComplete
               filter={AutoComplete.fuzzyFilter}
               maxSearchResults={5}
@@ -119,7 +122,7 @@ class Adder extends Component {
               onValidSubmit={this.handleSubmit}
               onInvalidSubmit={() => null}
             >
-              <h3 id="creator-form-title">Create a Pathway Presentation</h3>
+              <h3 id="creator-form-title">Create a new Pathway Presentation</h3>
               <FormsyText
                 name="title"
                 required
