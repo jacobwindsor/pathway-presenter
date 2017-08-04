@@ -11,8 +11,11 @@ import { cloneDeep, isEqual } from 'lodash';
 import Toolbar from './components/Toolbar';
 import Slide from './components/Slide';
 import Joyride from 'react-joyride';
+import { setCookie, checkCookie } from '../../../../utils/cookies';
 import 'react-joyride/lib/react-joyride-compiled.css';
 import './index.css';
+
+const onboardingCookieName = 'pathwayPresenterShownOnboarding';
 
 class Creator extends Component {
   constructor(props) {
@@ -307,14 +310,12 @@ class Creator extends Component {
       }
     ];
 
-    const onboardingCookieName = 'pathwayPresenterShownOnboarding';
-
     const joyrideCallback = ({ type }) => {
       if (type === 'finished') {
-        document.cookie = onboardingCookieName;
+        setCookie(onboardingCookieName);
       }
     };
-    const shouldShowJoyride = document.cookie.indexOf(onboardingCookieName) < 0;
+    const shouldShowJoyride = checkCookie(onboardingCookieName);
     return (
       <div className="creator-wrapper">
         <Joyride

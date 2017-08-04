@@ -5,7 +5,16 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import { red500 } from 'material-ui/styles/colors';
+import Toggle from 'material-ui/Toggle';
 import DeleteConfirmDialog from './components/DeleteConfirmDialog';
+import {
+  setCookie,
+  removeCookie,
+  checkCookie
+} from '../../../../../../utils/cookies';
+import './index.css';
+
+const onboardingCookieName = 'pathwayPresenterShownOnboarding';
 
 class SettingsDialog extends Component {
   constructor(props) {
@@ -16,7 +25,8 @@ class SettingsDialog extends Component {
       authorName: props.authorName || '',
       wpId: props.wpId,
       version: props.version,
-      deleteConfirmDialogOpen: false
+      deleteConfirmDialogOpen: false,
+      willShowOnboarding: checkCookie(onboardingCookieName)
     };
   }
 
@@ -26,6 +36,17 @@ class SettingsDialog extends Component {
   handleAuthorNameChange = this.handleChange('authorName');
   handleWpIdChange = this.handleChange('wpId');
   handleVersionChange = this.handleChange('version');
+
+  onOnboardingToggle = (e, isInputChecked) => {
+    if (isInputChecked) {
+      removeCookie(onboardingCookieName);
+    } else {
+      setCookie(onboardingCookieName);
+    }
+    this.setState({
+      willShowOnboarding: isInputChecked
+    });
+  };
 
   render() {
     const { handleClose, handleSave, isOpen, handleDelete } = this.props;
@@ -90,6 +111,12 @@ class SettingsDialog extends Component {
           onChange={this.handleVersionChange}
           value={version}
           fullWidth={true}
+        />
+        <Toggle
+          label="Show walk-through"
+          style={{ margin: '14px 0' }}
+          toggled={this.state.willShowOnboarding}
+          onToggle={this.onOnboardingToggle}
         />
         <RaisedButton
           label="Delete"
