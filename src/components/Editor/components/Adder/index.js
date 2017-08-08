@@ -10,6 +10,8 @@ import './index.css';
 import Formsy from 'formsy-react';
 import { FormsyText } from 'formsy-material-ui/lib';
 import { Scrollbars } from 'react-custom-scrollbars';
+import CircularProgress from 'material-ui/CircularProgress';
+import waitAndCallWithChar from '../../../../utils/waitAndCallWithChar';
 
 class Adder extends Component {
   constructor(props) {
@@ -20,7 +22,9 @@ class Adder extends Component {
       dataSource: [],
       title: '',
       authorName: '',
-      version: ''
+      version: '',
+      canSubmit: false,
+      isDemoing: false
     };
   }
 
@@ -62,6 +66,44 @@ class Adder extends Component {
     const { dataSource } = this.state;
     if (index < 0) return;
     handleSelect(dataSource[index].value);
+  };
+
+  handleDemoClick = () => {
+    this.setState(
+      {
+        wpId: '',
+        title: '',
+        authorName: '',
+        version: '',
+        isDemoing: true
+      },
+      () => {
+        const waitAndSetState = (string, stateParamName) =>
+          waitAndCallWithChar(
+            string,
+            val =>
+              this.setState(state => {
+                return { [stateParamName]: `${state[stateParamName]}${val}` };
+              }),
+            50 // Wait for 50ms between each char
+          );
+
+        const fillData = {
+          title: 'The TCA Cycle',
+          authorName: 'Fill Bot 2000',
+          wpId: 'WP78',
+          version: '0'
+        };
+
+        waitAndSetState(fillData.title, 'title'); // 50 * 13 = 650ms
+        waitAndSetState(fillData.authorName, 'authorName'); // 50 * 13 = 650 ms
+        waitAndSetState(fillData.wpId, 'wpId'); // 50 * 4 = 200ms
+        waitAndSetState(fillData.version, 'version'); // 50ms
+        // Total fill time = 1550ms;
+        // Add time for user to digest
+        setTimeout(this.handleSubmit, 3000, fillData);
+      }
+    );
   };
 
   render() {
@@ -116,6 +158,12 @@ class Adder extends Component {
               dataSource={this.state.dataSource}
               onNewRequest={this.handleSelect}
             />
+            <FlatButton
+              label="Show me an example"
+              id="form-demo-button"
+              disabled={this.state.isDemoing}
+              onTouchTap={this.handleDemoClick}
+            />
             <Formsy.Form
               onValid={() => this.setState({ canSubmit: true })}
               onInvalid={() => this.setState({ canSubmit: false })}
@@ -131,6 +179,7 @@ class Adder extends Component {
                 floatingLabelText="Title"
                 fullWidth
                 updateImmediately
+                value={this.state.title}
               />
               <FormsyText
                 required
@@ -141,6 +190,7 @@ class Adder extends Component {
                 floatingLabelText="Author Name(s)"
                 fullWidth
                 updateImmediately
+                value={this.state.authorName}
               />
               <FormsyText
                 name="wpId"
@@ -159,7 +209,7 @@ class Adder extends Component {
                 }}
                 hintText="WP78"
                 floatingLabelText="WikiPathways ID"
-                value={''}
+                value={this.state.wpId}
                 fullWidth
                 updateImmediately
               />
@@ -171,14 +221,19 @@ class Adder extends Component {
                 floatingLabelText="WikiPathways Version (optional)"
                 fullWidth
                 updateImmediately
+                value={this.state.version}
               />
               <FlatButton
-                label="Create"
+                label={
+                  this.state.isDemoing
+                    ? <CircularProgress size={20} thickness={2} />
+                    : 'Submit'
+                }
                 primary={true}
                 type="submit"
                 fullWidth={true}
                 className="create-button"
-                disabled={!this.state.canSubmit}
+                disabled={!this.state.canSubmit || this.state.isDemoing}
               />
             </Formsy.Form>
           </div>

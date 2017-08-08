@@ -51,3 +51,8 @@
 #alpha-notice h3 {
   text-align: center;
 }
+
+#form-demo-button {
+  float: right;
+  margin-top: .6rem !important;
+}
