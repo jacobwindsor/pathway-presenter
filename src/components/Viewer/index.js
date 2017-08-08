@@ -1,3 +1,4 @@
+import '../../polyfills';
 import React, { Component } from 'react';
 import presentations from '../../data/presentations';
 import './index.css';

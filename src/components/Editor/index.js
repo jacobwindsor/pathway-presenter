@@ -1,3 +1,4 @@
+import '../../polyfills';
 import './index.css';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
