@@ -1957,11 +1957,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
-
-core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.0.tgz#569c050918be6486b3837552028ae0466b717086"
 
@@ -7994,6 +7990,10 @@ url-parse@^1.1.1, url-parse@^1.1.8:
   dependencies:
     querystringify "~1.0.0"
     requires-port "1.0.x"
+
+url-polyfill@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.0.7.tgz#9dfd952aa6dcab8755c3eba7c4a3db5b41910ffd"
 
 url@^0.11.0:
   version "0.11.0"
