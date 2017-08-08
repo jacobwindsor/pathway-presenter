@@ -101,7 +101,7 @@ class Adder extends Component {
         waitAndSetState(fillData.version, 'version'); // 50ms
         // Total fill time = 1550ms;
         // Add time for user to digest
-        setTimeout(this.handleSubmit, 3000, fillData);
+        setTimeout(this.handleSubmit, 4000, fillData);
       }
     );
   };
