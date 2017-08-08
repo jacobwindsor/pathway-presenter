@@ -13,7 +13,7 @@ const EditorToolbar = props => {
   return (
     <Toolbar className="editor-toolbar">
       <ToolbarGroup>
-        <div className="logo-wrapper">
+        <div className="logo-wrapper" onClick={() => window.location.reload()}>
           <img src={Logo} className="logo" alt="Logo" />
         </div>
         <ToolbarTitle
