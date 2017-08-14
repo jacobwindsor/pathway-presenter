@@ -2345,10 +2345,6 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-dataset@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/dataset/-/dataset-0.3.2.tgz#c7541247f5daf2bafd54d95d0be80036f5fbc811"
-
 date-fns@^1.27.2:
   version "1.28.5"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.28.5.tgz#257cfc45d322df45ef5658665967ee841cd73faf"
@@ -2641,6 +2637,12 @@ electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.17:
 elegant-spinner@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/elegant-spinner/-/elegant-spinner-1.0.1.tgz#db043521c95d7e303fd8f345bedc3349cfb0729e"
+
+element-dataset@^2.2.6:
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/element-dataset/-/element-dataset-2.2.6.tgz#a4e46dbb3ee991e8c7d5366ec654f87670c2ef80"
+  dependencies:
+    babel-runtime "^6.23.0"
 
 elliptic@^6.0.0:
   version "6.4.0"
