@@ -17,7 +17,7 @@ This guide serves to aid developers wishing to work on the Pathway Presenter.
 Please consider using [Yarn](yarnpkg.com) over npm when working on this project (and any others ;).
 
 ## Create React App
-This project uses [Create React App](https://github.com/facebookincubator/create-react-app)(CRP) to handle building, dev server and other boilerplate tasks.
+This project uses [Create React App](https://github.com/facebookincubator/create-react-app) (CRP) to handle building, dev server and other boilerplate tasks.
 
 ### Project Structure.
 The project structure follows the same style as outlined in [this blog post](https://medium.com/@alexmngn/how-to-better-organize-your-react-applications-2fd3ea1920f1).
@@ -79,6 +79,10 @@ Please refer to the [Pvjs Github repo](https://github.com/wikipathways/pvjs) for
 ## Environment variables
 There is a .env file that is used to provide things like API keys to any scripts that might need it. You should copy `.env.example` to `.env` and change the key name pairs to match your values. 
 Under no circumstances should you push the filled in .env file to the public Github repo. This contains *sensitive* information.
+
+## Travis CI
+This project uses [Travis](travis-ci.org) to run the build step and unit tests on every push to the master branch. If all passed,
+the code is deployed to GitHub pages at the url specified by the "homepage" parameter in `package.json`.
 
 ## Questions
 If you have any questions you can email me (Jacob Windsor) at [me@jcbwndsr.com](mailto:me@jcbwndsr.com).
