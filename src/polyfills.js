@@ -5,4 +5,4 @@ import 'core-js/fn/set';
 import 'core-js/fn/string/includes';
 import 'url-polyfill';
 import 'core-js/fn/array/from';
-import 'element-dataset';
+import 'dataset';

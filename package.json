@@ -7,7 +7,7 @@
     "@wikipathways/pvjs": "^3.7.3-beta",
     "core-js": "^2.5.0",
     "create-react-app": "^1.4.0",
-    "element-dataset": "^2.2.6",
+    "dataset": "^0.3.2",
     "formsy-material-ui": "^0.6.0",
     "formsy-react": "^0.19.5",
     "gh-pages": "^1.0.0",
