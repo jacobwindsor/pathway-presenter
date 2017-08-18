@@ -29,10 +29,12 @@
     "screenfull": "^3.2.2",
     "spectacle": "^2.1.0",
     "url-polyfill": "^1.0.7",
-    "uuid": "^3.0.1"
+    "uuid": "^3.0.1",
+    "webdriverio": "^4.8.0"
   },
   "devDependencies": {
     "browserstack-local": "^1.3.0",
+    "chai": "^4.1.1",
     "dotenv": "^4.0.0",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
@@ -41,10 +43,10 @@
     "jest-localstorage-mock": "^1.2.0",
     "lint-staged": "^4.0.0",
     "prettier": "^1.5.2",
-    "protractor": "^5.1.2",
     "react-scripts": "1.0.10",
     "react-test-renderer": "^15.5.4",
-    "selenium-webdriver": "^3.5.0"
+    "selenium-webdriver": "^3.5.0",
+    "wdio-mocha-framework": "^0.5.11"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
@@ -53,11 +55,11 @@
     ]
   },
   "scripts": {
-    "protractor": "protractor",
+    "wdio": "wdio",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "pretest:e2e": "npm run start",
-    "test:e2e": "protractor ./protractor.conf.js",
+    "pretest:e2e": "echo 'ensure the local server is running on port 3000!'",
+    "test:e2e": "wdio ./wdio.conf.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",

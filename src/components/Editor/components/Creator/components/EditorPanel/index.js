@@ -139,6 +139,7 @@ class EditorPanel extends Component {
             primaryText="Hide"
             rightToggle={
               <Toggle
+                id="hide-toggle"
                 onToggle={this.handleHiddenToggle}
                 toggled={this.state.isHidden}
               />
@@ -149,6 +150,7 @@ class EditorPanel extends Component {
             primaryText="Highlight"
             rightToggle={
               <Toggle
+                id="highlight-toggle"
                 onToggle={this.handleHighlightToggle}
                 toggled={this.state.isHighlighted}
               />
@@ -164,24 +166,28 @@ class EditorPanel extends Component {
                 key={1}
               >
                 <RadioButton
+                  id="highlight-red-toggle"
                   value="red"
                   label="Red"
                   className="color-choice"
                   key={1}
                 />
                 <RadioButton
+                  id="highlight-green-toggle"
                   value="green"
                   label="Green"
                   className="color-choice"
                   key={2}
                 />
                 <RadioButton
+                  id="highlight-blue-toggle"
                   value="blue"
                   label="Blue"
                   className="color-choice"
                   key={3}
                 />
                 <RadioButton
+                  id="highlight-yellow-toggle"
                   value="yellow"
                   label="Yellow"
                   className="color-choice"
